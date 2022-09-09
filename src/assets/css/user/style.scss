@@ -1,0 +1,807 @@
+$blur: #5e5e5e;
+$sidebar: #0f172a;
+.bg-sidebar {
+  background-color: $sidebar;
+}
+.radial-gradient {
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(9, 201, 227, 0.7) 0%,
+    rgba(82, 216, 234, 0.7) 100%
+  );
+  filter: blur(185px);
+}
+.admin-layout {
+  .title {
+    font-weight: 300 !important;
+  }
+}
+.header-user {
+  .title {
+    font-size: 28px !important;
+    letter-spacing: 5px;
+  }
+}
+.sidebar {
+  width: 400px;
+  .main-menu {
+    li {
+      position: relative;
+      .activeBox {
+        background: #00fbff;
+        border-radius: 20px 20px 0px 0px;
+        transform: rotate(90deg);
+        width: 68px;
+        height: 41px;
+        position: absolute;
+        left: -20px;
+        &::before {
+          content: "";
+          position: absolute;
+          width: 68px;
+          height: 41px;
+          // left: -44.19px;
+          background: rgba(82, 220, 240, 0.5);
+          filter: blur(49px);
+          border-radius: 20px 20px 0px 0px;
+          transform: rotate(90deg);
+        }
+      }
+      .active {
+        color: #00fbff;
+      }
+    }
+  }
+}
+
+.mobSidebar {
+  .active {
+    color: #00fbff;
+  }
+}
+
+.overview {
+  font-size: 40px;
+  line-height: 47px;
+}
+
+.accountNo {
+  background: #353535;
+  border-radius: 21px;
+  width: 524px;
+
+  h2 {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #ffffff;
+    margin: 13px 44px;
+  }
+}
+
+.cardWrapper {
+  margin-top: 27px;
+  margin-bottom: 61px;
+
+  .oveviewCards {
+    background: linear-gradient(180deg, #3ba0e7 0%, #48c0d0 100%);
+    box-shadow: 1px 7px 6px #4b5657, 9px 4px 103px rgb(50 50 71 / 1%), 0px 4px 59px rgb(50 50 71 / 6%);
+    border-radius: 16px;
+    height: 99px;
+    padding: 16px;
+
+    .count {
+      font-family: "Jura";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: 0.25px;
+      color: #ffffff;
+    }
+  }
+}
+
+.giveHeading {
+  font-family: "Jura";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.0264em;
+  color: #52dcf0;
+  margin: 32px;
+}
+
+.giveP {
+  font-family: "Jura";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  text-align: center;
+  letter-spacing: 0.0264em;
+}
+
+.exploreBtn {
+  font-family: "Jura";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+  letter-spacing: 0.0264em;
+  color: #171d22;
+  background: #52dcf0;
+  box-shadow: 0px 20px 60px rgba(94, 213, 168, 0.16);
+  border-radius: 16px;
+  padding: 15px 16px;
+  margin-top: 18px;
+}
+
+.pointsCard {
+  background: linear-gradient(
+    132.5deg,
+    #0f172a 12.7%,
+    #3d3d40 139%,
+    #444445 139%
+  );
+  border-radius: 25px;
+  width: 600px;
+  padding: 19px;
+  margin: 76px 0px;
+
+  h3 {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-transform: uppercase;
+    color: #7e7e7e;
+    margin-top: 30px;
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: "Jura";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    color: #ffffff;
+
+    span {
+      color: #52dcf0;
+    }
+  }
+
+  .claimBtn {
+    background: linear-gradient(
+      98.23deg,
+      #00fbff -4.35%,
+      rgba(9, 201, 227, 0.36) 120.66%
+    );
+    box-shadow: inset 9px 9px 12px rgba(208, 208, 109, 0.5);
+    border-radius: 14px;
+    padding: 21px 22px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #ffffff;
+  }
+
+  .claimedBtn {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #ffffff;
+    padding: 21px 22px;
+    background: #a6a6a6;
+    box-shadow: inset 9px 9px 12px rgba(208, 208, 109, 0.5);
+    border-radius: 14px;
+  }
+}
+
+.likeCard {
+  background: #131420;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  padding: 20px 29px;
+  width: 731px;
+  margin-bottom: 20px;
+
+  .likeCardDetail {
+    margin-left: 26px;
+
+    h6 {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      color: #fffbff;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-family: "Jura";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 21px;
+      color: #ffffff;
+    }
+  }
+
+  h4 {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #b09dff;
+    margin-top: 17px;
+  }
+
+  .donationPrice {
+    background: #52dcf0;
+    border-radius: 20px;
+    padding: 14px 38px;
+    font-family: "Jura";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    color: #000000;
+  }
+}
+
+.inviteCard {
+  background: linear-gradient(
+    106.57deg,
+    #52dcf0 20.24%,
+    #09c9e3 43.08%,
+    #3694ef 62.32%,
+    #854bfe 80.48%,
+    #4e58ed 88.9%
+  );
+  border-radius: 29px;
+  padding: 25px 35px;
+  width: 685px;
+  margin-top: 70px;
+  margin-bottom: 66px;
+
+  h4 {
+    font-family: "Jura";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #222222;
+    margin-bottom: 23px;
+  }
+
+  h2 {
+    font-family: "Jura";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 38px;
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+
+  .copyBtn {
+    border: 2px dashed #222222;
+    border-radius: 32px;
+    background: rgba(252, 252, 254, 0.25);
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.25),
+      0px -1px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 29px;
+    padding: 17px 40px;
+    font-family: "Jura";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #222222;
+  }
+
+  .inviteBtn {
+    background: #000000;
+    border-radius: 48px;
+    font-family: "Jura";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    padding: 27px 100px;
+    text-align: center;
+  }
+}
+
+.claimDiv {
+  width: 680px;
+  display: block;
+  margin: 0 auto;
+
+  .referalCount {
+    background: rgba(151, 151, 151, 0.17);
+    border-radius: 8px;
+    padding: 14px 42px;
+    text-align: center;
+    margin-right: 9px;
+
+    h2 {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 150%;
+      color: #09c9e3;
+    }
+
+    p {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 150%;
+      color: #dadada;
+    }
+
+    h3 {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 150%;
+      color: #edd604;
+    }
+  }
+
+  button {
+    padding: 21px 22px;
+    background: linear-gradient(
+      98.23deg,
+      #7c4dfb -4.35%,
+      rgba(9, 201, 227, 0.36) 120.66%
+    );
+    box-shadow: inset 9px 9px 12px rgba(208, 208, 109, 0.5);
+    border-radius: 14px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #ffffff;
+  }
+}
+
+.projectCard {
+  background: #131420;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  padding: 9px 12px;
+  width: 988px;
+  margin-bottom: 20px;
+
+  .projectImg {
+    border-radius: 10px;
+    margin-right: 7px;
+  }
+
+  .projectTitle {
+    font-family: "Jura";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+    color: #fffbff;
+    margin-right: 19px;
+  }
+
+  .tag {
+    background: #00c938;
+    border-radius: 20px;
+    padding: 5.5px 27px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 15px;
+    color: #ffffff;
+    margin-right: 12px;
+  }
+
+  .projectDesc {
+    font-family: "Jura";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #ffffff;
+    width: 30%;
+  }
+
+  .line {
+    border-left: 2px solid #1b1c2d;
+    width: 15px;
+    height: 50%;
+  }
+
+  span {
+    font-family: "Jura";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #ffffff;
+  }
+
+  p {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: right;
+    color: #ffffff;
+  }
+
+  .likeCount {
+    background: #ec007f;
+    border-radius: 40px;
+    padding: 4.5px 15.5px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 21px;
+    color: #ffffff;
+    margin-left: 9px;
+  }
+
+  .updateBtn {
+    background: #52dcf0;
+    border-radius: 20px;
+    padding: 17.5px 26px;
+    margin-top: 12px;
+    margin-right: 40px;
+
+    p {
+      font-family: "Jura";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
+      color: #000000;
+      margin-right: 18px;
+    }
+  }
+}
+
+$black: #1e1e1e;
+$grey: #cccccc;
+$white: #ffffff;
+
+span.switcher {
+  position: relative;
+  width: 300px;
+  height: 80px;
+  background: #353535;
+  border-radius: 22px;
+  margin: 20px 10px;
+  input {
+    appearance: none;
+    position: relative;
+    width: 300px;
+    height: 80px;
+    border-radius: 22px;
+    background: #353535;
+    outline: none;
+    &:before,
+    &:after {
+      z-index: 2;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $white;
+    }
+    &:before {
+      content: "Donor";
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 23px;
+      line-height: 28px;
+      color: #474747;
+      left: 45px;
+    }
+    &:after {
+      content: "Creator";
+      right: 40px;
+      font-family: "Jura";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 23px;
+      line-height: 28px;
+      color: #474747;
+    }
+  }
+  label {
+    z-index: 1;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    border-radius: 20px;
+  }
+  &.switcher-1 {
+    input {
+      transition: 0.25s -0.1s;
+      &:checked {
+        background-color: #353535;
+        border: none;
+        &:before {
+          color: #474747;
+          transition: color 0.5s 0.2s;
+        }
+        &:after {
+          color: #ffffff;
+          transition: color 0.5s;
+        }
+        & + label {
+          left: 10px;
+          right: 150px;
+          background: #52dcf0;
+          transition: left 0.5s, right 0.4s 0.2s;
+        }
+      }
+      &:not(:checked) {
+        background-color: #353535;
+        transition: background 0.5s -0.1s;
+        border: none;
+        &:before {
+          color: #ffffff;
+          transition: color 0.5s;
+        }
+        &:after {
+          color: #474747;
+          transition: color 0.5s 0.2s;
+        }
+        & + label {
+          left: 150px;
+          right: 10px;
+          background: #52dcf0;
+          transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+        }
+      }
+    }
+  }
+}
+
+[type="checkbox"] {
+  color: transparent;
+}
+
+[type="checkbox"]:checked {
+  background-image: none;
+}
+
+[type="checkbox"]:focus,
+[type="radio"]:focus {
+  outline: none;
+  outline-offset: 0px;
+  --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
+  --tw-ring-offset-width: 2px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: #1c64f2;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: none;
+}
+
+@media (max-width: 1280px) {
+  .projectCard {
+    width: 100%;
+  }
+
+  .line1 {
+    margin-left: 25px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .pageHead {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .accountNo {
+    margin-left: 0px;
+  }
+
+  .cardWrapper {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .welcomeSect {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .likeCard,
+  .claimDiv,
+  .projectCard {
+    width: auto;
+  }
+
+  .projectCard {
+    flex-direction: column;
+    gap: 25px;
+    padding: 12px;
+
+    .projectImg {
+      margin-right: 0px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-wrap: wrap;
+  }
+
+  .accountNo {
+    width: auto;
+    padding: 5px;
+
+    h2 {
+      margin: 5px;
+    }
+  }
+
+  .wholeWrapper {
+    padding: 15px 0px;
+    z-index: 1;
+  }
+
+  .giveHeading {
+    margin: 32px 0px;
+  }
+
+  .overDesc {
+    width: 100%;
+  }
+  .likeCard {
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .likeDesc,
+  .likeCardDetail {
+    width: 100%;
+  }
+
+  .likeBtns {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 25px;
+
+    h4 {
+      margin-top: 0px;
+    }
+  }
+
+  .pointDetails {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+
+    h1 {
+      width: 100%;
+    }
+
+    div {
+      width: 100%;
+    }
+  }
+
+  .inviteCard .inviteBtn {
+    padding: 25px 50px;
+    justify-content: center;
+  }
+
+  .btnsWrap {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .inviteCard h2 {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  .projectCard {
+    .projectTitle {
+      margin-right: 11px;
+      font-size: 16px;
+    }
+
+    .projectDetails {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
+
+    .projectDesc {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+
+    .projectBtnsDiv {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .updateBtn {
+      margin: 0px;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .accountNo h2 {
+    font-size: 20px;
+  }
+
+  .updateBtn {
+    padding: 14.5px 20px;
+  }
+
+  .footer {
+    gap: 25px;
+    flex-direction: column;
+    h1 {
+      margin-left: 0px;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .accountNo h2 {
+    font-size: 18px;
+  }
+}
