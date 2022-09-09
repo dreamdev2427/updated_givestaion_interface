@@ -5,12 +5,10 @@ export default function Carousel() {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 4000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: false,
-    speed: 4000,
-    autoplaySpeed: 4000,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 6000
   };
 
   return (
