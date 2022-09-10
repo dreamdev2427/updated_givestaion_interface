@@ -93,47 +93,18 @@ const LikedCampaigns = () => {
             <div>
               <PageHeader heading={"Favourites"} />
               <div className="py-5 space-y-2">
+              {
+                likesInfo.length>0 && 
+                likesInfo.map((item, index) => (
                 <Card
-                  imgSrc="spin-small"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
+                  key={index}
+                  imgSrc={item?.campaign? `${backendURL}/${item.campaign?.imageURL}` : ""}
+                  desc={ item.campaign?.description || "" }
+                  title={item?.campaign? item.campaign?.name : ""}
                   heart="heart"
                 />
-
-                <Card
-                  imgSrc="spin-small"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
-                  heart="heart"
-                />
-
-                <Card
-                  imgSrc="spin-small"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
-                  heart="heart"
-                />
-
-                <Card
-                  imgSrc="spin-small"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
-                  heart="heart"
-                />
-
-                <Card
-                  imgSrc="spin-small"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
-                  heart="heart"
-                />
-
-                <Card
-                  imgSrc="spin-small"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
-                  heart="heart"
-                />
+                ))
+              }
               </div>
             </div>
           </div>

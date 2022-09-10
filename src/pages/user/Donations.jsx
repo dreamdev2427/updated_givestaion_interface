@@ -69,42 +69,18 @@ export default function Donations() {
               <PageHeader heading={"Donations"} />
 
               <div className="py-5 space-y-2">
+              {
+                donations.length>0 &&   
+                donations.map((item, index) => (
                 <Card
-                  imgSrc="spin"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
-                  btnText="$1125"
+                  key={index}
+                  imgSrc={`${backendURL}/${item.campaign?.imageURL}` || "spin" } 
+                  desc={ item.campaign?.description || "225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk" }
+                  title={item.campaign?.name || "SpinSamurai 👘" }
+                  btnText={(item.amount) > 0 ? item.amount :"0"}
                 />
-                <Card
-                  imgSrc="spin"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
-                  btnText="$1125"
-                />{" "}
-                <Card
-                  imgSrc="spin"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
-                  btnText="$1125"
-                />{" "}
-                <Card
-                  imgSrc="spin"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
-                  btnText="$1125"
-                />{" "}
-                <Card
-                  imgSrc="spin"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
-                  btnText="$1125"
-                />{" "}
-                <Card
-                  imgSrc="spin"
-                  desc="225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
-                  title="SpinSamurai 👘"
-                  btnText="$1125"
-                />
+                ))
+              }    
               </div>
             </div>
           </div>

@@ -105,8 +105,8 @@ const GivePoints = () => {
                             {isClaimed ? (
                               <>
                                 You have succesfully claimed{" "}
-                                <span className="text-[#52DCF0]"> 50 </span>
-                                POINTS for donating to 3{" "}
+                                <span className="text-[#52DCF0]">{gpAmount}</span>
+                                POINTS for donating to {campaignCounts}{" "}
                                 <span className="text-[#52DF0]">
                                   {" "}
                                   campaigns
@@ -116,8 +116,8 @@ const GivePoints = () => {
                             ) : (
                               <>
                                 You have earned{" "}
-                                <span className="text-[#52DCF0]">50</span>{" "}
-                                GIVEPOINTS for donating to 3
+                                <span className="text-[#52DCF0]">{gpAmount}</span>{" "}
+                                GIVEPOINTS for donating to {campaignCounts}
                                 <span className="text-[#52DCF0]">
                                   {" "}
                                   campaigns
@@ -131,6 +131,7 @@ const GivePoints = () => {
                           <button
                             onClick={() => {
                               setIsClaimed(!isClaimed);
+                              onClickClaim();
                             }}
                             className={`${
                               isClaimed ? "btn-claimed" : "btn"

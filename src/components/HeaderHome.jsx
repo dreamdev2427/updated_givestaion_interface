@@ -69,8 +69,6 @@ export default function Header( {isSideBarOpen = false, setIsSideBarOpen} ) {
     setShowAlert(false);
   };
 
-  console.log("isSideBarOpen = ", isSideBarOpen);
-
   useEffect(() => {
     if (account && chainId) {
       setConnected(true);

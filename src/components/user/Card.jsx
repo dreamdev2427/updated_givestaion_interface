@@ -3,7 +3,7 @@ const Card = ({ imgSrc, desc, title, btnText, heart }) => {
     <div className="bg-[#131420] rounded-3xl sm:rounded-2xl overflow-hidden py-2 px-3 flex flex-col sm:items-center sm:flex-row">
       <img
         className="h-72 sm:w-40 sm:h-auto"
-        src={`./assets/images/${imgSrc}.png`}
+        src={imgSrc}
         alt="spin"
       />
       <div className="sm:mt-0 sm:ml-2 mt-2 text-[#fff] flex-1">
