@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useMediaQuery } from 'react-responsive';
+import { useEffect } from "react";
 
 const Menu1 = [
   {
@@ -9,7 +11,7 @@ const Menu1 = [
     href: "/overview",
   },
   {
-    text: " my projects",
+    text: "My Grants",
     icon: "myprojects",
     activeIcon: "myprojects-active",
     href: "/myprojects",
@@ -44,6 +46,14 @@ const Menu2 = [
 ];
 
 const NavItem = ({ href, text, icon, activeIcon, clickHandler }) => {
+  const navigate = useNavigate();
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [navItem, setNavItem] = useState("Overview");
+  const [donorOrCreator, setDonorOrCreator] = useState(false);   //true:donor, false:creator
+
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1500px)' });
+
+
   return (
     <NavLink
       onClick={() => {
@@ -90,6 +100,13 @@ const NavItem = ({ href, text, icon, activeIcon, clickHandler }) => {
 };
 
 const Sidebar1 = ({ isSideBarOpen, setIsSideBarOpen }) => {
+
+  const navigate = useNavigate();
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [navItem, setNavItem] = useState("Overview");
+  const [donorOrCreator, setDonorOrCreator] = useState(false);   //true:donor, false:creator
+
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1500px)' });
   const [activeButton, setActiveButton] = useState({
     creater: true,
     donor: false,
@@ -120,6 +137,9 @@ const Sidebar1 = ({ isSideBarOpen, setIsSideBarOpen }) => {
 
         <nav className="text-[#fff] sm:my-3 md:my-5">
           {Menu1.map(({ text, icon, activeIcon, href }, index) => (
+            donorOrCreator === true && index === 1?
+            <></>
+            :
             <NavItem
               key={index}
               text={text}
@@ -150,6 +170,7 @@ const Sidebar1 = ({ isSideBarOpen, setIsSideBarOpen }) => {
                 creater: false,
                 donor: true,
               });
+              setDonorOrCreator(true);
             }}
             className={`px-5 py-3 w-1/2 text-xl font-semibold rounded-xl ${
               activeButton.donor
@@ -166,6 +187,7 @@ const Sidebar1 = ({ isSideBarOpen, setIsSideBarOpen }) => {
                 donor: false,
                 creater: true,
               });
+              setDonorOrCreator(false);
             }}
             className={`px-5 py-3 w-1/2 text-xl font-semibold rounded-xl ${
               activeButton.creater
