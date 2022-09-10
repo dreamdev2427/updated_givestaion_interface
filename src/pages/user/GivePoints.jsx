@@ -5,7 +5,7 @@ import { NotificationManager } from "react-notifications";
 import UserFooter from "../../components/user/UserFooter";
 import { chains } from "../../smart-contract/chains_constants";
 import Sidebar1 from "../../components/user/Sidebar1";
-import Header from "../../components/user/Header";
+import Header from "../../components/HeaderHome";
 import Card from "../../components/user/Card";
 import PageHeader from "../../components/user/PageHeader";
 
@@ -18,7 +18,7 @@ const GivePoints = () => {
   const globalWeb3 = useSelector((state) => state.auth.globalWeb3);
   const [gpAmount, setGpAmount] = useState(0);
   const [campaignCounts, setCampaignCounts] = useState(0);
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   const [isClaimed, setIsClaimed] = useState(false);
 
   const getGPInfo = async () => {

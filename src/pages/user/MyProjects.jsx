@@ -11,7 +11,7 @@ import { backendURL } from "../../config";
 import { chains } from "../../smart-contract/chains_constants";
 import PageHeader from "../../components/user/PageHeader";
 import Sidebar1 from "../../components/user/Sidebar1";
-import Header from "../../components/user/Header";
+import Header from "../../components/HeaderHome";
 
 const MyProjects = () => {
   const chainId = useSelector((state) => state.auth.currentChainId);
@@ -20,7 +20,7 @@ const MyProjects = () => {
   const [campaigns, setCampaigns] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
   const [isUpdateClick, setIsUpdateClick] = useState(false);
   const initProjectsInfo = async () => {

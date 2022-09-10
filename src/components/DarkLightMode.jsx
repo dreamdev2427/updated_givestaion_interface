@@ -81,9 +81,9 @@ export default function DarkLightMode() {
           clipRule="evenodd"
           d="M16.7 12C14.2 12.8 11.3 12.3 9.30005 10.3C6.80005 7.8 6.60005 3.8 8.60005 1C4.50005 1.4 1.30005 4.8 1.30005 9C1.30005 13.4 4.90005 17 9.30005 17C12.6 17 15.5 14.9 16.7 12Z"
           stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLikecap="round"
+          strokeLikejoin="round"
         />
       </svg>
     </button>

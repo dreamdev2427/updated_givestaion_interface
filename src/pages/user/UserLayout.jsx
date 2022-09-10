@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Header from "../../components/user/Header";
+import Header from "../../components/HeaderHome";
 import Sidebar1 from "../../components/user/Sidebar1";
 
 const Layout = ({ children }) => {

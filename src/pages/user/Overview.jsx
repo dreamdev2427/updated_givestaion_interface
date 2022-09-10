@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 import Layout from "../../components/user/Layout";
 import PageHeader from "../../components/user/PageHeader";
 import Sidebar1 from "../../components/user/Sidebar1";
-import Header from "../../components/user/Header";
+import Header from "../../components/HeaderHome";
 const ERC20Abi = require("../../smart-contract/build/ERC20.json");
 
 const Card = ({ title = "", imgSrc }) => {
@@ -34,7 +34,8 @@ export default function Overview() {
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
 
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
+  
   useEffect(() => {
     const getCountsInfo = async () => {
       if (account && globalWeb3) {

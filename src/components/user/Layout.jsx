@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Header from "./Header";
+import Header from "../HeaderHome";
 import Sidebar1 from "./Sidebar1";
 
 const Layout = ({ children }) => {
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
   return (
     <div className="font-Jura ">

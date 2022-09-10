@@ -12,7 +12,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { backendURL } from "../../config";
 import Sidebar1 from "../../components/user/Sidebar1";
-import Header from "../../components/user/Header";
+import Header from "../../components/HeaderHome";
 import Card from "../../components/user/Card";
 import PageHeader from "../../components/user/PageHeader";
 
@@ -24,7 +24,7 @@ const LikedCampaigns = () => {
   const navigate = useNavigate();
   const [ip, setIP] = useState("");
 
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   const getLocationData = async () => {
     const res = await axios.get("https://geolocation-db.com/json/");
     setIP(res.data.IPv4);
