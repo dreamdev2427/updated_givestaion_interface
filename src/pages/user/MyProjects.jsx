@@ -6,12 +6,14 @@ import UserFooter from "../../components/user/UserFooter";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
+import { NotificationManager } from "react-notifications";
 import axios from "axios";
 import { backendURL } from "../../config";
 import { chains } from "../../smart-contract/chains_constants";
 import PageHeader from "../../components/user/PageHeader";
 import Sidebar1 from "../../components/user/Sidebar1";
 import Header from "../../components/HeaderHome";
+import Icon from "../../components/Icon";
 
 const MyProjects = () => {
   const chainId = useSelector((state) => state.auth.currentChainId);
@@ -21,6 +23,11 @@ const MyProjects = () => {
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
+  const [category, setCategory] = useState("Defi");
+  const [description, setDescription] = useState("");
+  const [imageURL, setImageURL] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [editingGrantId, setEditingGrantId] = useState(undefined);
 
   const [isUpdateClick, setIsUpdateClick] = useState(false);
   const initProjectsInfo = async () => {
@@ -44,13 +51,74 @@ const MyProjects = () => {
     }
   };
 
+  const onClickUpdateCampaign = async (e) => {
+    e.preventDefault();
+    let imagePath = null;
+    const formData = new FormData();
+    formData.append("itemFile", selectedFile);
+    formData.append("authorId", "hch");
+    // return;
+    await axios({
+      method: "post",
+      url: `${backendURL}/api/utils/upload_file`,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then(function (response) {
+        alert("response.data.path = ", response.data.path);
+        imagePath = response.data.path;
+      })
+      .catch((err) => {
+        console.error(err);
+        setIsUpdateClick(!isUpdateClick);
+        return;
+      });
+
+    console.log("ccccccccccccccc");
+    await axios({
+      method: "post",
+      url: `${backendURL}/api/campaign/update`,
+      data: {
+        _id: editingGrantId,
+        description: description,
+        imageURL: imagePath !== null ? imagePath : imageURL,
+        category: category,
+      },
+    })
+      .then((res) => {
+        alert(res.data);
+        if (res.data && res.data.code === 0) {
+          NotificationManager.success("Camapaign is updated!");
+          navigate("/myprojects");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setIsUpdateClick(!isUpdateClick);
+      });
+    setIsUpdateClick(!isUpdateClick);
+
+    console.log("dddddddddd");
+  };
+
+  const changeFile = (event) => {
+    var file = event.target.files[0];
+    if (file == null) return;
+    console.log(file);
+    setSelectedFile(file);
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {};
+    reader.onerror = function (error) {};
+  };
+
   useEffect(() => {
     initProjectsInfo();
     setRefresh(!refresh);
   }, [account, globalWeb3, chainId, setRefresh]);
 
-  const onClickUpdate = (campaignAddress) => {
-    if (campaignAddress) navigate(`update/${campaignAddress}`);
+  const onClickUpdate = (campaignIdOnDB) => {
+    setEditingGrantId(campaignIdOnDB);
   };
 
   const subStr = (string) => {
@@ -180,7 +248,10 @@ const MyProjects = () => {
                                   <button
                                     onClick={() => {
                                       setIsUpdateClick(!isUpdateClick);
-                                      onClickUpdate(item?.address);
+                                      setCategory(item?.category);
+                                      setDescription(item?.description);
+                                      setImageURL(item?.imageURL);
+                                      onClickUpdate(item?._id);
                                     }}
                                     className="bg-[#52DCF0] text-[#000000] font-bold rounded-2xl flex items-center overflow-hidden justify-center py-3 px-4"
                                   >
@@ -202,27 +273,58 @@ const MyProjects = () => {
                   </>
                 ) : (
                   <form className="flex flex-col mb-5 md:px-5">
-                    <label className="dark:text-[#FFFFFF] text-[#000] opacity-70 text-center">
+                    <label className="dark:text-[#FFFFFF] text-[#000] opacity-70 text-center text-lg">
+                      Update a grant
+                    </label>
+                    <label className="dark:text-[#FFFFFF] text-[#000] opacity-70 text-left">
                       Project description
                     </label>
-                    <textarea className="innerShadow  bg-[#242A38] dark:bg-[#fff] h-20 rounded-2xl my-2	p-4 outline-none" />
+                    <textarea
+                      className="innerShadow  bg-[#242A38] dark:bg-[#fff] h-20 rounded-2xl my-2	p-4 outline-none"
+                      onChange={(e) => {
+                        setDescription(e.target.value);
+                      }}
+                      value={description || ""}
+                    />
 
                     <label className="dark:text-[#FFFFFF] text-[#000] opacity-70 mt-2 mb-1">
-                      Categories
+                      Category
                     </label>
-                    <input className="innerShadow bg-[#242A38] dark:bg-[#fff] rounded-2xl my-2 p-4 outline-none" />
-                    <label className="dark:text-[#FFFFFF] text-[#000] opacity-70 mt-2 mb-1">
-                      Image URL
-                    </label>
-                    <input className="innerShadow bg-[#242A38] dark:bg-[#fff] rounded-2xl my-2 p-4 outline-none" />
-                    <label className="dark:text-[#FFFFFF] text-[#000]  opacity-70 mt-2 mb-1">
-                      Creators Address
-                    </label>
-                    <input className="innerShadow bg-[#242A38] dark:bg-[#fff] rounded-2xl my-2 p-4 outline-none" />
+                    <input
+                      className="innerShadow bg-[#242A38] dark:bg-[#fff] rounded-2xl my-2 p-4 outline-none"
+                      onChange={(e) => {
+                        setCategory(e.target.value);
+                      }}
+                      value={category || ""}
+                    />
+
+                    <div className="my-3 mb-6 form-group">
+                      {/* <label className="block mb-2 dark:text-gray-100">Upload file</label> */}
+                      <div className="uploadingnote dark:text-gray-100">
+                        Drag or choose your file to upload
+                      </div>
+                      <div className="w-full px-6 py-3 border-0 rounded-lg uploadingFileDiv focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 shadow-secondary">
+                        <div className="bg-white uploadingSymbolImage text-slate-800">
+                          <Icon name="upload-file" size="24" />
+                        </div>
+                        <div className="uploadingFileFormats dark:text-gray-100">
+                          {!selectedFile
+                            ? "Suggested image size is 348*200. Image size up to 4MB."
+                            : selectedFile.name}
+                        </div>
+                        <input
+                          className="uploadingTempLoaded"
+                          type="file"
+                          id="fileInput1"
+                          onChange={changeFile}
+                          accept="image/*"
+                        />
+                      </div>
+                    </div>
 
                     <button
-                      onClick={() => {
-                        setIsUpdateClick(!isUpdateClick);
+                      onClick={(e) => {
+                        onClickUpdateCampaign(e);
                       }}
                       className="bg-[#52DCF0] text-[#000000] font-bold rounded-2xl w-fit self-center	 flex items-center overflow-hidden justify-center py-3 px-4"
                     >
