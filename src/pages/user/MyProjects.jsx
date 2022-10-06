@@ -26,6 +26,7 @@ const MyProjects = () => {
   const [category, setCategory] = useState("Defi");
   const [description, setDescription] = useState("");
   const [imageURL, setImageURL] = useState("");
+  const [newName, setNewName] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [editingGrantId, setEditingGrantId] = useState(undefined);
 
@@ -65,7 +66,6 @@ const MyProjects = () => {
       headers: { "Content-Type": "multipart/form-data" },
     })
       .then(function (response) {
-        alert("response.data.path = ", response.data.path);
         imagePath = response.data.path;
       })
       .catch((err) => {
@@ -74,7 +74,6 @@ const MyProjects = () => {
         return;
       });
 
-    console.log("ccccccccccccccc");
     await axios({
       method: "post",
       url: `${backendURL}/api/campaign/update`,
@@ -83,10 +82,10 @@ const MyProjects = () => {
         description: description,
         imageURL: imagePath !== null ? imagePath : imageURL,
         category: category,
+        name: newName,
       },
     })
       .then((res) => {
-        alert(res.data);
         if (res.data && res.data.code === 0) {
           NotificationManager.success("Camapaign is updated!");
           navigate("/myprojects");
@@ -251,6 +250,7 @@ const MyProjects = () => {
                                       setCategory(item?.category);
                                       setDescription(item?.description);
                                       setImageURL(item?.imageURL);
+                                      setNewName(item?.name);
                                       onClickUpdate(item?._id);
                                     }}
                                     className="bg-[#52DCF0] text-[#000000] font-bold rounded-2xl flex items-center overflow-hidden justify-center py-3 px-4"
@@ -277,7 +277,17 @@ const MyProjects = () => {
                       Update a grant
                     </label>
                     <label className="dark:text-[#FFFFFF] text-[#000] opacity-70 text-left">
-                      Project description
+                      Project name
+                    </label>
+                    <input
+                      className="innerShadow bg-[#242A38] dark:bg-[#fff] rounded-2xl my-2 p-4 outline-none"
+                      onChange={(e) => {
+                        setNewName(e.target.value);
+                      }}
+                      value={newName || ""}
+                    />
+                    <label className="dark:text-[#FFFFFF] text-[#000] opacity-70 text-left">
+                      Description
                     </label>
                     <textarea
                       className="innerShadow  bg-[#242A38] dark:bg-[#fff] h-20 rounded-2xl my-2	p-4 outline-none"
@@ -300,25 +310,27 @@ const MyProjects = () => {
 
                     <div className="my-3 mb-6 form-group">
                       {/* <label className="block mb-2 dark:text-gray-100">Upload file</label> */}
-                      <div className="uploadingnote dark:text-gray-100">
+                      <div className="uploadingnote dark:text-[#FFFFFF] text-[#000]">
                         Drag or choose your file to upload
                       </div>
-                      <div className="w-full px-6 py-3 border-0 rounded-lg uploadingFileDiv focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 shadow-secondary">
-                        <div className="bg-white uploadingSymbolImage text-slate-800">
-                          <Icon name="upload-file" size="24" />
+                      <div className="flex justify-center">
+                        <div className="w-full px-6 py-3 border-0 rounded-lg uploadingFileDiv focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 shadow-secondary">
+                          <div className="bg-white uploadingSymbolImage text-slate-800">
+                            <Icon name="upload-file" size="24" />
+                          </div>
+                          <div className="uploadingFileFormats dark:text-gray-100">
+                            {!selectedFile
+                              ? "Suggested image size is 348*200. Image size up to 4MB."
+                              : selectedFile.name}
+                          </div>
+                          <input
+                            className="uploadingTempLoaded"
+                            type="file"
+                            id="fileInput1"
+                            onChange={changeFile}
+                            accept="image/*"
+                          />
                         </div>
-                        <div className="uploadingFileFormats dark:text-gray-100">
-                          {!selectedFile
-                            ? "Suggested image size is 348*200. Image size up to 4MB."
-                            : selectedFile.name}
-                        </div>
-                        <input
-                          className="uploadingTempLoaded"
-                          type="file"
-                          id="fileInput1"
-                          onChange={changeFile}
-                          accept="image/*"
-                        />
                       </div>
                     </div>
 

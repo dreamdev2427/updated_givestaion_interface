@@ -20,7 +20,6 @@ import MyProjects from "./pages/user/MyProjects";
 import LikedCampaigns from "./pages/user/LikedCampaigns";
 import GivePoints from "./pages/user/GivePoints";
 import GiveFrens from "./pages/user/GiveFrens";
-import UpdateCampaign from "./pages/user/UpdateCampaign";
 import Hackathon from "./pages/Hackathon";
 
 function AppRoutes() {
@@ -40,10 +39,6 @@ function AppRoutes() {
           {/* <Route path="/user" element={<UserLayout />}> */}
           <Route path="/overview" element={<Overview />}></Route>
           <Route path="/myprojects" element={<MyProjects />}></Route>
-          <Route
-            path="/my-projects/update/:id"
-            element={<UpdateCampaign />}
-          ></Route>
           <Route path="/donations" element={<Donations />}></Route>
           <Route path="/favourites" element={<LikedCampaigns />}></Route>
           <Route path="/givepoints" element={<GivePoints />}></Route>
