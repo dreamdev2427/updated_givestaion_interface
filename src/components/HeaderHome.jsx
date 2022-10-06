@@ -25,6 +25,12 @@ import {
   OPTIMISTIC_NETWORK_ID,
   BSC_TEST_CHAIN_ID,
   BSC_TEST_NETWORK_ID,
+  MUMBAI_CHAIN_ID,
+  MUMBAI_NETWORK_ID,
+  TEST_ARBITRUM_CHAIN_ID,
+  TEST_ARBITRUM_NETWORK_ID,
+  GOERLI_CHAIN_ID,
+  GOERLI_NETWORK_ID,
 } from "../smart-contract/chains_constants";
 import Alert from "../pages/Alert";
 
@@ -183,9 +189,21 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
         setActiveIcon("arbitrum.png");
         setPopup(false);
         break;
+      case TEST_ARBITRUM_CHAIN_ID:
+      case TEST_ARBITRUM_NETWORK_ID:
+        setActive("Arbitrum testnet");
+        setActiveIcon("arbitrum.png");
+        setPopup(false);
+        break;
       case POLYGON_CHAIN_ID:
       case POLYGON_NETWORK_ID:
         setActive("Polygon");
+        setActiveIcon("polygon.png");
+        setPopup(false);
+        break;
+      case MUMBAI_CHAIN_ID:
+      case MUMBAI_NETWORK_ID:
+        setActive("Mumbai testnet");
         setActiveIcon("polygon.png");
         setPopup(false);
         break;
@@ -197,8 +215,14 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
         break;
       case BSC_TEST_CHAIN_ID:
       case BSC_TEST_NETWORK_ID:
-        setActive("BSC Testnet");
+        setActive("Binance Testnet");
         setActiveIcon("binance.png");
+        setPopup(false);
+        break;
+      case GOERLI_CHAIN_ID:
+      case GOERLI_NETWORK_ID:
+        setActive("Goerli testnet");
+        setActiveIcon("op.png");
         setPopup(false);
         break;
     }
@@ -350,72 +374,72 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 />
               </div>
               {chainId &&
-              (chainId.toString() === OPTIMISTIC_CHAIN_ID ||
-                chainId.toString() === OPTIMISTIC_CHAIN_ID) ? (
+              (chainId.toString() === GOERLI_CHAIN_ID ||
+                chainId.toString() === GOERLI_NETWORK_ID) ? (
                 <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
                     <img src="../../assets/images/op.png" alt="op" />
-                    <span className="ml-3 text-lg"> Optimism</span>
+                    <span className="ml-3 text-lg"> Goerli testnet</span>
                   </div>
                   <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
               ) : (
                 <div
                   className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
-                  onClick={() => onClickChangeNetwork(OPTIMISTIC_CHAIN_ID)}
+                  onClick={() => onClickChangeNetwork(GOERLI_CHAIN_ID)}
                 >
                   <img
                     className="w-8 h-8 mr-3"
                     src="../../assets/images/op.png"
                     alt="optimism"
                   />{" "}
-                  <h2 className="text-sm font-medium">Optimism</h2>
+                  <h2 className="text-sm font-medium">Goerli testnet</h2>
                 </div>
               )}
               {chainId &&
-              (chainId.toString() === ARBITRUM_CHAIN_ID ||
-                chainId.toString() === ARBITRUM_NETWORK_ID) ? (
+              (chainId.toString() === TEST_ARBITRUM_CHAIN_ID ||
+                chainId.toString() === TEST_ARBITRUM_NETWORK_ID) ? (
                 <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
                     <img src="../../assets/images/arbitrum.png" alt="op" />
-                    <span className="ml-3 text-lg"> Arbitrum</span>
+                    <span className="ml-3 text-lg"> Arbitrum testnet</span>
                   </div>
                   <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
               ) : (
                 <div
                   className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
-                  onClick={() => onClickChangeNetwork(ARBITRUM_CHAIN_ID)}
+                  onClick={() => onClickChangeNetwork(TEST_ARBITRUM_CHAIN_ID)}
                 >
                   <img
                     className="w-8 h-8 mr-3"
                     src="../../assets/images/arbitrum.png"
                     alt="arbitrum"
                   />{" "}
-                  <h2 className="text-sm font-medium">Arbitrum</h2>
+                  <h2 className="text-sm font-medium">Arbitrum testnet</h2>
                 </div>
               )}
               {chainId &&
-              (chainId.toString() === POLYGON_CHAIN_ID ||
-                chainId.toString() === POLYGON_NETWORK_ID) ? (
+              (chainId.toString() === MUMBAI_CHAIN_ID ||
+                chainId.toString() === MUMBAI_NETWORK_ID) ? (
                 <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
                     <img src="../../assets/images/polygon.png" alt="op" />
-                    <span className="ml-3 text-lg"> Polygon</span>
+                    <span className="ml-3 text-lg">Mumbai testnet</span>
                   </div>
                   <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
               ) : (
                 <div
                   className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
-                  onClick={() => onClickChangeNetwork(POLYGON_CHAIN_ID)}
+                  onClick={() => onClickChangeNetwork(MUMBAI_CHAIN_ID)}
                 >
                   <img
                     className="w-8 h-8 mr-3"
                     src="../../assets/images/polygon.png"
                     alt="polygon"
                   />
-                  <h2 className="text-sm font-medium">Polygon</h2>
+                  <h2 className="text-sm font-medium">Mumbai testnet</h2>
                 </div>
               )}
               {chainId &&
@@ -442,26 +466,26 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 </div>
               )}
               {chainId &&
-              (chainId.toString() === BSC_CHAIN_ID ||
-                chainId.toString() === BSC_NETWORK_ID) ? (
+              (chainId.toString() === BSC_TEST_CHAIN_ID ||
+                chainId.toString() === BSC_TEST_NETWORK_ID) ? (
                 <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
                     <img src="../../assets/images/binance.png" alt="op" />
-                    <span className="ml-3 text-lg"> Binance</span>
+                    <span className="ml-3 text-lg"> Binance testnet</span>
                   </div>
                   <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
               ) : (
                 <div
                   className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
-                  onClick={() => onClickChangeNetwork(BSC_CHAIN_ID)}
+                  onClick={() => onClickChangeNetwork(BSC_TEST_CHAIN_ID)}
                 >
                   <img
                     className="w-8 h-8 mr-3"
                     src="../../assets/images/binance.png"
                     alt="binance"
                   />
-                  <h2 className="text-sm font-medium">Binance</h2>
+                  <h2 className="text-sm font-medium">Binance testnet</h2>
                 </div>
               )}
             </div>
