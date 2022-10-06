@@ -44,7 +44,7 @@ const web3Modal = new Web3Modal({
   providerOptions,
 });
 
-export default function Header( {isSideBarOpen = false, setIsSideBarOpen} ) {
+export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
   const [active, setActive] = useState(null);
   const [activeIcon, setActiveIcon] = useState("op.png");
   const [connected, setConnected] = useState(false);
@@ -174,19 +174,19 @@ export default function Header( {isSideBarOpen = false, setIsSideBarOpen} ) {
       case BSC_CHAIN_ID:
       case BSC_NETWORK_ID:
         setActive("Binance");
-        setActiveIcon("protocol.png");
+        setActiveIcon("binance.png");
         setPopup(false);
         break;
       case ARBITRUM_CHAIN_ID:
       case ARBITRUM_NETWORK_ID:
         setActive("Arbitrum");
-        setActiveIcon("symbol.png");
+        setActiveIcon("arbitrum.png");
         setPopup(false);
         break;
       case POLYGON_CHAIN_ID:
       case POLYGON_NETWORK_ID:
         setActive("Polygon");
-        setActiveIcon("group.png");
+        setActiveIcon("polygon.png");
         setPopup(false);
         break;
       case GNOSIS_CHAIN_ID:
@@ -198,7 +198,7 @@ export default function Header( {isSideBarOpen = false, setIsSideBarOpen} ) {
       case BSC_TEST_CHAIN_ID:
       case BSC_TEST_NETWORK_ID:
         setActive("BSC Testnet");
-        setActiveIcon("protocol.png");
+        setActiveIcon("binance.png");
         setPopup(false);
         break;
     }
@@ -224,17 +224,16 @@ export default function Header( {isSideBarOpen = false, setIsSideBarOpen} ) {
       setShowAlert(true);
     }
   };
-  const [isOptimisimOpen, setIsOptimisimOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
-      <div className="flex lg:hidden w-full items-center justify-between p-3 z-40  sticky left-0 right-0 top-0">       
-        <Link to={"/"} className="flex lg:hidden items-center">
+      <div className="sticky top-0 left-0 right-0 z-40 flex items-center justify-between w-full p-3 lg:hidden">
+        <Link to={"/"} className="flex items-center lg:hidden">
           <img
-            className="w-20 h-20 object-contain"
+            className="object-contain w-20 h-20"
             src="./images/logo.png"
             alt="logo"
           />
@@ -251,7 +250,7 @@ export default function Header( {isSideBarOpen = false, setIsSideBarOpen} ) {
               onClick={() => {
                 setIsOpen(!isOpen);
               }}
-              className=" cursor-pointer w-5 h-5 "
+              className="w-5 h-5 cursor-pointer "
               src="./assets/icons/opener.svg"
               alt="opener"
             />
@@ -265,32 +264,29 @@ export default function Header( {isSideBarOpen = false, setIsSideBarOpen} ) {
             : "-left-80 hidden lg:flex"
         } absolute z-50 top-0 px-0 md:px-8 py-5 w-[320px] lg:static flex flex-col lg:flex-row  lg:bg-transparent h-full lg:w-full lg:items-center lg:justify-between lg:py-5 `}
       >
-        <div className="flex px-8 md:hidden items-center justify-between">
+        <div className="flex items-center justify-between px-8 md:hidden">
           <div className="flex items-center">
             <img
-              className="w-16 h-16 object-contain"
+              className="object-contain w-16 h-16"
               src="./images/logo.png"
               alt="logo"
             />
-            <h2 className="font-medium text-2xl text-[#fff]">
-              GiveStation
-            </h2>
+            <h2 className="font-medium text-2xl text-[#fff]">GiveStation</h2>
           </div>
           <img
             onClick={() => {
               setIsOpen(!isOpen);
             }}
-            className="ml-5 lg:hidden cursor-pointer"
+            className="ml-5 cursor-pointer lg:hidden"
             src="../../assets/icons/close.svg"
             alt="close"
           />
         </div>
-        <div className="md:space-y-3 lg:space-y-0 lg:space-x-3 flex flex-col  items-center lg:flex-row">
-          {
-            isSideBarOpen === false && 
-            <Link to={"/"} className="hidden lg:flex items-center">
+        <div className="flex flex-col items-center md:space-y-3 lg:space-y-0 lg:space-x-3 lg:flex-row">
+          {isSideBarOpen === false && (
+            <Link to={"/"} className="items-center hidden lg:flex">
               <img
-                className="w-20 h-20 object-contain"
+                className="object-contain w-20 h-20"
                 src="./images/logo.png"
                 alt="logo"
               />
@@ -298,152 +294,166 @@ export default function Header( {isSideBarOpen = false, setIsSideBarOpen} ) {
                 GiveStation
               </h2>
             </Link>
-          }
+          )}
           <button className="text-left md:text-center hover:bg-[#00FBFF] hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
-            <span className="gradient-text text-base">Grants</span>
+            <span className="text-base gradient-text">Grants</span>
           </button>
 
-          <Link to={"/hackathon"} className="relative bg-[#09080C] w-full lg:w-auto my-2 rounded-md py-2 px-4 shadow">
-            <span className="gradient-text text-base">Hackathons</span>
+          <Link
+            to={"/hackathon"}
+            className="relative bg-[#09080C] w-full lg:w-auto my-2 rounded-md py-2 px-4 shadow"
+          >
+            <span className="text-base gradient-text">Hackathons</span>
 
             <div className="coming-soon absolute -bottom-[14px] right-0 text-[#fff] px-3 py-1 rounded-xl text-xs">
               Coming Soon
             </div>
           </Link>
           <button className="text-left md:text-center hover:bg-[#00FBFF] hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
-            <span className="gradient-text text-base">Governance</span>
+            <span className="text-base gradient-text">Governance</span>
           </button>
           <button></button>
         </div>
-        <div className="px-8 md:px-0 mt-5 md:mt-0 space-y-3 lg:space-y-0 lg:space-x-3 flex flex-col lg:flex-row  lg:items-center">
+        <div className="flex flex-col px-8 mt-5 space-y-3 md:px-0 md:mt-0 lg:space-y-0 lg:space-x-3 lg:flex-row lg:items-center">
           <div className="relative">
             <button
               onClick={() => {
-                setIsOptimisimOpen(!isOptimisimOpen);
+                setPopup(!popup);
               }}
               className={`bg-[#1C1924] rounded-full w-full lg:w-auto flex justify-center md:justify-start items-center duration-300  ${
-                isOptimisimOpen ? " px-10 " : " px-3 "
+                popup ? " px-10 " : " px-3 "
               } py-2`}
             >
-              <img src="../../assets/images/op.png" alt="op" />
-              <span className="gradient-text text-base ml-5"> Optimism</span>
+              {active && (
+                <img src={`../../assets/images/${activeIcon}`} alt="op" />
+              )}
+              <span className="ml-5 text-base gradient-text">
+                {" "}
+                {active || "Select a network"}
+              </span>
             </button>
 
             <div
               className={`${
-                isOptimisimOpen
-                  ? "top-12 block mt-2"
-                  : "-top-[500px] hidden lg:block"
+                popup ? "top-12 block mt-2" : "-top-[500px] hidden lg:block"
               } lg:absolute top-12 left-0 text-[#fff] z-50 duration-300 dropsDownBg rounded-xl w-full px-3 py-6`}
             >
-              <div className="flex mb-4 items-center justify-between">
+              <div className="flex items-center justify-between mb-4">
                 <h1 className="font-semibold">Select a network</h1>
                 <img
                   onClick={() => {
-                    setIsOptimisimOpen(!isOptimisimOpen);
+                    setPopup(!popup);
                   }}
                   className="cursor-pointer"
                   src="../../assets/icons/close.svg"
                   alt="close"
                 />
               </div>
-              {
-                chainId && (chainId.toString() === OPTIMISTIC_CHAIN_ID || chainId.toString() === OPTIMISTIC_CHAIN_ID) ?
-                <div className="flex my-5 items-center justify-between"
-                >
+              {chainId &&
+              (chainId.toString() === OPTIMISTIC_CHAIN_ID ||
+                chainId.toString() === OPTIMISTIC_CHAIN_ID) ? (
+                <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
                     <img src="../../assets/images/op.png" alt="op" />
-                    <span className="text-lg ml-3"> Optimism</span>
-                  </div>                
-                    <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
+                    <span className="ml-3 text-lg"> Optimism</span>
+                  </div>
+                  <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
-                :
-                <div className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
-                  onClick={() => onClickChangeNetwork(OPTIMISTIC_CHAIN_ID) }>
+              ) : (
+                <div
+                  className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
+                  onClick={() => onClickChangeNetwork(OPTIMISTIC_CHAIN_ID)}
+                >
                   <img
                     className="w-8 h-8 mr-3"
                     src="../../assets/images/op.png"
                     alt="optimism"
                   />{" "}
-                  <h2 className="font-medium text-sm">Optimism</h2>
+                  <h2 className="text-sm font-medium">Optimism</h2>
                 </div>
-              } 
-              {
-                chainId && (chainId.toString() === ARBITRUM_CHAIN_ID || chainId.toString() === ARBITRUM_NETWORK_ID) ?
-                <div className="flex my-5 items-center justify-between"
-                >
+              )}
+              {chainId &&
+              (chainId.toString() === ARBITRUM_CHAIN_ID ||
+                chainId.toString() === ARBITRUM_NETWORK_ID) ? (
+                <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
                     <img src="../../assets/images/arbitrum.png" alt="op" />
-                    <span className="text-lg ml-3"> Arbitrum</span>
-                  </div>                
-                    <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
+                    <span className="ml-3 text-lg"> Arbitrum</span>
+                  </div>
+                  <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
-                :
-                <div className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
-                  onClick={() => onClickChangeNetwork(ARBITRUM_CHAIN_ID) }>
+              ) : (
+                <div
+                  className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
+                  onClick={() => onClickChangeNetwork(ARBITRUM_CHAIN_ID)}
+                >
                   <img
                     className="w-8 h-8 mr-3"
                     src="../../assets/images/arbitrum.png"
                     alt="arbitrum"
                   />{" "}
-                  <h2 className="font-medium text-sm">Arbitrum</h2>
+                  <h2 className="text-sm font-medium">Arbitrum</h2>
                 </div>
-              }
-              {
-                chainId && (chainId.toString() === POLYGON_CHAIN_ID || chainId.toString() === POLYGON_NETWORK_ID) ?
-                <div className="flex my-5 items-center justify-between"
-                >
+              )}
+              {chainId &&
+              (chainId.toString() === POLYGON_CHAIN_ID ||
+                chainId.toString() === POLYGON_NETWORK_ID) ? (
+                <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
                     <img src="../../assets/images/polygon.png" alt="op" />
-                    <span className="text-lg ml-3"> Polygon</span>
-                  </div>                
-                    <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
+                    <span className="ml-3 text-lg"> Polygon</span>
+                  </div>
+                  <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
-                :
-                <div className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
-                  onClick={() => onClickChangeNetwork(POLYGON_CHAIN_ID) }>
+              ) : (
+                <div
+                  className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
+                  onClick={() => onClickChangeNetwork(POLYGON_CHAIN_ID)}
+                >
                   <img
                     className="w-8 h-8 mr-3"
                     src="../../assets/images/polygon.png"
                     alt="polygon"
                   />
-                  <h2 className="font-medium text-sm">Polygon</h2>
+                  <h2 className="text-sm font-medium">Polygon</h2>
                 </div>
-              }
-              {
-                chainId && (chainId.toString() === GNOSIS_CHAIN_ID || chainId.toString() === GNOSIS_NETWORK_ID) ?
-                <div className="flex my-5 items-center justify-between"
-                >
+              )}
+              {chainId &&
+              (chainId.toString() === GNOSIS_CHAIN_ID ||
+                chainId.toString() === GNOSIS_NETWORK_ID) ? (
+                <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
                     <img src="../../assets/images/gnosis.png" alt="op" />
-                    <span className="text-lg ml-3"> Gnosis</span>
-                  </div>                
-                    <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
+                    <span className="ml-3 text-lg"> Gnosis</span>
+                  </div>
+                  <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
-                :
-                <div className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
-                  onClick={() => onClickChangeNetwork(GNOSIS_CHAIN_ID) }
+              ) : (
+                <div
+                  className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
+                  onClick={() => onClickChangeNetwork(GNOSIS_CHAIN_ID)}
                 >
                   <img
                     className="w-8 h-8 mr-3"
                     src="../../assets/images/gnosis.png"
                     alt="gnosis"
                   />
-                  <h2 className="font-medium text-sm">Gnosis</h2>
+                  <h2 className="text-sm font-medium">Gnosis</h2>
                 </div>
-              }
-              {
-                chainId && (chainId.toString() === BSC_CHAIN_ID || chainId.toString() === BSC_NETWORK_ID) ?
-                <div className="flex my-5 items-center justify-between"
-                >
+              )}
+              {chainId &&
+              (chainId.toString() === BSC_CHAIN_ID ||
+                chainId.toString() === BSC_NETWORK_ID) ? (
+                <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
                     <img src="../../assets/images/binance.png" alt="op" />
-                    <span className="text-lg ml-3"> Binance</span>
-                  </div>                
-                    <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
+                    <span className="ml-3 text-lg"> Binance</span>
+                  </div>
+                  <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
-                :
-                <div className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
+              ) : (
+                <div
+                  className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
                   onClick={() => onClickChangeNetwork(BSC_CHAIN_ID)}
                 >
                   <img
@@ -451,23 +461,23 @@ export default function Header( {isSideBarOpen = false, setIsSideBarOpen} ) {
                     src="../../assets/images/binance.png"
                     alt="binance"
                   />
-                  <h2 className="font-medium text-sm">Binance</h2>
+                  <h2 className="text-sm font-medium">Binance</h2>
                 </div>
-              }
+              )}
             </div>
           </div>
 
           <div className="relative">
             <button
               onClick={() => {
-                if(connected === true) setShowLogoutMenu(!showLogoutMenu);
-                if(connected === false) onClickConnectWallet();
+                if (connected === true) setShowLogoutMenu(!showLogoutMenu);
+                if (connected === false) onClickConnectWallet();
               }}
               className="bg-[#1C1924] rounded-full  w-full lg:w-auto justify-center flex items-center  px-3 py-2"
             >
-              <span className="gradient-text font-bold text-base mx-1">
-                { connected === false && "Connect Wallet" }
-                { connected === true && compressedAccount }
+              <span className="mx-1 text-base font-bold gradient-text">
+                {connected === false && "Connect Wallet"}
+                {connected === true && compressedAccount}
               </span>
               <img src="../../assets/icons/avatar.svg" alt="avatar" />
             </button>
@@ -480,27 +490,43 @@ export default function Header( {isSideBarOpen = false, setIsSideBarOpen} ) {
             >
               <div className="flex items-center px-2 my-1 hover:bg-[#242A38] cursor-pointer p-2 rounded-lg">
                 <img src="../../assets/icons/dashboard.svg" alt="dashboard" />
-                <span className="text-sm ml-3" onClick={() => {                    
-                    setShowLogoutMenu(!showLogoutMenu); 
+                <span
+                  className="ml-3 text-sm"
+                  onClick={() => {
+                    setShowLogoutMenu(!showLogoutMenu);
                     navigate("/overview");
-                  }}> Dashboard</span>
+                  }}
+                >
+                  {" "}
+                  Dashboard
+                </span>
               </div>
 
               <div className="flex items-center px-2 my-1 hover:bg-[#242A38] cursor-pointer p-2 rounded-lg">
                 <img src="../../assets/icons/support.svg" alt="support" />
-                <span className="text-sm ml-3"
-                onClick={() => {                    
-                    setShowLogoutMenu(!showLogoutMenu); 
-                  }}> Support</span>
+                <span
+                  className="ml-3 text-sm"
+                  onClick={() => {
+                    setShowLogoutMenu(!showLogoutMenu);
+                  }}
+                >
+                  {" "}
+                  Support
+                </span>
               </div>
 
               <div className="flex items-center px-2 my-1 hover:bg-[#242A38] cursor-pointer p-2 rounded-lg">
                 <img src="../../assets/icons/logout.svg" alt="logout" />
-                <span className="text-sm ml-3"
-                  onClick={() => {                    
-                    setShowLogoutMenu(!showLogoutMenu); onClickDisconnect();
+                <span
+                  className="ml-3 text-sm"
+                  onClick={() => {
+                    setShowLogoutMenu(!showLogoutMenu);
+                    onClickDisconnect();
                   }}
-                > Logout</span>
+                >
+                  {" "}
+                  Logout
+                </span>
               </div>
             </div>
           </div>
