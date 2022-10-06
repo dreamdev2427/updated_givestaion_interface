@@ -20,6 +20,7 @@ export default function Contribute() {
     const [donationAmount, setDonationAmount] = useState(0);
     const [campaignIdOnDB, setCampaignIdOnDB] = useState(null);
     const [copied, setCopied] = useState(false);
+    const [donatingPopup, showDonatingPopup] = useState(false);
     
     const chainId = useSelector(state => state.auth.currentChainId);
     const account = useSelector(state => state.auth.currentWallet);
@@ -137,6 +138,7 @@ export default function Contribute() {
         {
             if(globalWeb3 && account)
             {
+                showDonatingPopup(true);
                 try{
                     await new globalWeb3.eth.Contract(Campaign, id).methods.contribute(refAddr).send({
                         from: account,
@@ -155,6 +157,7 @@ export default function Contribute() {
                     }).then((res)=>{
                         if(res.data && res.data.code === 0)
                         {
+                            showDonatingPopup(false);
                             setLoading(true);    
                             setTimeout(()=>
                             {          
@@ -162,14 +165,16 @@ export default function Contribute() {
                             }, 2000);          
                         }
                     }).catch((err)=> {
+                        showDonatingPopup(false);
                         console.error(err);    
                     });
                 }catch(err)
-                {
+                {                    
+                    showDonatingPopup(false);
                     console.error(err);
                     if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");
                 }
-
+                showDonatingPopup(false);
             }
             else{
                 NotificationManager.warning("Connect your wallet!");
@@ -324,6 +329,24 @@ export default function Contribute() {
                     </div>
                 </section>
             </> : ''}
+
+            
+        {donatingPopup ? <>
+            <section className="popup fixed w-full top-0 left-0 z-50 min-h-screen flex items-center justify-center">
+                <div className="popup-other">
+                    <div className="container">
+                        <div className="donating-popup mx-auto">
+                            <div className="px-3 text-center">
+                                <h6 className='text-sm md:text-2xl mt-3 mb-1 text-white font-bold'>Donating...Please wait.</h6>
+                                <div className='flex justify-center'>
+                                    <img src="/images/donating_spin.png" alt="casual" className='donating_spin' />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </> : ''}
 
             <UserFooter />
             {
