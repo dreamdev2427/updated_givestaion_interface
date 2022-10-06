@@ -199,6 +199,12 @@ export default function Home() {
         );
       }
       console.log("summary = ", summary);
+      for (let idx = 0; idx < summary.length; idx++) {
+        summary[idx][1] = globalWeb3.utils.fromWei(
+          summary[idx][1].toString(),
+          "ether"
+        );
+      }
       if (campais.length > 0) {
         await axios({
           method: "post",
@@ -214,33 +220,28 @@ export default function Home() {
                 (item) => item.chainId == chainId
               );
 
-              // if (filtered.length > 0) {
-              for (let idx = 0; idx < summary.length; idx++) {
-                console.log(summary[idx][1]);
+              if (filtered.length > 0) {
+                for (let idx = 0; idx < summary.length; idx++) {
+                  console.log(summary[idx][1]);
 
-                let found =
-                  filtered.find((item) => item._id == summary[idx][10]) ||
-                  undefined;
+                  let found =
+                    filtered.find((item) => item._id == summary[idx][10]) ||
+                    undefined;
 
-                summary[idx][1] = globalWeb3.utils.fromWei(
-                  summary[idx][1].toString(),
-                  "ether"
-                );
-
-                if (found) {
-                  summary[idx][5] = found.name;
-                  summary[idx][6] = found.description;
-                  summary[idx][7] = found.imageURL;
-                  summary[idx][9] = found.verified;
-                  summary[idx][10] = campais[idx];
-                  summary[idx][11] = found.category;
-                  summary[idx][12] = found.likes;
-                  summary[idx][13] = false;
-                  summary[idx][14] = found._id;
-                  summary[idx][15] = found.chainId;
+                  if (found) {
+                    summary[idx][5] = found.name;
+                    summary[idx][6] = found.description;
+                    summary[idx][7] = found.imageURL;
+                    summary[idx][9] = found.verified;
+                    summary[idx][10] = campais[idx];
+                    summary[idx][11] = found.category;
+                    summary[idx][12] = found.likes;
+                    summary[idx][13] = false;
+                    summary[idx][14] = found._id;
+                    summary[idx][15] = found.chainId;
+                  }
                 }
               }
-              // }
             }
           })
           .catch((err) => {
