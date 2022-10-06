@@ -25,12 +25,12 @@ import {
   OPTIMISTIC_NETWORK_ID,
   BSC_TEST_CHAIN_ID,
   BSC_TEST_NETWORK_ID,
-  MUMBAI_CHAIN_ID,
-  MUMBAI_NETWORK_ID,
+  GOERLI_NETWORK_ID,
+  GOERLI_CHAIN_ID,
   TEST_ARBITRUM_CHAIN_ID,
   TEST_ARBITRUM_NETWORK_ID,
-  GOERLI_CHAIN_ID,
-  GOERLI_NETWORK_ID,
+  MUMBAI_CHAIN_ID,
+  MUMBAI_NETWORK_ID,
 } from "../smart-contract/chains_constants";
 import Alert from "../pages/Alert";
 
@@ -171,22 +171,22 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
     switch (chainId && chainId.toString()) {
       default:
         break;
+      case GOERLI_CHAIN_ID:
+      case GOERLI_NETWORK_ID:
+        setActive("Optimism Goerli ");
+        setActiveIcon("op.png");
+        setPopup(false);
+        break;
       case OPTIMISTIC_CHAIN_ID:
       case OPTIMISTIC_NETWORK_ID:
         setActive("Optimism");
         setActiveIcon("op.png");
         setPopup(false);
         break;
-      case BSC_CHAIN_ID:
-      case BSC_NETWORK_ID:
-        setActive("Binance");
+      case BSC_TEST_CHAIN_ID:
+      case BSC_TEST_NETWORK_ID:
+        setActive("Binance testnet");
         setActiveIcon("binance.png");
-        setPopup(false);
-        break;
-      case ARBITRUM_CHAIN_ID:
-      case ARBITRUM_NETWORK_ID:
-        setActive("Arbitrum");
-        setActiveIcon("arbitrum.png");
         setPopup(false);
         break;
       case TEST_ARBITRUM_CHAIN_ID:
@@ -194,16 +194,21 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
         setActive("Arbitrum testnet");
         setActiveIcon("arbitrum.png");
         setPopup(false);
-        break;
-      case POLYGON_CHAIN_ID:
-      case POLYGON_NETWORK_ID:
-        setActive("Polygon");
-        setActiveIcon("polygon.png");
+      case ARBITRUM_CHAIN_ID:
+      case ARBITRUM_NETWORK_ID:
+        setActive("Arbitrum");
+        setActiveIcon("arbitrum.png");
         setPopup(false);
         break;
       case MUMBAI_CHAIN_ID:
       case MUMBAI_NETWORK_ID:
-        setActive("Mumbai testnet");
+        setActive("Polygon testnet");
+        setActiveIcon("polygon.png");
+        setPopup(false);
+        break;
+      case POLYGON_CHAIN_ID:
+      case POLYGON_NETWORK_ID:
+        setActive("Polygon");
         setActiveIcon("polygon.png");
         setPopup(false);
         break;
@@ -215,14 +220,8 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
         break;
       case BSC_TEST_CHAIN_ID:
       case BSC_TEST_NETWORK_ID:
-        setActive("Binance Testnet");
+        setActive("BSC Testnet");
         setActiveIcon("binance.png");
-        setPopup(false);
-        break;
-      case GOERLI_CHAIN_ID:
-      case GOERLI_NETWORK_ID:
-        setActive("Goerli testnet");
-        setActiveIcon("op.png");
         setPopup(false);
         break;
     }
@@ -248,6 +247,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
       setShowAlert(true);
     }
   };
+  const [isOptimisimOpen, setIsOptimisimOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -258,7 +258,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
         <Link to={"/"} className="flex items-center lg:hidden">
           <img
             className="object-contain w-20 h-20"
-            src="./images/logo.png"
+            src={`${window.location.origin}/images/logo.png`}
             alt="logo"
           />
           <h2 className="font-medium text-2xl text-[#09080C] dark:text-[#fff]">
@@ -275,7 +275,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 setIsOpen(!isOpen);
               }}
               className="w-5 h-5 cursor-pointer "
-              src="./assets/icons/opener.svg"
+              src={`${window.location.origin}/assets/icons/opener.svg`}
               alt="opener"
             />
           </div>
@@ -292,7 +292,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
           <div className="flex items-center">
             <img
               className="object-contain w-16 h-16"
-              src="./images/logo.png"
+              src={`${window.location.origin}/images/logo.png`}
               alt="logo"
             />
             <h2 className="font-medium text-2xl text-[#fff]">GiveStation</h2>
@@ -302,7 +302,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
               setIsOpen(!isOpen);
             }}
             className="ml-5 cursor-pointer lg:hidden"
-            src="../../assets/icons/close.svg"
+            src={`${window.location.origin}/assets/icons/close.svg`}
             alt="close"
           />
         </div>
@@ -311,7 +311,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
             <Link to={"/"} className="items-center hidden lg:flex">
               <img
                 className="object-contain w-20 h-20"
-                src="./images/logo.png"
+                src={`${window.location.origin}/images/logo.png`}
                 alt="logo"
               />
               <h2 className="font-medium text-2xl text-[#09080C] dark:text-[#fff]">
@@ -319,9 +319,11 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
               </h2>
             </Link>
           )}
-          <button className="text-left md:text-center hover:bg-[#00FBFF] hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
-            <span className="text-base gradient-text">Grants</span>
-          </button>
+          <Link to={"/"}>
+            <button className="text-left md:text-center hover:bg-[#00FBFF] hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
+              <span className="text-base gradient-text">Grants</span>
+            </button>
+          </Link>
 
           <Link
             to={"/hackathon"}
@@ -334,52 +336,62 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
             </div>
           </Link>
           <button className="text-left md:text-center hover:bg-[#00FBFF] hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
-            <span className="text-base gradient-text">Governance</span>
+            <a href="https://snapshot.org/#/?q=GiveStation" target="_blank">
+              <span className="text-base gradient-text">Governance</span>
+            </a>
           </button>
-          <button></button>
         </div>
         <div className="flex flex-col px-8 mt-5 space-y-3 md:px-0 md:mt-0 lg:space-y-0 lg:space-x-3 lg:flex-row lg:items-center">
           <div className="relative">
             <button
               onClick={() => {
-                setPopup(!popup);
+                setIsOptimisimOpen(!isOptimisimOpen);
               }}
               className={`bg-[#1C1924] rounded-full w-full lg:w-auto flex justify-center md:justify-start items-center duration-300  ${
-                popup ? " px-10 " : " px-3 "
+                isOptimisimOpen ? " px-10 " : " px-3 "
               } py-2`}
             >
-              {active && (
-                <img src={`../../assets/images/${activeIcon}`} alt="op" />
+              {active ? (
+                <img
+                  src={`${window.location.origin}/assets/images/${activeIcon}`}
+                  alt="op"
+                />
+              ) : (
+                <></>
               )}
               <span className="ml-5 text-base gradient-text">
-                {" "}
                 {active || "Select a network"}
               </span>
             </button>
 
             <div
               className={`${
-                popup ? "top-12 block mt-2" : "-top-[500px] hidden lg:block"
+                isOptimisimOpen
+                  ? "top-12 block mt-2"
+                  : "-top-[500px] hidden lg:block"
               } lg:absolute top-12 left-0 text-[#fff] z-50 duration-300 dropsDownBg rounded-xl w-full px-3 py-6`}
             >
               <div className="flex items-center justify-between mb-4">
                 <h1 className="font-semibold">Select a network</h1>
                 <img
                   onClick={() => {
-                    setPopup(!popup);
+                    setIsOptimisimOpen(!isOptimisimOpen);
                   }}
                   className="cursor-pointer"
-                  src="../../assets/icons/close.svg"
+                  src={`${window.location.origin}/assets/icons/close.svg`}
                   alt="close"
                 />
               </div>
               {chainId &&
-              (chainId.toString() === GOERLI_CHAIN_ID ||
-                chainId.toString() === GOERLI_NETWORK_ID) ? (
+              (chainId.toString() === GOERLI_NETWORK_ID ||
+                chainId.toString() === GOERLI_CHAIN_ID) ? (
                 <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
-                    <img src="../../assets/images/op.png" alt="op" />
-                    <span className="ml-3 text-lg"> Goerli testnet</span>
+                    <img
+                      src={`${window.location.origin}/assets/images/op.png`}
+                      alt="op"
+                    />
+                    <span className="ml-3 text-lg">Optimism Goerli </span>
                   </div>
                   <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
@@ -390,10 +402,10 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 >
                   <img
                     className="w-8 h-8 mr-3"
-                    src="../../assets/images/op.png"
+                    src={`${window.location.origin}/assets/images/op.png`}
                     alt="optimism"
                   />{" "}
-                  <h2 className="text-sm font-medium">Goerli testnet</h2>
+                  <h2 className="text-sm font-medium">Optimism Goerli </h2>
                 </div>
               )}
               {chainId &&
@@ -401,7 +413,10 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 chainId.toString() === TEST_ARBITRUM_NETWORK_ID) ? (
                 <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
-                    <img src="../../assets/images/arbitrum.png" alt="op" />
+                    <img
+                      src={`${window.location.origin}/assets/images/arbitrum.png`}
+                      alt="op"
+                    />
                     <span className="ml-3 text-lg"> Arbitrum testnet</span>
                   </div>
                   <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
@@ -413,7 +428,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 >
                   <img
                     className="w-8 h-8 mr-3"
-                    src="../../assets/images/arbitrum.png"
+                    src={`${window.location.origin}/assets/images/arbitrum.png`}
                     alt="arbitrum"
                   />{" "}
                   <h2 className="text-sm font-medium">Arbitrum testnet</h2>
@@ -424,8 +439,11 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 chainId.toString() === MUMBAI_NETWORK_ID) ? (
                 <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
-                    <img src="../../assets/images/polygon.png" alt="op" />
-                    <span className="ml-3 text-lg">Mumbai testnet</span>
+                    <img
+                      src={`${window.location.origin}/assets/images/polygon.png`}
+                      alt="op"
+                    />
+                    <span className="ml-3 text-lg">Polygon testnet</span>
                   </div>
                   <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
@@ -436,10 +454,10 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 >
                   <img
                     className="w-8 h-8 mr-3"
-                    src="../../assets/images/polygon.png"
+                    src={`${window.location.origin}/assets/images/polygon.png`}
                     alt="polygon"
                   />
-                  <h2 className="text-sm font-medium">Mumbai testnet</h2>
+                  <h2 className="text-sm font-medium">Polygon testnet</h2>
                 </div>
               )}
               {chainId &&
@@ -447,7 +465,10 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 chainId.toString() === GNOSIS_NETWORK_ID) ? (
                 <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
-                    <img src="../../assets/images/gnosis.png" alt="op" />
+                    <img
+                      src={`${window.location.origin}/assets/images/gnosis.png`}
+                      alt="op"
+                    />
                     <span className="ml-3 text-lg"> Gnosis</span>
                   </div>
                   <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
@@ -459,7 +480,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 >
                   <img
                     className="w-8 h-8 mr-3"
-                    src="../../assets/images/gnosis.png"
+                    src={`${window.location.origin}/assets/images/gnosis.png`}
                     alt="gnosis"
                   />
                   <h2 className="text-sm font-medium">Gnosis</h2>
@@ -470,7 +491,10 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 chainId.toString() === BSC_TEST_NETWORK_ID) ? (
                 <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
-                    <img src="../../assets/images/binance.png" alt="op" />
+                    <img
+                      src={`${window.location.origin}/assets/images/binance.png`}
+                      alt="op"
+                    />
                     <span className="ml-3 text-lg"> Binance testnet</span>
                   </div>
                   <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
@@ -482,7 +506,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 >
                   <img
                     className="w-8 h-8 mr-3"
-                    src="../../assets/images/binance.png"
+                    src={`${window.location.origin}/assets/images/binance.png`}
                     alt="binance"
                   />
                   <h2 className="text-sm font-medium">Binance testnet</h2>
@@ -503,7 +527,10 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 {connected === false && "Connect Wallet"}
                 {connected === true && compressedAccount}
               </span>
-              <img src="../../assets/icons/avatar.svg" alt="avatar" />
+              <img
+                src={`${window.location.origin}/assets/icons/avatar.svg`}
+                alt="avatar"
+              />
             </button>
             <div
               className={`${
@@ -513,7 +540,10 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
               } lg:absolute top-12 left-0 text-[#fff] z-50 duration-300 dropsDownBg rounded-xl w-full px-3 py-4`}
             >
               <div className="flex items-center px-2 my-1 hover:bg-[#242A38] cursor-pointer p-2 rounded-lg">
-                <img src="../../assets/icons/dashboard.svg" alt="dashboard" />
+                <img
+                  src={`${window.location.origin}/assets/icons/dashboard.svg`}
+                  alt="dashboard"
+                />
                 <span
                   className="ml-3 text-sm"
                   onClick={() => {
@@ -527,7 +557,10 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
               </div>
 
               <div className="flex items-center px-2 my-1 hover:bg-[#242A38] cursor-pointer p-2 rounded-lg">
-                <img src="../../assets/icons/support.svg" alt="support" />
+                <img
+                  src={`${window.location.origin}/assets/icons/support.svg`}
+                  alt="support"
+                />
                 <span
                   className="ml-3 text-sm"
                   onClick={() => {
@@ -540,7 +573,10 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
               </div>
 
               <div className="flex items-center px-2 my-1 hover:bg-[#242A38] cursor-pointer p-2 rounded-lg">
-                <img src="../../assets/icons/logout.svg" alt="logout" />
+                <img
+                  src={`${window.location.origin}/assets/icons/logout.svg`}
+                  alt="logout"
+                />
                 <span
                   className="ml-3 text-sm"
                   onClick={() => {
