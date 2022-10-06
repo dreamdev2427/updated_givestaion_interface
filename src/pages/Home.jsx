@@ -208,9 +208,7 @@ export default function Home() {
           },
         })
           .then((res) => {
-            console.log("res.data = ", res.data);
             if (res.data && res.data.code === 0) {
-              console.log("res.data = ", res.data);
               let summaryFromDB = res.data.data || [];
               let filtered = summaryFromDB.filter(
                 (item) => item.chainId == chainId
