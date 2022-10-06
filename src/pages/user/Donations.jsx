@@ -52,6 +52,10 @@ export default function Donations() {
     setRefresh(!refresh);
   }, [donations]);
 
+  const subStr = (string) => {
+    return string.length > 250 ? `${string.substring(0, 250)}...` : string;
+  };
+
   return (
     <div className=" dark:bg-[#242A38] duration-300 ease-out	 bg-[#fff] min-h-screen">
       <div className="font-Jura ">
@@ -59,28 +63,31 @@ export default function Donations() {
           isSideBarOpen={isSideBarOpen}
           setIsSideBarOpen={setIsSideBarOpen}
         />
-        <div className=" lg:ml-72	lg:main">
+        <div className=" lg:ml-72 lg:main">
           <Header
             setIsSideBarOpen={setIsSideBarOpen}
             isSideBarOpen={isSideBarOpen}
           />
-          <div className="px-5 lg:px-8 mt-8">
+          <div className="px-5 mt-8 lg:px-8">
             <div>
               <PageHeader heading={"Donations"} />
 
               <div className="py-5 space-y-2">
-              {
-                donations.length>0 &&   
-                donations.map((item, index) => (
-                <Card
-                  key={index}
-                  imgSrc={`${backendURL}/${item.campaign?.imageURL}` || "spin" } 
-                  desc={ item.campaign?.description || "225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk" }
-                  title={item.campaign?.name || "SpinSamurai 👘" }
-                  btnText={(item.amount) > 0 ? item.amount :"0"}
-                />
-                ))
-              }    
+                {donations.length > 0 &&
+                  donations.map((item, index) => (
+                    <Card
+                      key={index}
+                      imgSrc={
+                        `${backendURL}/${item.campaign?.imageURL}` || "spin"
+                      }
+                      desc={
+                        subStr(item.campaign?.description) ||
+                        "225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
+                      }
+                      title={item.campaign?.name || "SpinSamurai 👘"}
+                      btnText={item.amount > 0 ? item.amount : "0"}
+                    />
+                  ))}
               </div>
             </div>
           </div>

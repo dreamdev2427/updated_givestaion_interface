@@ -53,6 +53,10 @@ const MyProjects = () => {
     if (campaignAddress) navigate(`update/${campaignAddress}`);
   };
 
+  const subStr = (string) => {
+    return string.length > 250 ? `${string.substring(0, 250)}...` : string;
+  };
+
   return (
     <div className=" dark:bg-[#242A38] duration-300 ease-out	 bg-[#fff] min-h-screen">
       <div className="font-Jura ">
@@ -60,115 +64,141 @@ const MyProjects = () => {
           isSideBarOpen={isSideBarOpen}
           setIsSideBarOpen={setIsSideBarOpen}
         />
-        <div className=" lg:ml-72	lg:main">
+        <div className=" lg:ml-72 lg:main">
           <Header
             setIsSideBarOpen={setIsSideBarOpen}
             isSideBarOpen={isSideBarOpen}
           />
-          <div className="px-5 lg:px-8 mt-8">
+          <div className="px-5 mt-8 lg:px-8">
             <div>
               <PageHeader heading={"My Projects"} />
 
-              <div className="mt-10 pb-5 space-y-5">
+              <div className="pb-5 mt-10 space-y-5">
                 {!isUpdateClick ? (
                   <>
-                  {
-                    campaigns.length>0 && 
-                    campaigns.map((item, index) => (
-                    <div className="rounded-lg bg-[#131420] p-2 flex flex-col md:flex-row space-x-3" key={index} >
-                      <img
-                        className="rounded-lg"
-                        src={`${backendURL}/${item?.imageURL}` || "./assets/images/casino.png" }
-                        style={{ width:"348px", height:"200px", alignSelf:"center"}}
-                        alt="casino"
-                      />
-                      <div className="text-[#fff] flex-1">
-                        <div className="flex  flex-col sm:flex-row items-center  mt-2 md:mt-0 justify-center md:justify-start">
-                          <h3 className="font-bold text-lg mr-4">
-                          {item?.name || ""}
-                          </h3>
-                          <div>
-                            <button className="font-bold mx-1 text-xs py-1 px-5 bg-[#00C938] rounded-xl">
-                              Active
-                            </button>
-                            <button className="font-bold mx-1 text-xs py-1 px-5 bg-[#00C938] rounded-xl">
-                              {item?.verified === true ? "Verified" : "Unverified"}
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col items-center md:flex-row md:items-end w-full justify-between">
-                          <div className="flex flex-col items-center md:flex-row md:items-end mt-4 space-x-5">
-                            <p className="text-center md:text-left md:max-w-[192px]">
-                              {item?.description || ""}
-                            </p>
-
-                            <div className="bg-[#1B1C2D] hidden md:block w-[2px] h-10 rounded-lg"></div>
-
-                            <div>
-                              <div className="flex justify-between items-center">
-                                <p className="font-normal text-xs mr-5 my-1">
-                                  Minimum Contribution
-                                </p>{" "}
-                                <h3 className="font-semibold text-[#fff] text-xs">
-                                {item?.minimum || 0.01}{chains[chainId?.toString()]?.nativeCurrency}
-                                </h3>
-                              </div>
-                              <div className="flex justify-between items-center">
-                                <p className="font-normal text-xs mr-5 my-1">
-                                  Target
-                                </p>{" "}
-                                <h3 className="font-semibold text-[#fff] text-xs">
-                                  {item?.target || 0.01}{chains[chainId?.toString()]?.nativeCurrency}
-                                </h3>
-                              </div>
-                              <div className="flex justify-between items-center">
-                                <p className="font-normal text-xs mr-5 my-1">
-                                  Raised
-                                </p>{" "}
-                                <h3 className="font-semibold text-[#fff] text-xs">
-                                  {item?.raised || 0.01}{chains[chainId?.toString()]?.nativeCurrency}
-                                </h3>
+                    {campaigns.length > 0 &&
+                      campaigns.map((item, index) => (
+                        <div
+                          className="rounded-lg bg-[#131420] p-2 flex flex-col md:flex-row space-x-3"
+                          key={index}
+                        >
+                          <img
+                            className="rounded-lg"
+                            src={
+                              `${backendURL}/${item?.imageURL}` ||
+                              "./assets/images/casino.png"
+                            }
+                            style={{
+                              width: "348px",
+                              height: "200px",
+                              alignSelf: "center",
+                            }}
+                            alt="casino"
+                          />
+                          <div className="text-[#fff] flex-1">
+                            <div className="flex flex-col items-center justify-center mt-2 sm:flex-row md:mt-0 md:justify-start">
+                              <h3 className="mr-4 text-lg font-bold">
+                                {item?.name || ""}
+                              </h3>
+                              <div>
+                                <button className="font-bold mx-1 text-xs py-1 px-5 bg-[#00C938] rounded-xl">
+                                  Active
+                                </button>
+                                <button className="font-bold mx-1 text-xs py-1 px-5 bg-[#00C938] rounded-xl">
+                                  {item?.verified === true
+                                    ? "Verified"
+                                    : "Unverified"}
+                                </button>
                               </div>
                             </div>
-                          </div>
 
-                          <div className="flex items-center space-x-4">
-                            <div className="bg-[#1B1C2D] hidden md:block w-[2px] h-10 rounded-lg"></div>
-                            <div className="flex flex-col items-center space-y-1">
-                              <div className="flex items-center">
-                                <img
-                                  className="w-10"
-                                  src="./assets/icons/heart.svg"
-                                  alt="heart"
-                                />
-                                <h1 className="bg-[#EC007F] font-extrabold text-lg rounded-2xl px-2 text-center ">
-                                  {item?.likes || 0}
-                                </h1>
-                              </div>
-                              <button
-                                onClick={() => {
-                                  setIsUpdateClick(!isUpdateClick);
-                                  onClickUpdate(item?.address);
-                                }}
-                                className="bg-[#52DCF0] text-[#000000] font-bold rounded-2xl flex items-center overflow-hidden justify-center py-3 px-4"
+                            <div
+                              className="flex flex-col items-center justify-between w-full md:flex-row md:items-end"
+                              style={{ alignItems: "center" }}
+                            >
+                              <div
+                                className="flex flex-col items-center justify-center mt-4 space-x-5 md:flex-row md:items-end"
+                                style={{ alignItems: "center" }}
                               >
-                                Update
-                                <img
-                                  src="./assets/icons/arrow-right.svg"
-                                  alt="arrow-right"
-                                />
-                              </button>
-                              <p className="text-[#B09DFF] text-xs">
-                                view campaign
-                              </p>
+                                <p className="text-center md:text-left md:max-w-[192px]">
+                                  {subStr(item?.description) || ""}
+                                </p>
+                                <div className="bg-[#1B1C2D] hidden flex flex-col justify-center md:block w-[2px] h-10 rounded-lg"></div>
+                                <div className="flex flex-col justify-center">
+                                  <div className="flex items-center justify-between">
+                                    <p className="my-1 mr-5 text-xs font-normal">
+                                      Minimum Contribution
+                                    </p>{" "}
+                                    <h3 className="font-semibold text-[#fff] text-xs">
+                                      {item?.minimum || 0.01}
+                                      {
+                                        chains[chainId?.toString()]
+                                          ?.nativeCurrency
+                                      }
+                                    </h3>
+                                  </div>
+                                  <div className="flex items-center justify-between">
+                                    <p className="my-1 mr-5 text-xs font-normal">
+                                      Target
+                                    </p>{" "}
+                                    <h3 className="font-semibold text-[#fff] text-xs">
+                                      {item?.target || 0.01}
+                                      {
+                                        chains[chainId?.toString()]
+                                          ?.nativeCurrency
+                                      }
+                                    </h3>
+                                  </div>
+                                  <div className="flex items-center justify-between">
+                                    <p className="my-1 mr-5 text-xs font-normal">
+                                      Raised
+                                    </p>{" "}
+                                    <h3 className="font-semibold text-[#fff] text-xs">
+                                      {item?.raised || 0.01}
+                                      {
+                                        chains[chainId?.toString()]
+                                          ?.nativeCurrency
+                                      }
+                                    </h3>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="flex items-center space-x-4">
+                                <div className="bg-[#1B1C2D] hidden md:block w-[2px] h-10 rounded-lg"></div>
+                                <div className="flex flex-col items-center space-y-1">
+                                  <div className="flex items-center">
+                                    <img
+                                      className="w-10"
+                                      src="./assets/icons/heart.svg"
+                                      alt="heart"
+                                    />
+                                    <h1 className="bg-[#EC007F] font-extrabold text-lg rounded-2xl px-2 text-center ">
+                                      {item?.likes || 0}
+                                    </h1>
+                                  </div>
+                                  <button
+                                    onClick={() => {
+                                      setIsUpdateClick(!isUpdateClick);
+                                      onClickUpdate(item?.address);
+                                    }}
+                                    className="bg-[#52DCF0] text-[#000000] font-bold rounded-2xl flex items-center overflow-hidden justify-center py-3 px-4"
+                                  >
+                                    Update
+                                    <img
+                                      src="./assets/icons/arrow-right.svg"
+                                      alt="arrow-right"
+                                    />
+                                  </button>
+                                  <p className="text-[#B09DFF] text-xs">
+                                    view campaign
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    ))
-                  }
+                      ))}
                   </>
                 ) : (
                   <form className="flex flex-col mb-5 md:px-5">

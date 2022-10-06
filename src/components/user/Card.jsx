@@ -5,12 +5,17 @@ const Card = ({ imgSrc, desc, title, btnText, heart }) => {
         className="h-72 sm:w-40 sm:h-auto"
         src={imgSrc}
         alt="spin"
+        style={{
+          width: "348px",
+          height: "200px",
+          alignSelf: "center",
+        }}
       />
       <div className="sm:mt-0 sm:ml-2 mt-2 text-[#fff] flex-1">
-        <h2 className="mb-2 text-center sm:text-left text-base font-semibold">
+        <h2 className="mb-2 text-base font-semibold text-center sm:text-left">
           {title}
         </h2>
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <p className="max-w-[185px] text-base font-normal">{desc}</p>
           <div className="flex flex-col items-center">
             {heart ? (
