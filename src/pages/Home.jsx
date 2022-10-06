@@ -399,7 +399,7 @@ export default function Home() {
   };
 
   const subStr = (string) => {
-    return string.length > 500 ? `${string.substring(0,500)}...` : string;
+    return string.length > 350 ? `${string.substring(0, 350)}...` : string;
   };
 
   return loading ? (
@@ -424,18 +424,18 @@ export default function Home() {
       ></div>
     </div>
   ) : (
-    <div className=" dark:bg-slate-900 " style={{ height: "100vh" }}>
+    <div className=" dark:bg-slate-900" style={{ height: "100vh" }}>
       <HeaderHome />
       <Carousel />
 
-      <section className="main-home  dark:bg-slate-900 py-5 pb-12">
+      <section className="py-5 pb-12 main-home dark:bg-slate-900">
         <div className="container">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold dark:text-gray-100">
               Explore Grants
             </h2>
-            <div className="hidden md:flex flex-wrap items-start">
-              <div className="relative  text-gray-600 focus-within:text-gray-400">
+            <div className="flex-wrap items-start hidden md:flex">
+              <div className="relative text-gray-600 focus-within:text-gray-400">
                 <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                   <button className="p-1 focus:outline-none focus:shadow-outline">
                     <svg
@@ -454,7 +454,7 @@ export default function Home() {
                 <input
                   type="search"
                   name="q"
-                  className="py-2 text-sm dark:text-white text-gray-900 bg-white dark:bg-gray-900 pl-10 focus:outline-none focus:bg-white focus:dark:text-white focus:text-gray-900 rounded-3xl"
+                  className="py-2 pl-10 text-sm text-gray-900 bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:bg-white focus:dark:text-white focus:text-gray-900 rounded-3xl"
                   placeholder="Search..."
                   autoComplete="off"
                   value={searchingName}
@@ -465,7 +465,7 @@ export default function Home() {
               </div>
               <div className="relative">
                 <button
-                  className="sm:ml-3 ml-0 py-2 px-6 text-md leading-5 text-slate-800 bg-gradient-secondary font-bold rounded-full dark:text-gray-100 flex items-center justify-between"
+                  className="flex items-center justify-between px-6 py-2 ml-0 font-bold leading-5 rounded-full sm:ml-3 text-md text-slate-800 bg-gradient-secondary dark:text-gray-100"
                   type="button"
                   onClick={() => {
                     setDropdown(!dropdown);
@@ -493,7 +493,7 @@ export default function Home() {
                   <>
                     <div
                       id="dropdown"
-                      className="absolute  top-12 right-0 z-10 bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700"
+                      className="absolute right-0 z-10 bg-white divide-y divide-gray-100 rounded shadow top-12 w-44 dark:bg-gray-700"
                     >
                       <ul
                         className="py-1 text-sm text-gray-700 dark:text-gray-200"
@@ -522,8 +522,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="md:hidden flex lg:flex-wrap md:flex-nowrap items-center my-10">
-            <div className="relative  text-gray-600 focus-within:text-gray-400">
+          <div className="flex items-center my-10 md:hidden lg:flex-wrap md:flex-nowrap">
+            <div className="relative text-gray-600 focus-within:text-gray-400">
               <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                 <button className="p-1 focus:outline-none focus:shadow-outline">
                   <svg
@@ -542,7 +542,7 @@ export default function Home() {
               <input
                 type="search"
                 name="q"
-                className="py-2 text-sm dark:text-white text-gray-900 bg-white dark:bg-gray-900 pl-10 focus:outline-none focus:bg-white focus:dark:text-white focus:text-gray-900 rounded-3xl"
+                className="py-2 pl-10 text-sm text-gray-900 bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:bg-white focus:dark:text-white focus:text-gray-900 rounded-3xl"
                 placeholder="Search..."
                 autoComplete="off"
                 value={searchingName}
@@ -551,13 +551,13 @@ export default function Home() {
                 }}
               />
             </div>
-            <div className="overflow-hidden flex overflow-x-auto categoryWrap">
+            <div className="flex overflow-hidden overflow-x-auto categoryWrap">
               {Category.map((i, index) => (
                 <div className="px-2" key={index}>
-                  {/* <div className="block text-center py-2 px-4 sm:px-6 text-md leading-5 text-slate-800 bg-gradient-secondary font-bold rounded-full dark:text-gray-100 whitespace-nowrap">{i.name}</div> */}
+                  {/* <div className="block px-4 py-2 font-bold leading-5 text-center rounded-full sm:px-6 text-md text-slate-800 bg-gradient-secondary dark:text-gray-100 whitespace-nowrap">{i.name}</div> */}
                   <button
                     type="button"
-                    // className="block text-center text-md leading-5 dark:text-slate-800  font-bold rounded-full text-gray-100 whitespace-nowrap"
+                    // className="block font-bold leading-5 text-center text-gray-100 rounded-full text-md dark:text-slate-800 whitespace-nowrap"
                     className={
                       // i.active?
                       "block text-center px-4 py-4 bg-gradient-secondary text-md leading-5 text-slate-800 font-bold rounded-full dark:text-gray-100 whitespace-nowrap mobFilterItem text-ellipsis overflow-hidden focus:bg-gradient-secondary"
@@ -581,12 +581,12 @@ export default function Home() {
               justifyContent: "center",
             }}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8 ">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 md:gap-8 ">
               {SummariesOfCampaigns &&
                 SummariesOfCampaigns.length > 0 &&
                 SummariesOfCampaigns.map((data, index) => (
                   <div
-                    className="bg-white px-2 md:px-6 pt-4 md:pt-12 pb-8 campaignCard"
+                    className="px-2 pt-4 pb-8 bg-white md:px-6 md:pt-12 campaignCard"
                     style={{ maxWidth: "400px" }}
                     key={index}
                   >
@@ -598,7 +598,7 @@ export default function Home() {
                         justifyContent: "space-between",
                       }}
                     >
-                      <h5 className="value text-lg">
+                      <h5 className="text-lg value">
                         {campaigns[index]?.toString()?.substring(0, 8) + "..."}
                       </h5>
                       <div
@@ -668,11 +668,11 @@ export default function Home() {
                         </CopyToClipboard>
                       </div>
                     </div>
-                    <div className="image relative my-4 flex justify-center">
+                    <div className="relative flex justify-center my-4 image">
                       <img
                         src={`${backendURL}/${data[7]}`}
                         alt="item"
-                        className="rounded-lg my-3 w-full"
+                        className="w-full my-3 rounded-lg"
                         style={{ width: "348px", height: "200px" }}
                       />
                       {data[9] === true ? (
@@ -687,16 +687,18 @@ export default function Home() {
                     </div>
                     <div className="body">
                       <div className="flex flex-wrap justify-between">
-                        <h4 className="text-blue text-sm title mb-3 ">
+                        <h4 className="mb-3 text-sm text-blue title ">
                           {data[5]}
                         </h4>
-                        <button className="bg-blue-light small-text font-normal px-2 text-xs py-1 mr-1">
+                        <button className="px-2 py-1 mr-1 text-xs font-normal bg-blue-light small-text">
                           {data[11]}
                         </button>
                       </div>
-                      <p className="text-blue description mb-3 min-h-[250px]">{subStr(data[6])}</p>
+                      <p className="text-blue description mb-3 min-h-[250px]">
+                        {subStr(data[6])}
+                      </p>
                       <p className="para">{"Raised"}</p>
-                      <h6 className="content mb-5 mt-1 text-sm">
+                      <h6 className="mt-1 mb-5 text-sm content">
                         {Number(data[1]?.toString() || "0").toFixed(3)}{" "}
                         {chains[data[15]]?.nativeCurrency}
                         {Number(nativePrices[data[15]]) > 0
@@ -711,7 +713,7 @@ export default function Home() {
                         onClick={() => {
                           onClickDonate(campaigns[index]);
                         }}
-                        className="handCursor py-2 donatebtn px-4 md:px-12 text-md leading-5 text-black bg-gradient-secondary font-bold"
+                        className="px-4 py-2 font-bold leading-5 text-black handCursor donatebtn md:px-12 text-md bg-gradient-secondary"
                       >
                         Donate
                       </div>
