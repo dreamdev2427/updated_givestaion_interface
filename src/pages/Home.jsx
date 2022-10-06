@@ -702,7 +702,7 @@ export default function Home() {
                           {data[11]}
                         </button>
                       </div>
-                      <p className="text-blue description mb-3 min-h-[180px]">
+                      <p className="text-blue description my-3 min-h-[180px]">
                         {subStr(data[6])}
                       </p>
                       <p className="para">{"Raised"}</p>
