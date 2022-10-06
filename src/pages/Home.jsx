@@ -25,6 +25,7 @@ import {
 import { backendURL } from "../config";
 import isEmpty from "../utilities/isEmpty";
 import Carousel from "./Carousel";
+import Web3 from "web3";
 
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
@@ -197,6 +198,7 @@ export default function Home() {
           )
         );
       }
+      console.log("summary = ", summary);
       if (campais.length > 0) {
         await axios({
           method: "post",
@@ -206,34 +208,41 @@ export default function Home() {
           },
         })
           .then((res) => {
+            console.log("res.data = ", res.data);
             if (res.data && res.data.code === 0) {
+              console.log("res.data = ", res.data);
               let summaryFromDB = res.data.data || [];
               let filtered = summaryFromDB.filter(
                 (item) => item.chainId == chainId
               );
-              if (filtered.length > 0) {
-                for (let idx = 0; idx < summary.length; idx++) {
-                  let found =
-                    filtered.find((item) => item._id == summary[idx][10]) ||
-                    undefined;
-                  if (found) {
-                    summary[idx][1] = globalWeb3.utils.fromWei(
-                      summary[idx][1].toString(),
-                      "ether"
-                    );
-                    summary[idx][5] = found.name;
-                    summary[idx][6] = found.description;
-                    summary[idx][7] = found.imageURL;
-                    summary[idx][9] = found.verified;
-                    summary[idx][10] = campais[idx];
-                    summary[idx][11] = found.category;
-                    summary[idx][12] = found.likes;
-                    summary[idx][13] = false;
-                    summary[idx][14] = found._id;
-                    summary[idx][15] = found.chainId;
-                  }
+
+              // if (filtered.length > 0) {
+              for (let idx = 0; idx < summary.length; idx++) {
+                console.log(summary[idx][1]);
+
+                let found =
+                  filtered.find((item) => item._id == summary[idx][10]) ||
+                  undefined;
+
+                summary[idx][1] = globalWeb3.utils.fromWei(
+                  summary[idx][1].toString(),
+                  "ether"
+                );
+
+                if (found) {
+                  summary[idx][5] = found.name;
+                  summary[idx][6] = found.description;
+                  summary[idx][7] = found.imageURL;
+                  summary[idx][9] = found.verified;
+                  summary[idx][10] = campais[idx];
+                  summary[idx][11] = found.category;
+                  summary[idx][12] = found.likes;
+                  summary[idx][13] = false;
+                  summary[idx][14] = found._id;
+                  summary[idx][15] = found.chainId;
                 }
               }
+              // }
             }
           })
           .catch((err) => {
