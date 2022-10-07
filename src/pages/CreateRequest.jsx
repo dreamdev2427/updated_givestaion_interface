@@ -48,11 +48,10 @@ export default function CreateRequest() {
                 {
                     await campaign.methods.createRequest(
                         description || "",
-                        globalWeb3.utils.toWei(amount.toString(), "ether"),
+                        globalWeb3.utils.toWei(amount.toString(), "ether").toString(),
                         recipient || ""
                     ).send({
-                        from: account, 
-                        gas: 3000000
+                        from: account
                     });
                     navigate(`/campaign/${id}`);
                 }
@@ -81,7 +80,7 @@ export default function CreateRequest() {
             </div>
         </section>
 
-        <section className="main py-24 text-center">
+        <section className=" text-center">
             <div className="container">
                 <h1 className='dark-text my-4 text-xl font-bold dark:text-gray-100'>Create a withdrawal request</h1>
                 <div className="mt-4 ">
@@ -102,7 +101,7 @@ export default function CreateRequest() {
                     onChange={(e) => {setRecipient(e.target.value)}} value={recipient || ""}
                 ></input>
                 </div>
-                <button className='my-5 campaignbtn bg-gradient-primary text-white  font-bold w-full sm:w-5/12 text-center rounded-lg py-3 px-4 flex justify-center items-center mx-auto'
+                <button className='mt-5 campaignbtn bg-gradient-primary text-white  font-bold w-full sm:w-5/12 text-center rounded-lg py-3 px-4 flex justify-center items-center mx-auto'
                     onClick={() => {onClickCreateRequest()}}
                 >Create withdrawal request</button>
             </div>

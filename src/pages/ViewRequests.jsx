@@ -7,12 +7,16 @@ import UserFooter from '../components/user/UserFooter';
 import { chains } from '../smart-contract/chains_constants';
 import axios from 'axios';
 import { backendURL } from '../config';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import Confetti from "react-confetti";
 const Campaign = require("../smart-contract/build/Campaign.json");
 
 export default function ViewRequests() {
     const [requests, setRequests] = useState([]);
     const [summary, setSummary] = useState({});
     const [campaignIdOnDB, setCampaignIdOnDB] = useState(null);
+    const [approvePopup, showApprovePopup] = useState(false);
+    const [finalizePopup, showFinalizePopup] = useState(false);
     
     const chainId = useSelector(state => state.auth.currentChainId);
     const account = useSelector(state => state.auth.currentWallet);
@@ -73,6 +77,7 @@ export default function ViewRequests() {
                     gas: 3000000
                 });
                 getRequestsFromCampaign();
+                showApprovePopup(true);
             }else{
                 console.log("creating a approve request : Invalid campaign instance");
             }
@@ -113,6 +118,7 @@ export default function ViewRequests() {
                         console.error(err);    
                     });
                 getRequestsFromCampaign();
+                showFinalizePopup(true);
             }
             else{
                 console.log("Finalysing requests: invalid campaign instance");
@@ -149,17 +155,12 @@ export default function ViewRequests() {
 
         { requests.length > 0 ? <>
             
-            <section className="main">
+            <section className="">
                 <div className="container">
                     <div className="relative overflow-x-auto shadow-md bg-dark py-4">
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 py-5 pb-10">
                             <thead className="text-xs text-gray-300 uppercase dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th scope="col" className=" px-4 py-6">
-                                        <div className="flex items-center">
-                                            <input type="checkbox" className="w-4 h-4 text-blue-600 bg-dark border-gray-700 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                        </div>
-                                    </th>
                                     <th scope="col" className="px-6 py-6">
                                         ID
                                     </th>
@@ -186,11 +187,6 @@ export default function ViewRequests() {
                             <tbody className='text-gray-300'>
                                 {requests.map((item, index) =>(
                                     <tr className="dark:bg-gray-800 py-8" key={index}>
-                                        <td className="w-4 p-4">
-                                            <div className="flex items-center">
-                                                <input type="checkbox" className="w-4 h-4 text-blue-600 bg-dark border-gray-700 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                                            </div>
-                                        </td>
                                         <td className="px-6 py-4">
                                             {index + 1}
                                         </td>
@@ -235,7 +231,7 @@ export default function ViewRequests() {
             </section>
 
         </>:<>
-            <section className="main py-24 text-center">
+            <section className=" text-center ">
                 <div className="container">
                     <h1 className='dark-text my-4 text-xl font-bold dark:text-gray-100'>No request for this grant</h1>
                     <p className='dark-text mb-4 text-lg dark:text-gray-100'>Kindly create a withdrawal request to withdraw funds from this campaign.</p>
@@ -250,7 +246,70 @@ export default function ViewRequests() {
 
         </>}
 
+        {approvePopup ? <>
+            <section className="popup fixed w-full top-0 left-0 z-50 min-h-screen flex items-center justify-center">
+                <div className="popup-other">
+                    <div className="container">
+                        <div className="request-popup mx-auto">
+                            <div className="popup-head py-6 px-6 flex justify-between items-center">
+                                <NavLink className="handcursor closebtn" to="/" onClick={() => { showApprovePopup(!approvePopup); }}>
+                                    <img src="/images/closebtn.png" alt="close" className='ml-auto' />
+                                </NavLink>
+                            </div>
+                            <div className="px-3 text-center">
+                                <div className='flex justify-center'>
+                                    <img src="/images/emoji _clapping hands_.png" alt="casual" className='mx-auto' />
+                                </div>
+                                <h6 className='text-sm md:text-2xl mt-3 mb-1 text-white font-bold'>You have successfully approved payment of this grant.</h6>
+                                <p className='text-xs md:text-lg mb-5 text-white'>We appreciate your support.</p>
+                                <div className="flex w-11/12 md:w-8/12 mx-auto input-group" style={{justifyContent: "center" }}>
+                                    <NavLink to="/">
+                                    <button className="inline-flex items-center text-sm text-white bg-light-blue rounded-tl-xl rounded-r-xl border-0 border-r-0 px-4 md:px-9 py-3 font-medium">
+                                        See more grants
+                                    </button>
+                                    </NavLink>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </> : ''}
+
+        {finalizePopup ? <>
+            <section className="popup fixed w-full top-0 left-0 z-50 min-h-screen flex items-center justify-center">
+                <div className="popup-other">
+                    <div className="container">
+                        <div className="request-popup mx-auto">
+                            <div className="popup-head py-6 px-6 flex justify-between items-center">
+                                <NavLink className="handcursor closebtn" to="/" onClick={() => { showFinalizePopup(!finalizePopup); }}>
+                                    <img src="/images/closebtn.png" alt="close" className='ml-auto' />
+                                </NavLink>
+                            </div>
+                            <div className="px-3 text-center">
+                                <div className='flex justify-center'>
+                                    <img src="/images/emoji _rocket_.png" alt="casual" className='mx-auto' />
+                                </div>
+                                <h6 className='text-sm md:text-2xl mt-3 mb-1 text-white font-bold'>You have successfully finalized payment of this grant.</h6>
+                                <p className='text-xs md:text-lg mb-5 text-white'>Check your wallet to withdraw funds.</p>
+                                <div className="flex w-11/12 md:w-8/12 mx-auto input-group" style={{justifyContent: "center" }}>
+                                    <NavLink to="/create-campaign">
+                                        <button className="inline-flex items-center text-sm text-white bg-light-blue rounded-tl-xl rounded-r-xl border-0 border-r-0 px-4 md:px-9 py-3 font-medium">
+                                            Create a grant
+                                        </button>
+                                    </NavLink>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </> : ''}
+
         <UserFooter />
+        {
+            (approvePopup || finalizePopup) && <Confetti />
+        }
     </div>
   )
 }
