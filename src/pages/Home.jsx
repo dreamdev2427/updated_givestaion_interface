@@ -11,11 +11,17 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ARBITRUM_NETWORK_ID,
+  BSC_CHAIN_ID,
   BSC_NETWORK_ID,
+  BSC_TEST_CHAIN_ID,
   chains,
+  GNOSIS_CHAIN_ID,
   GNOSIS_NETWORK_ID,
+  GOERLI_CHAIN_ID,
+  MUMBAI_CHAIN_ID,
   OPTIMISTIC_NETWORK_ID,
   POLYGON_NETWORK_ID,
+  TEST_ARBITRUM_CHAIN_ID,
 } from "../smart-contract/chains_constants";
 import {
   setNativePriceOnUSD,
@@ -26,6 +32,7 @@ import { backendURL } from "../config";
 import isEmpty from "../utilities/isEmpty";
 import Carousel from "./Carousel";
 import Web3 from "web3";
+import { changeNetwork } from "../smart-contract";
 
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
@@ -179,110 +186,6 @@ export default function Home() {
     }
   }, [ref]);
 
-  const getAllFromSmartContract = async () => {
-    try {
-      const factory = new globalWeb3.eth.Contract(
-        CampaignFactory,
-        chains[chainId?.toString()].factoryAddress
-      );
-      let summary = [],
-        campais = [];
-      if (factory) {
-        campais = await factory.methods.getDeployedCampaigns().call();
-        setCampaigns(campais);
-        summary = await Promise.all(
-          campais.map((campaign, i) =>
-            new globalWeb3.eth.Contract(Campaign, campais[i]).methods
-              .getSummary()
-              .call()
-          )
-        );
-      }
-      console.log("summary = ", summary);
-      for (let idx = 0; idx < summary.length; idx++) {
-        summary[idx][1] = globalWeb3.utils.fromWei(
-          summary[idx][1].toString(),
-          "ether"
-        );
-      }
-      if (campais.length > 0) {
-        await axios({
-          method: "post",
-          url: `${backendURL}/api/campaign/all`,
-          data: {
-            chainId: chainId,
-          },
-        })
-          .then((res) => {
-            if (res.data && res.data.code === 0) {
-              let summaryFromDB = res.data.data || [];
-              let filtered = summaryFromDB.filter(
-                (item) => item.chainId == chainId
-              );
-
-              if (filtered.length > 0) {
-                for (let idx = 0; idx < summary.length; idx++) {
-                  console.log(summary[idx][1]);
-
-                  let found =
-                    filtered.find((item) => item._id == summary[idx][10]) ||
-                    undefined;
-
-                  if (found) {
-                    summary[idx][5] = found.name;
-                    summary[idx][6] = found.description;
-                    summary[idx][7] = found.imageURL;
-                    summary[idx][9] = found.verified;
-                    summary[idx][10] = campais[idx];
-                    summary[idx][11] = found.category;
-                    summary[idx][12] = found.likes;
-                    summary[idx][13] = false;
-                    summary[idx][14] = found._id;
-                    summary[idx][15] = found.chainId;
-                  }
-                }
-              }
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-        await axios({
-          method: "post",
-          url: `${backendURL}/api/likes/getAllLikedCampaigns`,
-          data: {
-            user: ip || "",
-            chainId: chainId || "",
-          },
-        })
-          .then((res) => {
-            if (res.data && res.data.code === 0) {
-              let summaryFromDB = res.data.data || [];
-              if (summaryFromDB.length > 0) {
-                for (let idx = 0; idx < summary.length; idx++) {
-                  let found =
-                    summaryFromDB.find(
-                      (item) => item.campaign?.address == campais[idx]
-                    ) || undefined;
-                  if (found) {
-                    summary[idx][13] = found.value;
-                  }
-                }
-              }
-              setSummariesOfCampaigns(summary);
-              dispatch(updateCampaigns(summary));
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-      setLoading(false);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   const getAllFromDB = async () => {
     let summary = [],
       campais = [];
@@ -299,6 +202,7 @@ export default function Home() {
               let found = summaryFromDB[idx] || undefined;
               if (found) {
                 let newObj = {
+                  4: found.address,
                   5: found.name,
                   6: found.description,
                   7: found.imageURL,
@@ -326,7 +230,6 @@ export default function Home() {
       url: `${backendURL}/api/likes/getAllLikedCampaigns`,
       data: {
         user: ip || "",
-        chainId: chainId || "",
       },
     })
       .then((res) => {
@@ -343,23 +246,73 @@ export default function Home() {
               }
             }
           }
-          setSummariesOfCampaigns(summary);
-          dispatch(updateCampaigns(summary));
         }
       })
       .catch((err) => {
         console.error(err);
       });
+    console.log("summary = ", summary);
+    try {
+      let consideringChains = [
+        GOERLI_CHAIN_ID,
+        TEST_ARBITRUM_CHAIN_ID,
+        MUMBAI_CHAIN_ID,
+        GNOSIS_CHAIN_ID,
+        BSC_TEST_CHAIN_ID,
+      ];
+      let summariesFromSmartContracts = [];
+      for (let idx = 0; idx < consideringChains.length; idx++) {
+        try {
+          let web3Obj = new Web3(chains[consideringChains[idx]].rpcUrl);
+          let factory = new web3Obj.eth.Contract(
+            CampaignFactory,
+            chains[consideringChains[idx]].factoryAddress
+          );
+          let summaryOfOneNetwork = [],
+            campais = [];
+          if (factory) {
+            campais = await factory.methods.getDeployedCampaigns().call();
+            setCampaigns(campais);
+            summaryOfOneNetwork = await Promise.all(
+              campais.map((campaign, i) =>
+                new web3Obj.eth.Contract(Campaign, campais[i]).methods
+                  .getSummary()
+                  .call()
+              )
+            );
+          }
+          for (let idx = 0; idx < summaryOfOneNetwork.length; idx++) {
+            summaryOfOneNetwork[idx][1] = web3Obj.utils.fromWei(
+              summaryOfOneNetwork[idx][1].toString(),
+              "ether"
+            );
+          }
+          console.log("summaryOfOneNetwork = ", summaryOfOneNetwork);
+          summariesFromSmartContracts.push(...summaryOfOneNetwork);
+        } catch (err) {}
+      }
+      console.log(
+        "summariesFromSmartContracts = ",
+        summariesFromSmartContracts
+      );
+      for (let idx = 0; idx < summary.length; idx++) {
+        let foundItem = summariesFromSmartContracts.find(
+          (item) => item[10] === summary[idx][14]
+        );
+        if (foundItem) {
+          summary[idx][1] = foundItem[1];
+        }
+      }
+      console.log("summary = ", summary);
+      setSummariesOfCampaigns(summary);
+      dispatch(updateCampaigns(summary));
+    } catch (err) {}
     setLoading(false);
   };
 
   useEffect(() => {
     getNativePrice();
-    if (account && chainId && globalWeb3) {
-      getAllFromSmartContract();
-    } else {
-      getAllFromDB();
-    }
+    getAllFromDB();
   }, [account, chainId, globalWeb3]);
 
   const onCopyAddress = (campaignAddr) => {
@@ -385,8 +338,7 @@ export default function Home() {
     })
       .then((res) => {
         if (res.data && res.data.code === 0) {
-          if (globalWeb3 && chainId && account) getAllFromSmartContract();
-          else getAllFromDB();
+          getAllFromDB();
         }
       })
       .catch((err) => {
@@ -398,9 +350,18 @@ export default function Home() {
       });
   };
 
-  const onClickDonate = (id) => {
+  const onClickDonate = async (id, grantChainId) => {
     if (chainId && account && globalWeb3) {
-      navigate(`/campaign/${id}`);
+      if (Number(chainId) === Number(grantChainId)) navigate(`/campaign/${id}`);
+      else {
+        NotificationManager.warning(
+          "Please switch the network on your wallet and retry."
+        );
+        try {
+          let switchingResult = await changeNetwork(grantChainId);
+          if (switchingResult.success === true) navigate(`/campaign/${id}`);
+        } catch (err) {}
+      }
     } else {
       NotificationManager.warning("Please connect your wallet.");
     }
@@ -607,7 +568,7 @@ export default function Home() {
                       }}
                     >
                       <h5 className="text-lg value">
-                        {campaigns[index]?.toString()?.substring(0, 8) + "..."}
+                        {data[4]?.toString()?.substring(0, 8) + "..."}
                       </h5>
                       <div
                         className="flex flex-row justify-between gap-3 align-items-center"
@@ -719,7 +680,7 @@ export default function Home() {
                       </h6>
                       <div
                         onClick={() => {
-                          onClickDonate(campaigns[index]);
+                          onClickDonate(data[4], data[15]);
                         }}
                         className="px-4 py-2 font-bold leading-5 text-black handCursor donatebtn md:px-12 text-md bg-gradient-secondary"
                       >
