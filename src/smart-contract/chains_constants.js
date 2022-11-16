@@ -16,8 +16,8 @@ export const MUMBAI_CHAIN_ID = "0x13881";
 export const MUMBAI_NETWORK_ID = "80001";
 export const GOERLI_CHAIN_ID = "0x1a4";
 export const GOERLI_NETWORK_ID = "420";
-export const TEST_ARBITRUM_CHAIN_ID = "0x66eeb";
-export const TEST_ARBITRUM_NETWORK_ID = "421611";
+export const TEST_ARBITRUM_CHAIN_ID = "0xa4ba";
+export const TEST_ARBITRUM_NETWORK_ID = "42170";
 
 export const DEFAULT_CHAIN_ID = RINKEBY_CHAIN_ID;
 
@@ -65,32 +65,32 @@ export const chains = {
         blockScanUrl: "https://optimistic.etherscan.io/"
     },
     [GNOSIS_CHAIN_ID]: {
-        rpcUrl: "https://rpc.ankr.com/gnosis",
+        rpcUrl: "https://gnosis-mainnet.public.blastapi.io",
         nativeCurrency: "xDAI",
         factoryAddress: "0x3D2d157070A4F7254E64f90d9A7ceb0e633BCf12",
         givePointAddress: "0x74F6D3E611C1D87754eF6c9F7AefE6d92a21B2f7",
-        blockScanUrl: "https://gnosisscan.io"
+        blockScanUrl: "https://blockscout.com/xdai/mainnet/ "
     },
     [GNOSIS_NETWORK_ID]: {
-        rpcUrl: "https://rpc.ankr.com/gnosis",
+        rpcUrl: "https://gnosis-mainnet.public.blastapi.io",
         nativeCurrency: "xDAI",
         factoryAddress: "0x3D2d157070A4F7254E64f90d9A7ceb0e633BCf12",
         givePointAddress: "0x74F6D3E611C1D87754eF6c9F7AefE6d92a21B2f7",
-        blockScanUrl: "https://gnosisscan.io"
+        blockScanUrl: "https://blockscout.com/xdai/mainnet/ "
     },
     [ARBITRUM_CHAIN_ID]: {
-        rpcUrl: "https://arb1.arbitrum.io/rpc",
+        rpcUrl: "https://nova.arbitrum.io/rpc",
         nativeCurrency: "ETH",
         factoryAddress: "0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
         givePointAddress: "0x7DD7d0e4985363051e993C3EABAf6493A7691F50",
-        blockScanUrl: "https://arbiscan.io/"
+        blockScanUrl: "https://nova-explorer.arbitrum.io"
     },
     [ARBITRUM_NETWORK_ID]: {
-        rpcUrl: "https://arb1.arbitrum.io/rpc",
+        rpcUrl: "https://nova.arbitrum.io/rpc",
         nativeCurrency: "ETH",
         factoryAddress: "0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
         givePointAddress: "0x7DD7d0e4985363051e993C3EABAf6493A7691F50",
-        blockScanUrl: "https://arbiscan.io/"
+        blockScanUrl: "https://nova-explorer.arbitrum.io"
     },
     [BSC_TEST_CHAIN_ID]: {
         rpcUrl: "https://data-seed-prebsc-1-s1.binance.org:8545/",
