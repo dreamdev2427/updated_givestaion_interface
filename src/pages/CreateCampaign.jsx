@@ -111,6 +111,7 @@ export default function CreateCampaign() {
 				});
 			}
 			let createdCampaignAddress = null;
+			console.log(idOnDb);
 			if (idOnDb !== null) {
 				try {
 					const factory = new globalWeb3.eth.Contract(
@@ -149,11 +150,13 @@ export default function CreateCampaign() {
 					}
 				}
 				catch (e) {
+					console.error(e);
 					await axios({
 						method: "post",
 						url: `${backendURL}/api/campaign/delete`,
 						data: {
-							_id: idOnDb
+							campainId: idOnDb,
+							creator: account || ""
 						}
 					}).then((res) => {
 						if (res.data && res.data.code === 0) {
@@ -183,7 +186,7 @@ export default function CreateCampaign() {
 				}
 			}
 		} else {
-			console.log("Invalid web3");
+			NotificationManager.warning("Please connect your wallet.");
 		}
 	}
 

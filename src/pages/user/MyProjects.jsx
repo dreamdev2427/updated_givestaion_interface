@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { NotificationManager } from "react-notifications";
 import axios from "axios";
+import parse from 'html-react-parser';
+
 import { backendURL } from "../../config";
 import { chains } from "../../smart-contract/chains_constants";
 import PageHeader from "../../components/user/PageHeader";
@@ -188,7 +190,7 @@ const MyProjects = () => {
                                 style={{ alignItems: "center" }}
                               >
                                 <p className="text-center md:text-left md:max-w-[192px]">
-                                  {subStr(item?.description) || ""}
+                                  {parse(subStr(item?.description) || "") || ""}
                                 </p>
                                 <div className="bg-[#1B1C2D] hidden flex flex-col justify-center md:block w-[2px] h-10 rounded-lg"></div>
                                 <div className="flex flex-col justify-center">

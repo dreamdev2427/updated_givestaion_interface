@@ -1,4 +1,8 @@
-const Card = ({ imgSrc, desc, title, btnText, heart }) => {
+import { useNavigate } from "react-router-dom";
+
+const Card = ({ imgSrc, desc, title, btnText, heart, camId }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-[#131420] rounded-3xl sm:rounded-2xl overflow-hidden py-2 px-3 flex flex-col sm:items-center sm:flex-row">
       <img
@@ -29,7 +33,7 @@ const Card = ({ imgSrc, desc, title, btnText, heart }) => {
                 {btnText}
               </button>
             )}
-            <p className="text-[#B09DFF] text-xs">view campaign</p>
+            <p className="text-[#B09DFF] text-xs cursor-pointer" onClick={() => navigate(`/campaign/${camId}`)}>view campaign</p>
           </div>
         </div>
       </div>

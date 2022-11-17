@@ -15,6 +15,7 @@ import Sidebar1 from "../../components/user/Sidebar1";
 import Header from "../../components/HeaderHome";
 import Card from "../../components/user/Card";
 import PageHeader from "../../components/user/PageHeader";
+import parse from 'html-react-parser';
 
 const LikedCampaigns = () => {
   const chainId = useSelector((state) => state.auth.currentChainId);
@@ -39,8 +40,7 @@ const LikedCampaigns = () => {
       method: "post",
       url: `${backendURL}/api/likes/getAllLikedCampaigns`,
       data: {
-        user: ip || "",
-        chainId: chainId || "",
+        user: ip || ""
       },
     })
       .then((res) => {
@@ -77,6 +77,10 @@ const LikedCampaigns = () => {
       });
   };
 
+  const subStr = (string) => {
+    return string.length > 116 ? `${string.substring(0, 116)}...` : string;
+  };
+
   return (
     <div className=" dark:bg-[#242A38] duration-300 ease-out	 bg-[#fff] min-h-screen">
       <div className="font-Jura ">
@@ -84,12 +88,12 @@ const LikedCampaigns = () => {
           isSideBarOpen={isSideBarOpen}
           setIsSideBarOpen={setIsSideBarOpen}
         />
-        <div className=" lg:ml-72	lg:main">
+        <div className=" lg:ml-72 lg:main">
           <Header
             setIsSideBarOpen={setIsSideBarOpen}
             isSideBarOpen={isSideBarOpen}
           />
-          <div className="px-5 lg:px-8 mt-8">
+          <div className="px-5 mt-8 lg:px-8">
             <div>
               <PageHeader heading={"Favourites"} />
               <div className="py-5 space-y-2">
@@ -99,8 +103,9 @@ const LikedCampaigns = () => {
                 <Card
                   key={index}
                   imgSrc={item?.campaign? `${backendURL}/${item.campaign?.imageURL}` : ""}
-                  desc={ item.campaign?.description || "" }
+                  desc={ parse(subStr(item.campaign?.description) || "") || "" }
                   title={item?.campaign? item.campaign?.name : ""}
+                  camId={item?.campaign? item.campaign?.address : ""}
                   heart="heart"
                 />
                 ))

@@ -12,6 +12,7 @@ import PageHeader from "../../components/user/PageHeader";
 import Sidebar1 from "../../components/user/Sidebar1";
 import Header from "../../components/HeaderHome";
 import Card from "../../components/user/Card";
+import parse from 'html-react-parser';
 
 export default function Donations() {
   const chainId = useSelector((state) => state.auth.currentChainId);
@@ -81,11 +82,12 @@ export default function Donations() {
                         `${backendURL}/${item.campaign?.imageURL}` || "spin"
                       }
                       desc={
-                        subStr(item.campaign?.description) ||
-                        "225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
+                        parse(subStr(item.campaign?.description) || "") ||
+                        ""
                       }
-                      title={item.campaign?.name || "SpinSamurai 👘"}
+                      title={item.campaign?.name || ""}
                       btnText={item.amount > 0 ? item.amount : "0"}
+                      camId={item?.campaign? item.campaign?.address : ""}
                     />
                   ))}
               </div>

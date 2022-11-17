@@ -39,13 +39,11 @@ export function Auth(state = auth, action)
                 ...state, mintedNFTCount: action.payload
             }
         case SET_NATIVE_PRICE:
-            console.log("[SET_NATIVE_PRICE] ", action.payload);
             let tempNativePriceObj = {...state.nativePrice, ...action.payload};
             return {...state, nativePrice: tempNativePriceObj};
         case AUTH_SUCCESS:
             return { ...state, user: action.payload };
         case AUTH_LOGOUT:
-            // localStorage.removeItem("jwtToken");
             return { ...state, user: action.payload };
         case GET_USER_DETAIL:
             return {

@@ -192,6 +192,7 @@ export default function Home() {
       .then((res) => {
         if (res.data && res.data.code === 0) {
           let summaryFromDB = res.data.data || [];
+          console.log("summaryFromDB : ", summaryFromDB);
           if (summaryFromDB.length > 0) {
             for (let idx = 0; idx < summaryFromDB.length; idx++) {
               let found = summaryFromDB[idx] || undefined;
@@ -600,7 +601,7 @@ export default function Home() {
                           </span>
                         </div>
                         <CopyToClipboard
-                          text={`${window.location.origin}/campaign/${campaigns[index]}`}
+                          text={`${window.location.origin}/campaign/${data[4]}`}
                           onCopy={() => {
                             onCopyAddress(index);
                           }}

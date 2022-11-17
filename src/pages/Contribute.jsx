@@ -10,6 +10,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import Confetti from "react-confetti";
 import { useMediaQuery } from "react-responsive";
 import { chains } from "../smart-contract/chains_constants";
+import parse from 'html-react-parser';
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
 
@@ -249,8 +250,8 @@ export default function Contribute() {
                   <h6 className="my-2.5 text-md dark:text-gray-100">
                     Description
                   </h6>
-                  <p className="mb-3 text-justify dark:text-gray-100">
-                    {summary[6] || ""}
+                  <p className="mb-3 dark:text-gray-100">
+                    { parse(summary[6] || "") || ""}
                   </p>
                   <div className="flex flex-wrap items-end mt-6">
                     <div className="w-full sm:w-3/12 md:3/12">
