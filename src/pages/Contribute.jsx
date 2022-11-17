@@ -312,6 +312,9 @@ export default function Contribute() {
                       </div>
                     </div>
                   </div>
+                  <div className="flex items-end mt-10">
+                    
+                  </div>
                 </div>
                 <div className="pl-0 right md:pl-12">
                   <h4 className="my-6 text-lg font-bold value dark:text-gray-100">
