@@ -75,6 +75,9 @@ export default function Contribute() {
                     summa[9] = summaryFromDB.verified;
                     summa[11] = summaryFromDB.category;
                     summa[12] = summaryFromDB.raised;
+                    summa[13] = summaryFromDB.websiteurl;
+                    summa[14] = summaryFromDB.telegramurl;
+                    summa[15] = summaryFromDB.twitterurl;
                   }
                   setCampaignIdOnDB(summa[10]);
                   setSummary(summa);
@@ -109,6 +112,9 @@ export default function Contribute() {
                 summa[9] = summaryFromDB.verified;
                 summa[11] = summaryFromDB.category;
                 summa[12] = summaryFromDB.raised;
+                summa[13] = summaryFromDB.websiteurl;
+                summa[14] = summaryFromDB.telegramurl;
+                summa[15] = summaryFromDB.twitterurl;
                 setCampaignIdOnDB(summaryFromDB._id);
               }
               setSummary(summa);
@@ -313,7 +319,33 @@ export default function Contribute() {
                     </div>
                   </div>
                   <div className="flex items-end mt-10">
-                    
+                    {
+                      summary[13] !== "" ?
+                      <div className="mx-2" >
+                        <a href={`${summary[13]}`} target="_blank" rel="noreferrer" >
+                          <img src="/images/icons/github.png" style={{ width:"32px", height:"32px", cursor:"pointer" }} alt="githubicon" />
+                        </a>
+                      </div>
+                      : <></>
+                    }
+                    {
+                      summary[14] !== "" ?
+                      <div className="mx-2" >
+                        <a href={`${summary[14]}`} target="_blank" rel="noreferrer" >
+                          <img src="/images/icons/telegram.png" style={{ width:"32px", height:"32px", cursor:"pointer" }} alt="telegramicon" />
+                        </a>
+                      </div>
+                      : <></>
+                    }                    
+                    {
+                      summary[15] !== "" ?
+                      <div className="mx-2" >
+                        <a href={`${summary[15]}`} target="_blank" rel="noreferrer" >
+                          <img src="/images/icons/yutube.png" style={{ width:"32px", height:"32px", cursor:"pointer" }} alt="yutubeicon" />
+                        </a>
+                      </div>
+                      : <></>
+                    }
                   </div>
                 </div>
                 <div className="pl-0 right md:pl-12">
