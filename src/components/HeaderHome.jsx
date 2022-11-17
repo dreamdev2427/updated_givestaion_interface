@@ -335,9 +335,9 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
               Coming Soon
             </div>
           </Link>
-          <Link to="/tokenclaim" className="text-left md:text-center  hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
+          <div className="text-left md:text-center  hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
             <span className="text-base gradient-text">Claim GVST</span>
-          </Link>
+          </div>
         </div>
         <div className="flex flex-col px-8 mt-5 space-y-3 md:px-0 md:mt-0 lg:space-y-0 lg:space-x-3 lg:flex-row lg:items-center">
           <div className="relative">
