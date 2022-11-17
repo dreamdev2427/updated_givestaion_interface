@@ -233,3 +233,8 @@
 .slick-slide > div {
   display: flex ;
 }
+
+.rdw-editor-main  {
+  background-color: white;
+  min-height: 300px;
+}

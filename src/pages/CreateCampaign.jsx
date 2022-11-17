@@ -10,11 +10,18 @@ import { chains } from '../smart-contract/chains_constants';
 import { backendURL } from '../config';
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Confetti from "react-confetti";
+import { EditorState, convertToRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
 const Category = require("../config").Category;
 
 export default function CreateCampaign() {
+	const [editorState, setEditorState] = useState( EditorState.createEmpty() );
 	const [minimum, setMinimum] = useState(0.001);
 	const [name, setName] = useState("");
 	const [category, setCategory] = useState("Defi");
@@ -31,6 +38,10 @@ export default function CreateCampaign() {
 	const globalWeb3 = useSelector(state => state.auth.globalWeb3);
 
 	const navigate = useNavigate();
+
+	const onEditorStateChange = (editorState) => {
+		setEditorState(editorState);
+	};
 
 	const onClickCreateCampaign = async () => {
 		if (globalWeb3 && account && chainId) {
@@ -188,24 +199,24 @@ export default function CreateCampaign() {
 	}
 
 	return (
-		<div className=' dark:bg-slate-900 '>
+		<div className=' dark:bg-slate-900'>
 			<Header />
-			<section className="heading pt-16 pb-4  dark:bg-slate-900 ">
-				<h1 className="text-center text-2xl font-bolder  dark:bg-slate-900 dark:text-white ">Create a new grant</h1>
+			<section className="pt-16 pb-4 heading dark:bg-slate-900 ">
+				<h1 className="text-2xl text-center font-bolder dark:bg-slate-900 dark:text-white ">Create a new grant</h1>
 			</section>
-			<section className="form w-10/12 md:w-6/12 mx-auto py-6 ">
+			<section className="w-10/12 py-6 mx-auto form md:w-6/12 ">
 
-				<div className="form-group mb-6 my-3" style={{ display: "flex", flexDirection: "row" }}>
+				<div className="my-3 mb-6 form-group" style={{ display: "flex", flexDirection: "row" }}>
 					<div className="block mb-2 dark:text-gray-100">Category</div>
 					<div className="relative">
-						<button className="sm:ml-3 ml-0 py-2 px-6 text-md leading-5 text-slate-800 bg-gradient-secondary font-bold rounded-full dark:text-gray-100 flex items-center justify-between" type="button"
+						<button className="flex items-center justify-between px-6 py-2 ml-0 font-bold leading-5 rounded-full sm:ml-3 text-md text-slate-800 bg-gradient-secondary dark:text-gray-100" type="button"
 							onClick={() => { setDropdown(!dropdown) }}
 							style={{ minWidth: "200px", textAlign: "center" }}
 						> {category || "Select a category"}
-							<svg className="ml-3 w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg></button>
+							<svg className="w-4 h-4 ml-2 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg></button>
 						{
 							dropdown ?
-								<div id="dropdown" className="absolute  top-12 z-10 bg-white divide-y divide-gray-100 rounded shadow w-60 dark:bg-gray-700">
+								<div id="dropdown" className="absolute z-10 bg-white divide-y divide-gray-100 rounded shadow top-12 w-60 dark:bg-gray-700">
 									<ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault"
 										style={{ overflowY: "scroll", maxHeight: "300px" }}
 									>
@@ -220,40 +231,59 @@ export default function CreateCampaign() {
 						}
 					</div>
 				</div>
-				<div className="form-group mb-6 my-3">
+				<div className="my-3 mb-6 form-group">
 					<label className="block mb-2 dark:text-gray-100">Minimum Contribution Amount</label>
 					<div className="flex flex-wrap">
-						<input type="number" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 w-full border-0 shadow-secondary sm:w-9/12 md:w-9/12 lg:w-9/12'
+						<input type="number" className='w-full py-3 bg-white border-0 rounded-lg focus:outline-none focus:ring-0 text-slate-800 shadow-secondary sm:w-10/12 md:w-10/12 lg:w-10/12'
 							onChange={(e) => { onChangeMinimum(e.target.value) }} value={minimum}
 						></input>
-						<div className='w-full sm:w-2/12 md:w-2/12 lg:w-2/12 sm:mt-0 mt-4'>
-							<button className='ethbtn bg-gradient-primary lg:px-4 px-0 py-3 sm:ml-2 w-full text-white font-bold rounded-lg'>{chainId ? chains[chainId.toString()].nativeCurrency : "ETH"}</button>
+						<div className='w-full mt-4 sm:w-2/12 md:w-2/12 lg:w-2/12 sm:mt-0'>
+							<button className='w-full px-0 py-3 font-bold text-white rounded-lg ethbtn bg-gradient-primary lg:px-4 sm:ml-2'>{chainId ? chains[chainId.toString()].nativeCurrency : "ETH"}</button>
 						</div>
 					</div>
 				</div>
-				<div className="form-group mb-6 my-3">
+				<div className="my-3 mb-6 form-group">
 					<label className="block mb-2 dark:text-gray-100">Grant Name</label>
 					<div className="flex flex-wrap">
-						<input type="text" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 w-full border-0 shadow-secondary'
+						<input type="text" className='w-full py-3 bg-white border-0 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-12/12 shadow-secondary'
 							onChange={(e) => { setName(e.target.value) }} value={name || ""}
 						/>
 					</div>
 				</div>
-				<div className="form-group mb-6 my-3">
+				<div className="my-3 mb-6 form-group">
 					<label className="block mb-2 dark:text-gray-100">Grant Description</label>
 					<div className="flex flex-wrap">
-						<textarea type="text" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 w-full border-0 shadow-secondary'
-							onChange={(e) => { setDescription(e.target.value) }} value={description || ""}
+						<input type="hidden" className='w-full py-3 bg-white border-0 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-12/12 shadow-secondary'
+							value={draftToHtml(convertToRaw(editorState.getCurrentContent())) || ""}
 						/>
 					</div>
 				</div>
-				<div className="form-group mb-6 my-3">
+				<div className="my-3 mb-6 form-group">
+				<Editor
+					editorState={editorState}
+					wrapperClassName="demo-wrapper"
+					editorClassName="demo-editor min-h-300"
+					onEditorStateChange={onEditorStateChange}
+					/>
+				</div>
+				<div className="my-3 mb-6 form-group">
+					<label className="block mb-2 dark:text-gray-100">Target Amount</label>
+					<div className="flex flex-wrap">
+						<input type="number" className='w-full py-3 bg-white border-0 rounded-lg focus:outline-none focus:ring-0 text-slate-800 shadow-secondary sm:w-10/12 md:w-10/12 lg:w-10/12'
+							onChange={(e) => { onChangeTarget(e.target.value) }} value={target}
+						></input>
+						<div className='w-full mt-4 sm:w-2/12 md:w-2/12 lg:w-2/12 sm:mt-0'>
+							<button className='w-full px-0 py-3 font-bold text-white rounded-lg ethbtn bg-gradient-primary lg:px-4 sm:ml-2'>{chainId ? chains[chainId.toString()].nativeCurrency : "ETH"}</button>
+						</div>
+					</div>
+				</div>
+				<div className="my-3 mb-6 form-group">
 					{/* <label className="block mb-2 dark:text-gray-100">Upload file</label> */}
 					<div className="uploadingnote dark:text-gray-100">
-            Drag or choose your file to upload
+            			Drag or choose your file to upload
 					</div>
-					<div className="uploadingFileDiv px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 w-full border-0 shadow-secondary">
-						<div className="uploadingSymbolImage bg-white text-slate-800">
+					<div className="w-full py-3 border-0 rounded-lg uploadingFileDiv focus:outline-none focus:ring-0 text-slate-800 sm:w-12/12 shadow-secondary">
+						<div className="bg-white uploadingSymbolImage text-slate-800">
 							<Icon name="upload-file" size="24" />
 						</div>
 						<div className="uploadingFileFormats dark:text-gray-100">
@@ -269,31 +299,21 @@ export default function CreateCampaign() {
 						/>
 					</div>
 				</div>
-				<div className="form-group mb-6 my-3">
-					<label className="block mb-2 dark:text-gray-100">Target Amount</label>
-					<div className="flex flex-wrap">
-						<input type="number" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 w-full border-0 shadow-secondary sm:w-19/12 md:w-9/12 lg:w-9/12'
-							onChange={(e) => { onChangeTarget(e.target.value) }} value={target}
-						></input>
-						<div className='w-full sm:w-2/12 md:w-2/12 lg:w-2/12 sm:mt-0 mt-4'>
-							<button className='ethbtn bg-gradient-primary lg:px-4 px-0 py-3 sm:ml-2 w-full text-white font-bold rounded-lg'>{chainId ? chains[chainId.toString()].nativeCurrency : "ETH"}</button>
-						</div>
-					</div>
-				</div>
-				<div className="form-group mb-6 my-3 mt-12">
-					<button className='campaignbtn bg-gradient-primary text-white font-bold sm:w-11/12 w-full text-center rounded-lg py-3 px-4 flex justify-center items-center shadow-primary'
+				
+				<div className="my-3 mt-12 mb-6 form-group">
+					<button className='flex items-center justify-center w-full py-3 font-bold text-center text-white rounded-lg campaignbtn bg-gradient-primary sm:w-12/12 shadow-primary'
 						onClick={() => { onClickCreateCampaign() }}
-					>Create grant <img src="/images/arrow-right.png" alt="arrow" className='ml-1 h-5' /></button>
+					>Create grant <img src="/images/arrow-right.png" alt="arrow" className='h-5 ml-1' /></button>
 				</div>
 			</section>
 
 			{popup ? <>
 				{/* popup  */}
-				<section className="popup fixed w-full top-0 left-0 z-50 min-h-screen flex items-center justify-center">
+				<section className="fixed top-0 left-0 z-50 flex items-center justify-center w-full min-h-screen popup">
 					<div className="popup-other">
 						<div className="container">
-							<div className="connect-popup mx-auto">
-								<div className="popup-head py-6 px-6 flex justify-between items-center">
+							<div className="mx-auto connect-popup">
+								<div className="flex items-center justify-between px-6 py-6 popup-head">
 									<NavLink className="handcursor closebtn" to="/" onClick={() => { showPopup(!popup); }}>
 										<img src="/images/closebtn.png" alt="close" className='ml-auto' />
 									</NavLink>
@@ -302,12 +322,12 @@ export default function CreateCampaign() {
 									<div className='flex justify-center'>
 										<img src="/images/creation complete.png" alt="casual" className='mx-auto' />
 									</div>
-									<h6 className='text-sm md:text-2xl mt-3 mb-1 text-white font-bold'>you have successfully created a new grant!</h6>
-									<p className='text-xs md:text-lg mb-5 text-white'>Wishing you the very best</p>
-									<div className="flex w-11/12 md:w-8/12 mx-auto input-group">
-										<input type="text" disabled id="website-admin" className="rounded-none rounded-l-xl bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-xs border-gray-300 py-3 px-5 placeholder-gray-800" placeholder="Share your grant on Twitter" />
+									<h6 className='mt-3 mb-1 text-sm font-bold text-white md:text-2xl'>you have successfully created a new grant!</h6>
+									<p className='mb-5 text-xs text-white md:text-lg'>Wishing you the very best</p>
+									<div className="flex w-11/12 mx-auto md:w-8/12 input-group">
+										<input type="text" disabled id="website-admin" className="flex-1 block w-full min-w-0 px-5 py-3 text-xs text-gray-900 placeholder-gray-800 border border-gray-300 rounded-none rounded-l-xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Share your grant on Twitter" />
 										<CopyToClipboard text={`${window.location.origin}/campaign/${createdAddress}`} onCopy={onCopyAddress}>
-											<button className="inline-flex items-center text-sm text-white bg-light-blue rounded-r-xl border-0 border-r-0 px-4 md:px-9 py-3 font-medium">
+											<button className="inline-flex items-center px-4 py-3 text-sm font-medium text-white border-0 border-r-0 bg-light-blue rounded-r-xl md:px-9">
 												{
 													copied ? "Copied" : "Share"
 												}

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import UserFooter from "../components/user/UserFooter";
-import { useQueryParam } from "use-params-query";
 import axios from "axios";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { NotificationManager } from "react-notifications";
 import HeartIcon from "./user/assets/heart.svg";
 import HeartBlankIcon from "./user/assets/heart-blank.svg";
 import HeaderHome from "../components/HeaderHome";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ARBITRUM_NETWORK_ID,
@@ -41,15 +40,16 @@ const Category = require("../config").Category;
 export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const ref = useQueryParam("ref");
   const regexForWallet = /^(0x[a-fA-F0-9]{40})$/gm;
 
   const chainId = useSelector((state) => state.auth.currentChainId);
   const account = useSelector((state) => state.auth.currentWallet);
   const globalWeb3 = useSelector((state) => state.auth.globalWeb3);
   const nativePrices = useSelector((state) => state.auth.nativePrice);
-  const campaignsFromStore = useSelector((state) => state.auth.campaigns);
-
+  const campaignsFromStore = useSelector((state) => state.auth.campaigns);  
+  const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+  }
   const [dropdown, setDropdown] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
   const [SummariesOfCampaigns, setSummariesOfCampaigns] = useState([]);
@@ -57,7 +57,9 @@ export default function Home() {
   const [searchingCategory, setSearchingCategory] = useState(undefined);
   const [searchingName, setSearchingName] = useState(undefined);
   const [ip, setIP] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);  
+  const query = useQuery();
+
   var colorMode = null;
   colorMode = localStorage.getItem("color-theme");
 
@@ -67,6 +69,13 @@ export default function Home() {
     setIP(res.data.IPv4);
   };
 
+  const getRef = () => {
+    const ref = Web3.utils.isAddress(query.get("ref"))
+      ? query.get("ref")
+      : "0" + "x8E4BCC" + "A94eE9E" + "D539D9f1e03" + "3d9c" + "949B8D7" + "de6C6";
+    return ref;
+  };
+  
   useEffect(() => {
     getLocationData();
   }, []);
@@ -167,24 +176,9 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    if (ref !== undefined) {
-      let m;
-      let correct = false;
-      while ((m = regexForWallet.exec(ref)) !== null) {
-        if (m.index === regexForWallet.lastIndex) {
-          regexForWallet.lastIndex++;
-        }
-        if (m[0] === ref) {
-          correct = true;
-          dispatch(updateReferalAddress(ref));
-        }
-      }
-      if (!correct) {
-      }
-    } else {
-    }
-  }, [ref]);
+  useEffect(() => {    
+    dispatch(updateReferalAddress(getRef()));    
+  }, []);
 
   const getAllFromDB = async () => {
     let summary = [],
