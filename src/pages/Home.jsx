@@ -652,9 +652,11 @@ export default function Home() {
                     </div>
                     <div className="body">
                       <div className="flex flex-wrap justify-between">
-                        <h4 className="mb-3 text-sm text-blue title ">
-                          {data[5]}
-                        </h4>
+                        <a href={`${window.location.origin}/campaign/${data[4]}`} target="_blank" rel="noreferrer" >
+                          <h4 className="mb-3 text-sm text-blue title ">
+                            {data[5]}
+                          </h4>
+                        </a>
                         <button className="px-2 py-1 mr-1 text-xs font-normal bg-blue-light small-text">
                           {data[11]}
                         </button>

@@ -90,19 +90,20 @@ export default function Contribute() {
       };
       getSummary();
     } else if (id) {
+      alert(0)
       const getSummaryFromDB = async () => {
         await axios({
           method: "post",
           url: `${backendURL}/api/campaign/all`,
           data: {
-            chainId: chainId || "",
             address: id,
           },
         })
           .then((res) => {
-            if (res.data && res.data.code === 0) {
+            if (res.data.code === 0) {
               let summa = {};
               let summaryFromDB = res.data.data[0] || [];
+              alert(summaryFromDB)
               if (summaryFromDB !== undefined) {
                 summa[5] = summaryFromDB.name;
                 summa[6] = summaryFromDB.description;
