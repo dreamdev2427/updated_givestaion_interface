@@ -9,6 +9,56 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+.gradient-text-token {
+  background: linear-gradient(
+    73.6deg,
+    #85ffc4 2.11%,
+    #5cc6ff 42.39%,
+    #bc85ff 85.72%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-token-claim {
+  background: linear-gradient(
+    73.6deg,
+    #85ffc4 2.11%,
+    #5cc6ff 42.39%,
+    #bc85ff 85.72%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-bg-token-claim {
+  background: linear-gradient(180deg, #7acded 0%, #00eda6 100%);
+}
+.bG {
+  background: linear-gradient(180deg, #41aedd 0%, #09c9e3 100%);
+}
+.gT {
+  background: linear-gradient(
+    73.6deg,
+    #85ffc4 2.11%,
+    #5cc6ff 42.39%,
+    #bc85ff 85.72%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text {
+  background: linear-gradient(
+    73.6deg,
+    #85ffc4 2.11%,
+    #5cc6ff 42.39%,
+    #bc85ff 85.72%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .bG {
   background: linear-gradient(180deg, #41aedd 0%, #09c9e3 100%);
 }
