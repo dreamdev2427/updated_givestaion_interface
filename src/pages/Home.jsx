@@ -31,6 +31,7 @@ import { backendURL } from "../config";
 import isEmpty from "../utilities/isEmpty";
 import Carousel from "./Carousel";
 import Web3 from "web3";
+import parse from 'html-react-parser';
 import { changeNetwork } from "../smart-contract";
 
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
@@ -362,7 +363,7 @@ export default function Home() {
   };
 
   const subStr = (string) => {
-    return string.length > 350 ? `${string.substring(0, 350)}...` : string;
+    return string.length > 116 ? `${string.substring(0, 116)}...` : string;
   };
 
   return loading ? (
@@ -657,9 +658,9 @@ export default function Home() {
                           {data[11]}
                         </button>
                       </div>
-                      <p className="text-blue description my-3 min-h-[180px]">
-                        {subStr(data[6])}
-                      </p>
+                      <div className="text-blue description my-3 min-h-[80px]">                        
+                        {parse(subStr(data[6]))}
+                      </div>
                       <p className="para">{"Raised"}</p>
                       <h6 className="mt-1 mb-5 text-sm content">
                         {Number(data[1]?.toString() || "0").toFixed(3)}{" "}

@@ -121,7 +121,7 @@ const MyProjects = () => {
   };
 
   const subStr = (string) => {
-    return string.length > 250 ? `${string.substring(0, 250)}...` : string;
+    return string.length > 116 ? `${string.substring(0, 116)}...` : string;
   };
 
   return (

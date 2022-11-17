@@ -13,7 +13,6 @@ import Confetti from "react-confetti";
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
@@ -32,6 +31,9 @@ export default function CreateCampaign() {
 	const [copied, setCopied] = useState(false);
 	const [createdAddress, setCreatedAddress] = useState(undefined);
   	const [selectedFile, setSelectedFile] = useState(null);
+	const [websiteurl, setWebsiteURL] = useState("");
+	const [twitterurl, setTwitterURL] = useState("");
+	const [telegramurl, setTelegramURL] = useState("");
 
 	const chainId = useSelector(state => state.auth.currentChainId);
 	const account = useSelector(state => state.auth.currentWallet);
@@ -41,9 +43,25 @@ export default function CreateCampaign() {
 
 	const onEditorStateChange = (editorState) => {
 		setEditorState(editorState);
+		setDescription(draftToHtml(convertToRaw(editorState.getCurrentContent())) || "");
 	};
 
 	const onClickCreateCampaign = async () => {
+		if(name === "" )
+		{
+			NotificationManager.warning("Please input name.");
+			return;
+		}
+		if(description == "")
+		{
+			NotificationManager.warning("Please input description.");
+			return;
+		}
+		if(selectedFile == null)
+		{
+			NotificationManager.warning("Please input a image.");
+			return;
+		}
 		if (globalWeb3 && account && chainId) {
 			let imagePath = null;
 			const formData = new FormData();
@@ -75,6 +93,9 @@ export default function CreateCampaign() {
 						imageURL: imagePath,
 						minimum,
 						target,
+						twitterurl: twitterurl,
+						websiteurl: websiteurl,
+						telegramurl: telegramurl,
 						creator: account || "",
 						category: category,
 						address: "",
@@ -252,13 +273,6 @@ export default function CreateCampaign() {
 				</div>
 				<div className="my-3 mb-6 form-group">
 					<label className="block mb-2 dark:text-gray-100">Grant Description</label>
-					<div className="flex flex-wrap">
-						<input type="hidden" className='w-full py-3 bg-white border-0 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-12/12 shadow-secondary'
-							value={draftToHtml(convertToRaw(editorState.getCurrentContent())) || ""}
-						/>
-					</div>
-				</div>
-				<div className="my-3 mb-6 form-group">
 				<Editor
 					editorState={editorState}
 					wrapperClassName="demo-wrapper"
@@ -299,7 +313,22 @@ export default function CreateCampaign() {
 						/>
 					</div>
 				</div>
-				
+				<div className="flex flex-row my-1 form-group">
+					<label className="block w-4/12 mb-2 text-center sm:w-12/12 dark:text-gray-100 ">Website/Github</label>
+					<label className="block w-4/12 mb-2 text-center sm:w-12/12 dark:text-gray-100">Twitter</label>
+					<label className="block w-4/12 mb-2 text-center sm:w-12/12 dark:text-gray-100">Telegram</label>
+				</div>				
+				<div className="flex flex-row my-1 mb-6 form-group">
+					<input type="text" className='w-4/12 py-3 mx-1 bg-white border-0 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-12/12 shadow-secondary'
+						onChange={(e) => setWebsiteURL(e.target.value)} value={websiteurl}
+					/>
+					<input type="text" className='w-4/12 py-3 mx-1 bg-white border-0 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-12/12 shadow-secondary'
+						onChange={(e) => setTwitterURL(e.target.value)} value={twitterurl}
+					/>
+					<input type="text" className='w-4/12 py-3 mx-1 bg-white border-0 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-12/12 shadow-secondary'
+						onChange={(e) => setTelegramURL(e.target.value)} value={telegramurl}
+					/>
+				</div>
 				<div className="my-3 mt-12 mb-6 form-group">
 					<button className='flex items-center justify-center w-full py-3 font-bold text-center text-white rounded-lg campaignbtn bg-gradient-primary sm:w-12/12 shadow-primary'
 						onClick={() => { onClickCreateCampaign() }}

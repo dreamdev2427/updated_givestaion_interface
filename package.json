@@ -15,6 +15,7 @@
     "flowbite": "^1.4.7",
     "flowbite-react": "^0.0.27",
     "fs": "^0.0.1-security",
+    "html-react-parser": "^3.0.4",
     "html-to-draftjs": "^1.5.0",
     "https": "^1.0.0",
     "https-browserify": "^1.0.0",
