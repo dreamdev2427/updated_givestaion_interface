@@ -21,6 +21,7 @@ import LikedCampaigns from "./pages/user/LikedCampaigns";
 import GivePoints from "./pages/user/GivePoints";
 import GiveFrens from "./pages/user/GiveFrens";
 import Hackathon from "./pages/Hackathon";
+import TokenClaim from "./pages/user/TokenClaim";
 
 function AppRoutes() {
   return (
@@ -43,6 +44,7 @@ function AppRoutes() {
           <Route path="/favourites" element={<LikedCampaigns />}></Route>
           <Route path="/givepoints" element={<GivePoints />}></Route>
           <Route path="/givefrens" element={<GiveFrens />}></Route>
+          <Route path="/tokenclaim" element={<TokenClaim />}></Route>
           {/* </Route> */}
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
