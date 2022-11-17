@@ -8,7 +8,7 @@ const TokenClaim = () => {
       <div className="font-Jura ">
         <HeaderHome />
 
-        <div className="max-w-4xl mx-auto px-5 lg:px-8 ">
+        <div className="max-w-4xl px-5 mx-auto lg:px-8 ">
           <div className="bg-[#ffffff] rounded-xl p-4 space-y-4 pb-10">
             <div className="flex items-center justify-center">
               <img
@@ -17,7 +17,7 @@ const TokenClaim = () => {
                 alt="congratulations"
               />
             </div>
-            <h1 className="text-xl md:text-2xl font-bold gradient-text-token text-center">
+            <h1 className="text-xl font-bold text-center md:text-2xl gradient-text-token">
               Congrats!
               <br className="hidden md:block" />
               You’re eligible for the airdrop.
@@ -66,12 +66,12 @@ const TokenClaim = () => {
             </p>
 
             <div className="text-[#68778D] max-w-2xl mx-auto space-y-4">
-              <h2 className="text-center md:text-left md:ml-8 font-semibold text-lg">ELIGIBILITY CRITERIA</h2>
+              <h2 className="text-lg font-semibold text-center md:text-left md:ml-8">ELIGIBILITY CRITERIA</h2>
 
               <div className="space-y-8">
                 <div className="space-y-1">
-                  <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                    <div className="flex-1 flex items-center space-x-2 justify-start ">
+                  <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                    <div className="flex items-center justify-start flex-1 space-x-2 ">
                       <div>
                         <svg
                           width="24"
@@ -96,13 +96,13 @@ const TokenClaim = () => {
                       </div>
                       <p>GiveStation Contributor</p>
                     </div>
-                    <div className="md:flex-1 text-right">
-                      <p className="gradient-text-token text-lg">500 GVST</p>
+                    <div className="text-right md:flex-1">
+                      <p className="text-lg gradient-text-token">500 GVST</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                    <div className="flex-1 flex items-center space-x-2 justify-start ">
+                  <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                    <div className="flex items-center justify-start flex-1 space-x-2 ">
                       <div>
                         <svg
                           width="24"
@@ -126,13 +126,13 @@ const TokenClaim = () => {
                       </div>
                       <p>Grant creators</p>
                     </div>
-                    <div className="md:flex-1 text-right">
-                      <p className="gradient-text-token text-lg">0 GVST</p>
+                    <div className="text-right md:flex-1">
+                      <p className="text-lg gradient-text-token">0 GVST</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                    <div className="flex-1 flex items-center space-x-2 justify-start ">
+                  <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                    <div className="flex items-center justify-start flex-1 space-x-2 ">
                       <div>
                         <svg
                           width="24"
@@ -156,13 +156,13 @@ const TokenClaim = () => {
                       </div>
                       <p>GiveStationDAO Voter</p>
                     </div>
-                    <div className="md:flex-1 text-right">
-                      <p className="gradient-text-token text-lg">0 GVST</p>
+                    <div className="text-right md:flex-1">
+                      <p className="text-lg gradient-text-token">0 GVST</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                    <div className="flex-1 flex items-center space-x-2 justify-start ">
+                  <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                    <div className="flex items-center justify-start flex-1 space-x-2 ">
                       <div>
                         <svg
                           width="24"
@@ -186,13 +186,13 @@ const TokenClaim = () => {
                       </div>
                       <p>Multi-sig signers</p>
                     </div>
-                    <div className="md:flex-1 text-right">
-                      <p className="gradient-text-token text-lg">0 GVST</p>
+                    <div className="text-right md:flex-1">
+                      <p className="text-lg gradient-text-token">0 GVST</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                    <div className="flex-1 flex items-center space-x-2 justify-start ">
+                  <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                    <div className="flex items-center justify-start flex-1 space-x-2 ">
                       <div>
                         <svg
                           width="24"
@@ -217,19 +217,19 @@ const TokenClaim = () => {
                       </div>
                       <p>Donated to GiveStation’s Gitcoin Grant</p>
                     </div>
-                    <div className="md:flex-1 text-right">
-                      <p className="gradient-text-token text-lg">500 GVST</p>
+                    <div className="text-right md:flex-1">
+                      <p className="text-lg gradient-text-token">500 GVST</p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                    <div className="flex-1 flex items-center space-x-2 justify-start ">
+                  <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                    <div className="flex items-center justify-start flex-1 space-x-2 ">
                       <p>Total</p>
                     </div>
-                    <div className="md:flex-1 text-right">
-                      <p className="gradient-text-token text-lg">1,000 GVST</p>
+                    <div className="text-right md:flex-1">
+                      <p className="text-lg gradient-text-token">1,000 GVST</p>
                     </div>
                   </div>
                 </div>
@@ -241,9 +241,9 @@ const TokenClaim = () => {
         {/* Modal */}
         {showModal && (
           <div className="fixed top-0 py-4 left-0 bottom-0 right-0 z-50 overflow-auto bg-[#000000CC]">
-            <div className="max-w-2xl  md:mt-16 mx-auto px-5 lg:px-8 ">
+            <div className="max-w-2xl px-5 mx-auto md:mt-16 lg:px-8 ">
               <div className="bg-[#ffffff] rounded-xl p-4 space-y-4 pb-10">
-                <h1 className="text-xl md:text-2xl font-bold gradient-text-token mt-6 text-center">
+                <h1 className="mt-6 text-xl font-bold text-center md:text-2xl gradient-text-token">
                   Sorry! You’re not eligible for the airdrop.
                 </h1>
                 <h2 className="text-[#000000] text-center">
@@ -258,7 +258,7 @@ const TokenClaim = () => {
                     }}
                     className="bg-[#000000]  rounded-lg py-2 px-8 md:px-20"
                   >
-                    <span className="gradient-text-token font-semibold text-lg">
+                    <span className="text-lg font-semibold gradient-text-token">
                       Fund a grant
                     </span>
                   </button>
@@ -270,12 +270,12 @@ const TokenClaim = () => {
                 </p>
 
                 <div className="text-[#68778D] max-w-3xl mx-auto space-y-4">
-                  <h2 className="text-center md:text-left md:ml-8 font-semibold text-lg">ELIGIBILITY CRITERIA</h2>
+                  <h2 className="text-lg font-semibold text-center md:text-left md:ml-8">ELIGIBILITY CRITERIA</h2>
 
                   <div className="space-y-8">
                     <div className="space-y-1">
-                      <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                        <div className="flex-1 flex items-center space-x-2 justify-start ">
+                      <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                        <div className="flex items-center justify-start flex-1 space-x-2 ">
                           <div>
                             <svg
                               width="24"
@@ -299,13 +299,13 @@ const TokenClaim = () => {
                           </div>
                           <p>GiveStation Contributor</p>
                         </div>
-                        <div className="md:flex-1 text-right">
-                          <p className="gradient-text-token text-lg">0 GVST</p>
+                        <div className="text-right md:flex-1">
+                          <p className="text-lg gradient-text-token">0 GVST</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                        <div className="flex-1 flex items-center space-x-2 justify-start ">
+                      <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                        <div className="flex items-center justify-start flex-1 space-x-2 ">
                           <div>
                             <svg
                               width="24"
@@ -329,13 +329,13 @@ const TokenClaim = () => {
                           </div>
                           <p>Grant creators</p>
                         </div>
-                        <div className="md:flex-1 text-right">
-                          <p className="gradient-text-token text-lg">0 GVST</p>
+                        <div className="text-right md:flex-1">
+                          <p className="text-lg gradient-text-token">0 GVST</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                        <div className="flex-1 flex items-center space-x-2 justify-start ">
+                      <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                        <div className="flex items-center justify-start flex-1 space-x-2 ">
                           <div>
                             <svg
                               width="24"
@@ -359,13 +359,13 @@ const TokenClaim = () => {
                           </div>{" "}
                           <p>GiveStationDAO Voter</p>
                         </div>
-                        <div className="md:flex-1 text-right">
-                          <p className="gradient-text-token text-lg">0 GVST</p>
+                        <div className="text-right md:flex-1">
+                          <p className="text-lg gradient-text-token">0 GVST</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                        <div className="flex-1 flex items-center space-x-2 justify-start ">
+                      <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                        <div className="flex items-center justify-start flex-1 space-x-2 ">
                           <div>
                             <svg
                               width="24"
@@ -389,13 +389,13 @@ const TokenClaim = () => {
                           </div>
                           <p>Multi-sig signers</p>
                         </div>
-                        <div className="md:flex-1 text-right">
-                          <p className="gradient-text-token text-lg">0 GVST</p>
+                        <div className="text-right md:flex-1">
+                          <p className="text-lg gradient-text-token">0 GVST</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                        <div className="flex-1 flex items-center space-x-2 justify-start ">
+                      <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                        <div className="flex items-center justify-start flex-1 space-x-2 ">
                           <div>
                             <svg
                               width="24"
@@ -419,19 +419,19 @@ const TokenClaim = () => {
                           </div>
                           <p>Donated to GiveStation’s Gitcoin Grant</p>
                         </div>
-                        <div className="md:flex-1 text-right">
-                          <p className="gradient-text-token text-lg">0 GVST</p>
+                        <div className="text-right md:flex-1">
+                          <p className="text-lg gradient-text-token">0 GVST</p>
                         </div>
                       </div>
                     </div>
 
                     <div>
-                      <div className="flex items-center justify-between md:space-x-0 space-x-4">
-                        <div className="flex-1 flex items-center space-x-2 justify-start ">
+                      <div className="flex items-center justify-between space-x-4 md:space-x-0">
+                        <div className="flex items-center justify-start flex-1 space-x-2 ">
                           <p>Total</p>
                         </div>
-                        <div className="md:flex-1 text-right">
-                          <p className="gradient-text-token text-lg">0 GVST</p>
+                        <div className="text-right md:flex-1">
+                          <p className="text-lg gradient-text-token">0 GVST</p>
                         </div>
                       </div>
                     </div>

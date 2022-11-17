@@ -90,7 +90,6 @@ export default function Contribute() {
       };
       getSummary();
     } else if (id) {
-      alert(0)
       const getSummaryFromDB = async () => {
         await axios({
           method: "post",
@@ -103,7 +102,6 @@ export default function Contribute() {
             if (res.data.code === 0) {
               let summa = {};
               let summaryFromDB = res.data.data[0] || [];
-              alert(summaryFromDB)
               if (summaryFromDB !== undefined) {
                 summa[5] = summaryFromDB.name;
                 summa[6] = summaryFromDB.description;
