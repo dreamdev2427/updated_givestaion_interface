@@ -16,8 +16,8 @@ export const MUMBAI_CHAIN_ID = "0x13881";
 export const MUMBAI_NETWORK_ID = "80001";
 export const GOERLI_CHAIN_ID = "0x1a4";
 export const GOERLI_NETWORK_ID = "420";
-export const TEST_ARBITRUM_CHAIN_ID = "0xa4ba";
-export const TEST_ARBITRUM_NETWORK_ID = "42170";
+export const TEST_ARBITRUM_CHAIN_ID = "0x66eed";
+export const TEST_ARBITRUM_NETWORK_ID = "421613";
 
 export const DEFAULT_CHAIN_ID = RINKEBY_CHAIN_ID;
 
@@ -135,17 +135,17 @@ export const chains = {
         blockScanUrl: "https://goerli.etherscan.io/"
     },
     [TEST_ARBITRUM_CHAIN_ID]: {
-        rpcUrl: "https://rinkeby.arbitrum.io/rpc",
+        rpcUrl: "https://goerli-rollup.arbitrum.io/rpc",
         nativeCurrency: "ETH",
-        factoryAddress: "0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
-        givePointAddress: "0x7DD7d0e4985363051e993C3EABAf6493A7691F50",
+        factoryAddress: "0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
+        givePointAddress: "0xb2c5544a5B60757e3A7885A85b42Bc4160609992",
         blockScanUrl: "https://testnet.arbiscan.io/"
     },
     [TEST_ARBITRUM_NETWORK_ID]: {
-        rpcUrl: "https://rinkeby.arbitrum.io/rpc",
+        rpcUrl: "https://goerli-rollup.arbitrum.io/rpc",
         nativeCurrency: "ETH",
-        factoryAddress: "0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
-        givePointAddress: "0x7DD7d0e4985363051e993C3EABAf6493A7691F50",
+        factoryAddress: "0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
+        givePointAddress: "0xb2c5544a5B60757e3A7885A85b42Bc4160609992",
         blockScanUrl: "https://testnet.arbiscan.io/"
     },
 }
