@@ -307,7 +307,8 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
           />
         </div>
         <div className="flex flex-col items-center md:space-y-3 lg:space-y-0 lg:space-x-3 lg:flex-row">
-          {isSideBarOpen === false && (
+          {
+            isSideBarOpen === false && (
             <Link to={"/"} className="items-center hidden lg:flex">
               <img
                 className="object-contain w-20 h-20"
@@ -319,11 +320,11 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
               </h2>
             </Link>
           )}
-          <Link to={"/"}>
-            <button className="text-left md:text-center hover:bg-[#00FBFF] hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
+            <div className="text-left md:text-center  hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow" 
+              onClick={() => navigate("/")}
+            >
               <span className="text-base gradient-text">Grants</span>
-            </button>
-          </Link>
+            </div>
 
           <a
             href="https://hackathons.givestation.org/"
@@ -336,7 +337,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
               Coming Soon
             </div>
           </a>
-          <div className="text-left md:text-center  hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
+          <div className="text-left md:text-center  hover:md:bg-[#09080C] md:bg-[rgb(9,8,12)] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
             <span className="text-base gradient-text">Claim GVST</span>
           </div>
         </div>

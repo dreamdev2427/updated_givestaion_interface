@@ -650,7 +650,7 @@ export default function Home() {
                         <></>
                       )}
                     </div>
-                    <div className="body">
+                    <div className="flex flex-col justify-between body">
                       <div className="flex flex-wrap justify-between">
                         <a href={`${window.location.origin}/campaign/${data[4]}`} target="_blank" rel="noreferrer" >
                           <h4 className="mb-3 text-sm text-blue title ">

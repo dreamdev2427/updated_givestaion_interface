@@ -30,6 +30,9 @@ $green: #53a24c;
   box-shadow: 1px 7px 6px #4b5657, 9px 4px 103px rgb(50 50 71 / 1%), 0px 4px 59px rgb(50 50 71 / 6%);
   border-radius: 10px;
   border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .donating-popup {
   width: 502px;
