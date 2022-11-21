@@ -325,8 +325,9 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
             </button>
           </Link>
 
-          <Link
-            to={"/hackathon"}
+          <a
+            href="https://hackathons.givestation.org/"
+            target="_blank" rel="noreferrer" 
             className="relative bg-[#09080C] w-full lg:w-auto my-2 rounded-md py-2 px-4 shadow"
           >
             <span className="text-base gradient-text">Hackathons</span>
@@ -334,7 +335,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
             <div className="coming-soon absolute -bottom-[14px] right-0 text-[#fff] px-3 py-1 rounded-xl text-xs">
               Coming Soon
             </div>
-          </Link>
+          </a>
           <div className="text-left md:text-center  hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
             <span className="text-base gradient-text">Claim GVST</span>
           </div>
