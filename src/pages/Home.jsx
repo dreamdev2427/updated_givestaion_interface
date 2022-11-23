@@ -652,11 +652,11 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col justify-between body">
                       <div className="flex flex-wrap justify-between">
-                        <a href={`${window.location.origin}/campaign/${data[4]}`} target="_blank" rel="noreferrer" >
+                        <div onClick={() => navigate(`${window.location.origin}/campaign/${data[4]}`)} className="cursor-pointer blue" >
                           <h4 className="mb-3 text-sm text-blue title ">
                             {data[5]}
                           </h4>
-                        </a>
+                        </div>
                         <button className="px-2 py-1 mr-1 text-xs font-normal bg-blue-light small-text">
                           {data[11]}
                         </button>
