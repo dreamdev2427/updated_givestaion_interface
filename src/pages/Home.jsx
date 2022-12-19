@@ -732,7 +732,7 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col justify-between body">
                       <div className="flex flex-wrap justify-between">
-                        <div onClick={() => navigate(`${window.location.origin}/campaign/${data[4]}`)} className="cursor-pointer blue" >
+                        <div onClick={() => navigate(`/campaign/${data[4]}`)} className="cursor-pointer blue" >
                           <h4 className="mb-3 text-sm text-blue title ">
                             {data[5]}
                           </h4>
