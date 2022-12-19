@@ -33,6 +33,7 @@ import Carousel from "./Carousel";
 import Web3 from "web3";
 import parse from 'html-react-parser';
 import { changeNetwork } from "../smart-contract";
+import { useRef } from "react";
 
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
@@ -57,10 +58,16 @@ export default function Home() {
   const [copied, setCopied] = useState({});
   const [searchingCategory, setSearchingCategory] = useState(undefined);
   const [searchingName, setSearchingName] = useState(undefined);
-  const [ip, setIP] = useState("");
-  const [loading, setLoading] = useState(true);  
+  const [ip, setIP] = useState(""); 
+  const [nftList, setnftList] = useState([]);
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [noData, setNoData] = useState(false);
+  const [totalCount, setTotalCount] = useState(0);
+  const [campaignsFromDB, setCampaignsFromDB] = useState([]);
   const query = useQuery();
-
+  const PAGE_LIMIT = 6;
+  
   var colorMode = null;
   colorMode = localStorage.getItem("color-theme");
 
@@ -183,44 +190,30 @@ export default function Home() {
 
   const getAllFromDB = async () => {
     let summary = [],
-      campais = [];
-    await axios({
-      method: "post",
-      url: `${backendURL}/api/campaign/all`,
-      data: {},
-    })
-      .then((res) => {
-        if (res.data && res.data.code === 0) {
-          let summaryFromDB = res.data.data || [];
-          console.log("summaryFromDB : ", summaryFromDB);
-          if (summaryFromDB.length > 0) {
-            for (let idx = 0; idx < summaryFromDB.length; idx++) {
-              let found = summaryFromDB[idx] || undefined;
-              if (found) {
-                let newObj = {
-                  4: found.address,
-                  5: found.name,
-                  6: found.description,
-                  7: found.imageURL,
-                  9: found.verified,
-                  11: found.category,
-                  1: found.raised,
-                  12: found.likes,
-                  13: false,
-                  14: found._id,
-                  15: found.chainId,
-                };
-                summary[idx] = newObj;
-                campais[idx] = found.address;
-              }
-            }
-          }
-          setCampaigns(campais);
+      campais = [];   
+    if (campaignsFromDB.length > 0) {
+      for (let idx = 0; idx < campaignsFromDB.length; idx++) {
+        let found = campaignsFromDB[idx] || undefined;
+        if (found) {
+          let newObj = {
+            4: found.address,
+            5: found.name,
+            6: found.description,
+            7: found.imageURL,
+            9: found.verified,
+            11: found.category,
+            1: found.raised,
+            12: found.likes,
+            13: false,
+            14: found._id,
+            15: found.chainId,
+          };
+          summary[idx] = newObj;
+          campais[idx] = found.address;
         }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      }
+    }
+    setCampaigns(campais);        
     await axios({
       method: "post",
       url: `${backendURL}/api/likes/getAllLikedCampaigns`,
@@ -238,7 +231,7 @@ export default function Home() {
                   (item) => item.campaign.address === campais[idx]
                 ) || undefined;
               if (found) {
-                summary[idx][13] = found.value;
+                summary[idx][13] = found.value > 0? found.value : 0;
               }
             }
           }
@@ -247,69 +240,70 @@ export default function Home() {
       .catch((err) => {
         console.error(err);
       });
-    console.log("summary = ", summary);
-    try {
-      let consideringChains = [
-        GOERLI_CHAIN_ID,
-        TEST_ARBITRUM_CHAIN_ID,
-        MUMBAI_CHAIN_ID,
-        GNOSIS_CHAIN_ID,
-        BSC_TEST_CHAIN_ID,
-      ];
-      let summariesFromSmartContracts = [];
-      for (let idx = 0; idx < consideringChains.length; idx++) {
-        try {
-          let web3Obj = new Web3(chains[consideringChains[idx]].rpcUrl);
-          let factory = new web3Obj.eth.Contract(
-            CampaignFactory,
-            chains[consideringChains[idx]].factoryAddress
-          );
-          let summaryOfOneNetwork = [],
-            campais = [];
-          if (factory) {
-            campais = await factory.methods.getDeployedCampaigns().call();
-            setCampaigns(campais);
-            summaryOfOneNetwork = await Promise.all(
-              campais.map((campaign, i) =>
-                new web3Obj.eth.Contract(Campaign, campais[i]).methods
-                  .getSummary()
-                  .call()
-              )
-            );
-          }
-          for (let idx = 0; idx < summaryOfOneNetwork.length; idx++) {
-            summaryOfOneNetwork[idx][1] = web3Obj.utils.fromWei(
-              summaryOfOneNetwork[idx][1].toString(),
-              "ether"
-            );
-          }
-          console.log("summaryOfOneNetwork = ", summaryOfOneNetwork);
-          summariesFromSmartContracts.push(...summaryOfOneNetwork);
-        } catch (err) {}
-      }
-      console.log(
-        "summariesFromSmartContracts = ",
-        summariesFromSmartContracts
-      );
-      for (let idx = 0; idx < summary.length; idx++) {
-        let foundItem = summariesFromSmartContracts.find(
-          (item) => item[10] === summary[idx][14]
-        );
-        if (foundItem) {
-          summary[idx][1] = foundItem[1];
-        }
-      }
-      console.log("summary = ", summary);
-      setSummariesOfCampaigns(summary);
       dispatch(updateCampaigns(summary));
-    } catch (err) {}
+    console.log("summary = ", summary);
+    // try {
+    //   let consideringChains = [
+    //     GOERLI_CHAIN_ID,
+    //     TEST_ARBITRUM_CHAIN_ID,
+    //     MUMBAI_CHAIN_ID,
+    //     GNOSIS_CHAIN_ID,
+    //     BSC_TEST_CHAIN_ID,
+    //   ];
+    //   let summariesFromSmartContracts = [];
+    //   for (let idx = 0; idx < consideringChains.length; idx++) {
+    //     try {
+    //       let web3Obj = new Web3(chains[consideringChains[idx]].rpcUrl);
+    //       let factory = new web3Obj.eth.Contract(
+    //         CampaignFactory,
+    //         chains[consideringChains[idx]].factoryAddress
+    //       );
+    //       let summaryOfOneNetwork = [],
+    //         campais = [];
+    //       if (factory) {
+    //         campais = await factory.methods.getDeployedCampaigns().call();
+    //         setCampaigns(campais);
+    //         summaryOfOneNetwork = await Promise.all(
+    //           campais.map((campaign, i) =>
+    //             new web3Obj.eth.Contract(Campaign, campais[i]).methods
+    //               .getSummary()
+    //               .call()
+    //           )
+    //         );
+    //       }
+    //       for (let idx = 0; idx < summaryOfOneNetwork.length; idx++) {
+    //         summaryOfOneNetwork[idx][1] = web3Obj.utils.fromWei(
+    //           summaryOfOneNetwork[idx][1].toString(),
+    //           "ether"
+    //         );
+    //       }
+    //       console.log("summaryOfOneNetwork = ", summaryOfOneNetwork);
+    //       summariesFromSmartContracts.push(...summaryOfOneNetwork);
+    //     } catch (err) {}
+    //   }
+    //   console.log(
+    //     "summariesFromSmartContracts = ",
+    //     summariesFromSmartContracts
+    //   );
+    //   for (let idx = 0; idx < summary.length; idx++) {
+    //     let foundItem = summariesFromSmartContracts.find(
+    //       (item) => item[10] === summary[idx][14]
+    //     );
+    //     if (foundItem) {
+    //       summary[idx][1] = foundItem[1];
+    //     }
+    //   }
+    //   console.log("summary = ", summary);
+    //   setSummariesOfCampaigns(summary);
+    //   dispatch(updateCampaigns(summary));
+    // } catch (err) {}
     setLoading(false);
   };
 
   useEffect(() => {
     getNativePrice();
     getAllFromDB();
-  }, [account, chainId, globalWeb3]);
+  }, [account, chainId, globalWeb3, campaignsFromDB]);
 
   const onCopyAddress = (campaignAddr) => {
     let temp = copied;
@@ -346,6 +340,107 @@ export default function Home() {
       });
   };
 
+  const getTotalCounts = async () => {
+    await axios({
+      method: "get",
+      url: `${backendURL}/api/campaign/getCampaignCounts`,
+      data: {},
+    })
+      .then((res) => {
+        if (res.data && res.data.code === 0) {
+          setTotalCount(res.data.data || 0);          
+          loadnftList(res.data.data);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  const getList =  async (page, totalCount) =>
+  {
+    try {      
+      let offset=0;
+      if(page!=null & page > 0) 
+      {        
+        offset = page*PAGE_LIMIT;
+        if(offset > totalCount) {
+          return 0;
+        }
+      } 
+      else { 
+        if(page === 0) offset = 0;
+      } 
+      let grantsFromDB = [];
+      await axios({
+        method: "post",
+        url: `${backendURL}/api/campaign/getByLimit`,
+        data: {
+          skip: offset,
+          limit: PAGE_LIMIT
+        },
+      })
+        .then((res) => {
+          if (res.data && res.data.code === 0) {                      
+            grantsFromDB = res.data.data || [];
+          }
+          else return 0;
+        })
+        .catch((err) => {
+          console.error(err);
+          return 0;
+        });
+      return grantsFromDB;
+    } catch(error) {
+      throw error;
+    }
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      getTotalCounts();
+    }, 1000);
+  }, [])
+  
+  window.onscroll = () => {
+    console.log("window.innerHeight = ", window.innerHeight)
+    console.log("document.documentElement.scrollTop = ", document.documentElement.scrollTop)
+    console.log("document.documentElement.offsetHeight = ", document.documentElement.offsetHeight)
+
+    if (document.documentElement.scrollTop + 200 > document.documentElement.offsetHeight) {
+      console.log("do load next")
+      if (noData === false && loading === false) {
+        loadnftList(totalCount);
+      }
+    }
+  }
+
+  const loadnftList = (totalCount) => {
+
+    if (totalCount <= 0) return;
+
+    setLoading(true);
+    setTimeout(async () => {
+      await getList(page, totalCount)
+        .then((data) => {
+          if (data === 0) setNoData(true);
+          else {
+            setNoData(false);
+            const newPage = page + 1;
+
+            let newList = campaignsFromDB.concat(data);
+            setCampaignsFromDB(newList);
+            setPage(newPage);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+        })
+    }, 500);
+  }
+
   const onClickDonate = async (id, grantChainId) => {
     if (chainId && account && globalWeb3) {
       if (Number(chainId) === Number(grantChainId)) navigate(`/campaign/${id}`);
@@ -367,28 +462,7 @@ export default function Home() {
     return string.length > 116 ? `${string.substring(0, 116)}...` : string;
   };
 
-  return loading ? (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        background:
-          colorMode == null || colorMode == "light" ? "white" : "black",
-      }}
-    >
-      <div
-        className="loader"
-        style={{
-          backgroundImage:
-            colorMode == null || colorMode == "light"
-              ? `url('/images/loader-light.gif')`
-              : `url('/images/loader-dark.gif')`,
-        }}
-      ></div>
-    </div>
-  ) : (
+  return (
     <div className=" dark:bg-slate-900" style={{ height: "100vh" }}>
       <HeaderHome />
       <Carousel />
@@ -634,12 +708,12 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="relative flex justify-center my-4 image">
-                      <img
+                      {/* <img
                         src={`${backendURL}/${data[7]}`}
                         alt="item"
                         className="w-full my-3 rounded-lg"
                         style={{ width: "348px", height: "200px" }}
-                      />
+                      /> */}
                       {data[9] === true ? (
                         <img
                           src="/images/tick.png"

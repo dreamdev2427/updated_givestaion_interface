@@ -27,7 +27,7 @@ function Index() {
 
   return (
     <>
-      {loading ? (
+      {/* {loading ? (
         <div
           style={{
             display: "flex",
@@ -48,12 +48,12 @@ function Index() {
             }}
           ></div>
         </div>
-      ) : (
+      ) : ( */}
         <Provider store={store}>
           <AppRoutes />
           <NotificationContainer />
         </Provider>
-      )}
+      {/* )} */}
     </>
   );
 }

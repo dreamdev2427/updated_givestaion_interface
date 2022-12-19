@@ -52,14 +52,14 @@ export const chains = {
     },
     [OPTIMISTIC_CHAIN_ID]: {
         rpcUrl: "https://mainnet.optimism.io/",
-        nativeCurrency: "ETH",
+        nativeCurrency: "oETH",
         factoryAddress: "0xCA091f771124dF584620af06C43ddF49e0BB502D",
         givePointAddress: "0x18a12dfeAB833b7D391D22bCb6002f1CD25B838B",
         blockScanUrl: "https://optimistic.etherscan.io/"
     },
     [OPTIMISTIC_NETWORK_ID]: {
         rpcUrl: "https://mainnet.optimism.io/",
-        nativeCurrency: "ETH",
+        nativeCurrency: "oETH",
         factoryAddress: "0xCA091f771124dF584620af06C43ddF49e0BB502D",
         givePointAddress: "0x18a12dfeAB833b7D391D22bCb6002f1CD25B838B",
         blockScanUrl: "https://optimistic.etherscan.io/"
@@ -80,14 +80,14 @@ export const chains = {
     },
     [ARBITRUM_CHAIN_ID]: {
         rpcUrl: "https://nova.arbitrum.io/rpc",
-        nativeCurrency: "ETH",
+        nativeCurrency: "aETH",
         factoryAddress: "0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
         givePointAddress: "0x7DD7d0e4985363051e993C3EABAf6493A7691F50",
         blockScanUrl: "https://nova-explorer.arbitrum.io"
     },
     [ARBITRUM_NETWORK_ID]: {
         rpcUrl: "https://nova.arbitrum.io/rpc",
-        nativeCurrency: "ETH",
+        nativeCurrency: "aETH",
         factoryAddress: "0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
         givePointAddress: "0x7DD7d0e4985363051e993C3EABAf6493A7691F50",
         blockScanUrl: "https://nova-explorer.arbitrum.io"
@@ -108,14 +108,14 @@ export const chains = {
     },
     [MUMBAI_CHAIN_ID]: {
         rpcUrl: "https://matic-mumbai.chainstacklabs.com",
-        nativeCurrency: "MATIC",
+        nativeCurrency: "mMATIC",
         factoryAddress: "0x3D2d157070A4F7254E64f90d9A7ceb0e633BCf12",
         givePointAddress: "0x74F6D3E611C1D87754eF6c9F7AefE6d92a21B2f7",
         blockScanUrl: "https://mumbai.polygonscan.com/"
     },
     [MUMBAI_NETWORK_ID]: {
         rpcUrl: "https://matic-mumbai.chainstacklabs.com",
-        nativeCurrency: "MATIC",
+        nativeCurrency: "mMATIC",
         factoryAddress: "0x3D2d157070A4F7254E64f90d9A7ceb0e633BCf12",
         givePointAddress: "0x74F6D3E611C1D87754eF6c9F7AefE6d92a21B2f7",
         blockScanUrl: "https://mumbai.polygonscan.com/"
@@ -136,14 +136,14 @@ export const chains = {
     },
     [TEST_ARBITRUM_CHAIN_ID]: {
         rpcUrl: "https://goerli-rollup.arbitrum.io/rpc",
-        nativeCurrency: "ETH",
+        nativeCurrency: "aETH",
         factoryAddress: "0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
         givePointAddress: "0xb2c5544a5B60757e3A7885A85b42Bc4160609992",
         blockScanUrl: "https://testnet.arbiscan.io/"
     },
     [TEST_ARBITRUM_NETWORK_ID]: {
         rpcUrl: "https://goerli-rollup.arbitrum.io/rpc",
-        nativeCurrency: "ETH",
+        nativeCurrency: "aETH",
         factoryAddress: "0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
         givePointAddress: "0xb2c5544a5B60757e3A7885A85b42Bc4160609992",
         blockScanUrl: "https://testnet.arbiscan.io/"
