@@ -233,6 +233,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
       if (result && result.success === true) {
         dispatch(setConnectedChainId(chainId));
         setActiveNetwork(chainId);
+        onClickConnectWallet();
       } else {
         // setAlertType("warning");
         // setAlertContent("Please check your wallet. Try adding the chain to Wallet first.");
