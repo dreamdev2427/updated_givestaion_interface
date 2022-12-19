@@ -198,6 +198,11 @@ export default function CreateCampaign() {
 		let reader = new FileReader()
 		reader.readAsDataURL(file)
 		reader.onload = () => {
+			if(file.size > 2097152)
+			{
+				NotificationManager.warning("File size should be equal or less than 2MB");
+				setSelectedFile(null);
+			}
 		};
 		reader.onerror = function (error) {
 		}
@@ -306,7 +311,7 @@ export default function CreateCampaign() {
 						<div className="uploadingFileFormats dark:text-gray-100">
 							{
 								!selectedFile ?
-									"Suggested image size is 348*200. Image size up to 4MB."
+									"Suggested image size is 348*200. Image size up to 2MB."
 									:
 									selectedFile.name
 							}
