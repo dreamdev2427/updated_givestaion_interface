@@ -708,12 +708,12 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="relative flex justify-center my-4 image">
-                      {/* <img
+                      <img
                         src={`${backendURL}/${data[7]}`}
                         alt="item"
                         className="w-full my-3 rounded-lg"
                         style={{ width: "348px", height: "200px" }}
-                      /> */}
+                      />
                       {data[9] === true ? (
                         <img
                           src="/images/tick.png"
