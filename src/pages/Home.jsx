@@ -438,7 +438,7 @@ export default function Home() {
         })
         .finally(() => {
         })
-    }, 500);
+    }, 1000);
   }
 
   const onClickDonate = async (id, grantChainId) => {
