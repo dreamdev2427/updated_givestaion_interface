@@ -67,6 +67,7 @@ export default function Home() {
   const [campaignsFromDB, setCampaignsFromDB] = useState([]);
   const query = useQuery();
   const PAGE_LIMIT = 6;
+  const isScreenMounted = useRef(true);
   
   var colorMode = null;
   colorMode = localStorage.getItem("color-theme");
@@ -403,6 +404,7 @@ export default function Home() {
   }, [])
   
   window.onscroll = () => {
+    if(!isScreenMounted.current) return; 
     console.log("window.innerHeight = ", window.innerHeight)
     console.log("document.documentElement.scrollTop = ", document.documentElement.scrollTop)
     console.log("document.documentElement.offsetHeight = ", document.documentElement.offsetHeight)
@@ -415,8 +417,12 @@ export default function Home() {
     }
   }
 
-  const loadnftList = (totalCount) => {
+  useEffect(() => {
+      return () =>  isScreenMounted.current = false
+  },[])
 
+  const loadnftList = (totalCount) => {
+    if(!isScreenMounted.current) return;
     if (totalCount <= 0) return;
 
     setLoading(true);
