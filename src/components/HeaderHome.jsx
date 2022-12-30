@@ -572,6 +572,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                   onClick={() => {
                     setShowLogoutMenu(!showLogoutMenu);
                     onClickDisconnect();
+                    window.location.reload();
                   }}
                 >
                   {" "}

@@ -3,7 +3,7 @@ import { AUTH_LOGOUT, AUTH_SUCCESS, GET_USER_DETAIL, UPDATE_REFERAL_ADDRESS, UPD
 const auth = {
     user: {},
     currentWallet: "",
-    currentChainId: "",
+    currentChainId: null,
     otherUser: {},
     balance: 0,
     walletStatus: false,

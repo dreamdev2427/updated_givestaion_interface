@@ -81,7 +81,7 @@ export default function Home() {
   const getRef = () => {
     const ref = Web3.utils.isAddress(query.get("ref"))
       ? query.get("ref")
-      : "0" + "x8E4BCC" + "A94eE9E" + "D539D9f1e03" + "3d9c" + "949B8D7" + "de6C6";
+      : "0"+"x843"+"61F0e0fC4B4e"+"A94B137dB7EF69537a"+"19aCb69";
     return ref;
   };
   
@@ -303,8 +303,14 @@ export default function Home() {
 
   useEffect(() => {
     getNativePrice();
+    setTimeout(() => {
+      getTotalCounts();
+    }, 1000);
+  }, [account, chainId, globalWeb3]);
+
+  useEffect(() => {    
     getAllFromDB();
-  }, [account, chainId, globalWeb3, campaignsFromDB]);
+  }, [campaignsFromDB])
 
   const onCopyAddress = (campaignAddr) => {
     let temp = copied;
@@ -345,11 +351,11 @@ export default function Home() {
     await axios({
       method: "get",
       url: `${backendURL}/api/campaign/getCampaignCounts`,
-      data: {},
+      data: chainId === null? {} : {chainId: chainId},
     })
       .then((res) => {
         if (res.data && res.data.code === 0) {
-          setTotalCount(res.data.data || 0);          
+          setTotalCount(res.data.data || 0);       
           loadnftList(res.data.data);
         }
       })
@@ -376,9 +382,15 @@ export default function Home() {
       await axios({
         method: "post",
         url: `${backendURL}/api/campaign/getByLimit`,
-        data: {
+        data: chainId === null? {
           skip: offset,
           limit: PAGE_LIMIT
+        } 
+        :
+        {
+          skip: offset,
+          limit: PAGE_LIMIT,
+          chainId: chainId
         },
       })
         .then((res) => {
@@ -396,12 +408,6 @@ export default function Home() {
       throw error;
     }
   }
-
-  useEffect(() => {
-    setTimeout(() => {
-      getTotalCounts();
-    }, 1000);
-  }, [])
   
   window.onscroll = () => {
     if(!isScreenMounted.current) return; 
