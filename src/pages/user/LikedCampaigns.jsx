@@ -49,7 +49,7 @@ const LikedCampaigns = () => {
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
   };
 
@@ -73,7 +73,7 @@ const LikedCampaigns = () => {
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
   };
 

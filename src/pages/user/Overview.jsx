@@ -54,7 +54,7 @@ export default function Overview() {
             }
           })
           .catch((err) => {
-            console.error(err);
+            console.log(err);
           });
         await axios({
           method: "post",
@@ -70,7 +70,7 @@ export default function Overview() {
             }
           })
           .catch((err) => {
-            console.error(err);
+            console.log(err);
           });
         await axios({
           method: "post",
@@ -86,7 +86,7 @@ export default function Overview() {
             }
           })
           .catch((err) => {
-            console.error(err);
+            console.log(err);
           });
         let givePoint = null;
         try {
@@ -95,7 +95,7 @@ export default function Overview() {
             chains[chainId?.toString()]?.givePointAddress
           );
         } catch (err) {
-          console.error(err);
+          console.log(err);
         }
         if (givePoint !== null) {
           try {
@@ -104,7 +104,7 @@ export default function Overview() {
             temAry[3] = globalWeb3.utils.fromWei(gpBalance.toString(), "ether");
             setStatistics(temAry);
           } catch (err) {
-            console.error(err);
+            console.log(err);
           }
         } else {
           console.log("Invalid GivePoint");

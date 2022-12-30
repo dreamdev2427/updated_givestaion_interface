@@ -49,7 +49,7 @@ const MyProjects = () => {
           }
         })
         .catch((err) => {
-          console.error(err);
+          console.log(err);
         });
     }
   };
@@ -71,7 +71,7 @@ const MyProjects = () => {
         imagePath = response.data.path;
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
         setIsUpdateClick(!isUpdateClick);
         return;
       });
@@ -94,7 +94,7 @@ const MyProjects = () => {
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
         setIsUpdateClick(!isUpdateClick);
       });
     setIsUpdateClick(!isUpdateClick);

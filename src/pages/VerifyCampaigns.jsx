@@ -46,7 +46,7 @@ export default function VerifyCampaigns() {
                 setCampaigns(campais);
             }
         }).catch((err)=> {
-            console.error(err);    
+            console.log(err);    
         });
     }
 
@@ -83,7 +83,7 @@ export default function VerifyCampaigns() {
                             {   
                             }
                         }).catch((err)=> {
-                            console.error(err);    
+                            console.log(err);    
                         });
                     getSummaryFromDB();
                 }
@@ -91,7 +91,7 @@ export default function VerifyCampaigns() {
                 console.log("creating a approve request : Invalid campaign instance");
             }
         } catch (err) {
-            console.error(err);
+            console.log(err);
             if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");            
         } finally {
 

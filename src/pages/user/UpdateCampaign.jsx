@@ -72,13 +72,13 @@ export default function UpdateCampaign() {
                                 setSummary(summa);
                             }
                         }).catch((err)=> {
-                            console.error(err);    
+                            console.log(err);    
                         });
                     }
                 }
                 catch(e)
                 {
-                    console.error(e);
+                    console.log(e);
                 }
             }
             getSummary();
@@ -113,7 +113,7 @@ export default function UpdateCampaign() {
                             setSummary(summa);
                         }
                     }).catch((err)=> {
-                        console.error(err);    
+                        console.log(err);    
                     });
             }
             getSummaryFromDB();
@@ -136,7 +136,7 @@ export default function UpdateCampaign() {
 					imagePath = response.data.path;
 				})
 				.catch((err) => {		
-					console.error(err);
+					console.log(err);
 					// return;
 				})
 			console.log(imagePath);
@@ -155,7 +155,7 @@ export default function UpdateCampaign() {
 					navigate(`/myprojects`);
 				}
 			}).catch((err) => {
-				console.error(err);
+				console.log(err);
 			});		
 	}
 

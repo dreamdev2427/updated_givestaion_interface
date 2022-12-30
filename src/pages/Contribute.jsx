@@ -84,11 +84,11 @@ export default function Contribute() {
                 }
               })
               .catch((err) => {
-                console.error(err);
+                console.log(err);
               });
           }
         } catch (e) {
-          console.error(e);
+          console.log(e);
         }
       };
       getSummary();
@@ -121,7 +121,7 @@ export default function Contribute() {
             }
           })
           .catch((err) => {
-            console.error(err);
+            console.log(err);
           });
       };
       getSummaryFromDB();
@@ -167,11 +167,11 @@ export default function Contribute() {
             })
             .catch((err) => {
               showDonatingPopup(false);
-              console.error(err);
+              console.log(err);
             });
         } catch (err) {
           showDonatingPopup(false);
-          console.error(err);
+          console.log(err);
           if (err.code && err.code === 4100)
             NotificationManager.warning(
               "Please unlock your wallet and try again."

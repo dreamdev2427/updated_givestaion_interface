@@ -239,7 +239,7 @@ export default function Home() {
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
       dispatch(updateCampaigns(summary));
     console.log("summary = ", summary);
@@ -333,7 +333,7 @@ export default function Home() {
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
         if (err.code && err.code === 4100)
           NotificationManager.warning(
             "Please unlock your wallet and try again."
@@ -354,7 +354,7 @@ export default function Home() {
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
   }
 
@@ -388,7 +388,7 @@ export default function Home() {
           else return 0;
         })
         .catch((err) => {
-          console.error(err);
+          console.log(err);
           return 0;
         });
       return grantsFromDB;

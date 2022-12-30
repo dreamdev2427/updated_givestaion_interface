@@ -54,7 +54,7 @@ export default function ViewRequests() {
                     }
                 }
             }).catch((err)=> {
-                console.error(err);    
+                console.log(err);    
             });
     }   
 
@@ -82,7 +82,7 @@ export default function ViewRequests() {
                 console.log("creating a approve request : Invalid campaign instance");
             }
         } catch (err) {
-            console.error(err);
+            console.log(err);
             if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");
         } finally {
 
@@ -115,7 +115,7 @@ export default function ViewRequests() {
                         {   
                         }
                     }).catch((err)=> {
-                        console.error(err);    
+                        console.log(err);    
                     });
                 getRequestsFromCampaign();
                 showFinalizePopup(true);
@@ -124,7 +124,7 @@ export default function ViewRequests() {
                 console.log("Finalysing requests: invalid campaign instance");
             }
         } catch (err) {
-            console.error(err);
+            console.log(err);
             if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");
         } finally {
         }

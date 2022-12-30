@@ -47,7 +47,7 @@ const GiveFrens = () => {
               .call()) || 0;
           setRefCounts(refCounts);
         } catch (e) {
-          console.error(e);
+          console.log(e);
         }
       }
     }
@@ -71,7 +71,7 @@ const GiveFrens = () => {
           });
           getGPInfo();
         } catch (err) {
-          console.error(err);
+          console.log(err);
           if (err.code && err.code === 4100)
             NotificationManager.warning(
               "Please unlock your wallet and try again."

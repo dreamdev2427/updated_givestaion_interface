@@ -59,7 +59,7 @@ export default function CreateRequest() {
                     console.log("Finalysing requests: invalid campaign instance");
                 }
             } catch (err) {
-                console.error(err);
+                console.log(err);
             } finally {
             }
         }else{

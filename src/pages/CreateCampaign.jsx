@@ -77,7 +77,7 @@ export default function CreateCampaign() {
 					imagePath = response.data.path;
 				})
 				.catch((err) => {		
-					console.error(err);
+					console.log(err);
 					// return;
 				})
 			let idOnDb = null;
@@ -106,7 +106,7 @@ export default function CreateCampaign() {
 						idOnDb = res.data.data._id;
 					}
 				}).catch((err) => {
-					console.error(err);
+					console.log(err);
 					//delete image uploaded
 				});
 			}
@@ -150,7 +150,7 @@ export default function CreateCampaign() {
 					}
 				}
 				catch (e) {
-					console.error(e);
+					console.log(e);
 					await axios({
 						method: "post",
 						url: `${backendURL}/api/campaign/delete`,
@@ -162,9 +162,9 @@ export default function CreateCampaign() {
 						if (res.data && res.data.code === 0) {
 						}
 					}).catch((err) => {
-						console.error(err);
+						console.log(err);
 					});
-					console.error(e);
+					console.log(e);
 					if (e.code && e.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");
 				}
 				if (createdCampaignAddress !== null) {
@@ -181,7 +181,7 @@ export default function CreateCampaign() {
 							showPopup(!popup);
 						}
 					}).catch((err) => {
-						console.error(err);
+						console.log(err);
 					});
 				}
 			}

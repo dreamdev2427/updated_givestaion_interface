@@ -42,7 +42,7 @@ export default function Donations() {
             }
           })
           .catch((err) => {
-            console.error(err);
+            console.log(err);
           });
       }
     };
