@@ -349,9 +349,17 @@ export default function Contribute() {
                   </div>
                 </div>
                 <div className="pl-0 right md:pl-12">
-                  <h4 className="my-6 text-lg font-bold value dark:text-gray-100">
-                    Grant Balance
-                  </h4>
+                  <div className=" flex justify-between" >
+                    <h4 className="my-6 text-lg font-bold value dark:text-gray-100">
+                      Grant Balance
+                    </h4>
+                    <h4 className="my-6 text-lg font-bold value dark:text-gray-100">
+                      {
+                      Number(globalWeb3?.utils?.fromWei(summary[8]?.toString(), "ether").toString()) <= Number(globalWeb3?.utils?.fromWei(summary[1]?.toString(), "ether").toString())? 
+                      "Target reached" : ""
+                      }
+                    </h4>
+                  </div>
                   <div className="my-1 range">
                     <input
                       type="range"
@@ -360,17 +368,13 @@ export default function Contribute() {
                       min="0"
                       max={
                         summary[8] >= 0
-                          ? globalWeb3?.utils
-                              .fromWei(summary[8].toString(), "ether")
-                              .toString()
+                          ? globalWeb3?.utils?.fromWei(summary[8]?.toString(), "ether").toString()
                           : "0"
                       }
                       className="w-full h-2 rounded-lg appearance-none cursor-pointer bg-primary"
                       value={
                         summary[1] >= 0
-                          ? globalWeb3?.utils
-                              .fromWei(summary[1], "ether")
-                              .toString()
+                          ? globalWeb3?.utils?.fromWei(summary[1]?.toString(), "ether").toString()
                           : "0"
                       }
                       onChange={() => {}}
