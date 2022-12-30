@@ -139,7 +139,7 @@ export const changeNetwork = async (chainId = null) =>
         } catch (addError) {          
           return {
             success : false,
-            message : "Switching failed." + addError.message
+            message : addError.message
           }
         }
       }

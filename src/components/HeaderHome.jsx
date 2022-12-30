@@ -230,15 +230,18 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
   const onClickChangeNetwork = async (chainId) => {
     try {
       let result = await changeNetwork(chainId);
-      if (result && result.success === true) {
-        dispatch(setConnectedChainId(chainId));
-        setActiveNetwork(chainId);
-        onClickConnectWallet();
-      } else {
-        // setAlertType("warning");
-        // setAlertContent("Please check your wallet. Try adding the chain to Wallet first.");
-        // setAlertTitle("Warning");
-        // setShowAlert(true);
+      if (result)
+      {
+          if(result.success === true) {
+          dispatch(setConnectedChainId(chainId));
+          setActiveNetwork(chainId);
+          onClickConnectWallet();
+        } else {
+          setAlertType("warning");
+          setAlertContent(result.message + "\n Please check your wallet. Try adding the chain to Wallet first.");
+          setAlertTitle("Warning");
+          setShowAlert(true);
+        }
       }
     } catch (error) {
       console.error(error);
@@ -596,11 +599,10 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
           </div>
         </div>
       </div>
+      
+    	{showAlert === true &&
+    		<Alert type={alertType} title={alertTitle} content={alertContent} onClose={onCloseAlert} />
+    	}
     </div>
-
-    // 	{showAlert === true &&
-    // 		<Alert type={alertType} title={alertTitle} content={alertContent} onClose={onCloseAlert} />
-    // 	}
-    // </div>
   );
 }
