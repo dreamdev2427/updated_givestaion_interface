@@ -229,7 +229,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
           setActiveNetwork(chainId);
           onClickConnectWallet();
         } else {          
-          NotificationManager.warning(result.message + "\n Please check your wallet. Try adding the chain to Wallet first." , "");
+          NotificationManager.warning(<div><span>{result.message}</span><br></br><span>Please check your wallet. Try adding the chain to Wallet first.</span></div>);
         }
       }
     } catch (error) {
