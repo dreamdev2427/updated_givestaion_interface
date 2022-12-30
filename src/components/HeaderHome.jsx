@@ -67,10 +67,6 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onCloseAlert = () => {
-    setShowAlert(false);
-  };
-
   useEffect(() => {
     if (account && chainId) {
       setConnected(true);
