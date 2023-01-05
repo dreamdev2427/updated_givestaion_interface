@@ -356,7 +356,7 @@ export default function Contribute() {
                     <h4 className="my-6 text-lg font-bold value dark:text-gray-100">
                       {
                       Number(globalWeb3?.utils?.fromWei(summary[8]?.toString(), "ether").toString()) <= Number(globalWeb3?.utils?.fromWei(summary[1]?.toString(), "ether").toString())? 
-                      "Target reached" : ""
+                      "Target Completed" : ""
                       }
                     </h4>
                   </div>
