@@ -9,7 +9,7 @@ import Header from "../components/HeaderHome";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Confetti from "react-confetti";
 import { useMediaQuery } from "react-responsive";
-import { chains } from "../smart-contract/chains_constants";
+import { chains, OPTIMISTIC_CHAIN_ID, OPTIMISTIC_NETWORK_ID, GOERLI_CHAIN_ID, GOERLI_NETWORK_ID } from "../smart-contract/chains_constants";
 import parse from "html-react-parser";
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
@@ -160,7 +160,14 @@ export default function Contribute() {
   };
 
   const onClickContribute = async () => {
-    if (donationAmount > 0) {
+    if (Number(donationAmount) > 0) {
+      if(Number(globalWeb3?.utils?.fromWei(summary[8]?.toString() || "0", "ether").toString()) <= Number(globalWeb3?.utils?.fromWei(summary[1]?.toString() || "0", "ether").toString()))
+      {
+        NotificationManager.warning(
+          "Target is reached, You can not contribut any more."
+        );
+        return;
+      }
       if (globalWeb3 && account) {
         showDonatingPopup(true);
         try {
@@ -328,7 +335,7 @@ export default function Contribute() {
                 summary[15] !== "" ?
                 <div className="mx-2" >
                   <a href={`${summary[15]}`} target="_blank" rel="noreferrer" >
-                    <img src="/images/icons/yutube.png" style={{ width:"32px", height:"32px", cursor:"pointer" }} alt="yutubeicon" />
+                    <img src="/images/icons/twitter.png" style={{ width:"32px", height:"32px", cursor:"pointer" }} alt="twittericon" />
                   </a>
                 </div>
                 : <></>
@@ -516,12 +523,12 @@ export default function Contribute() {
                   onClick={() => {
                     setShowConfirmDlg(true);
                   }}
-                  className="grantBtn  w-full p-3 rounded-xl font-bold text-xl text-[#FFFFFF] campaignbtn bg-gradient-primary shadow-primary"
+                  className="grantBtn  w-full p-3 rounded-xl font-bold text-xl text-[#FFFFFF]  bg-gradient-primary shadow-primary"
                 >
                   Contribute
                 </button>
               </div>
-              <button className="grantBtn md:mt-10 w-full p-3 rounded-xl font-bold text-xl text-[#FFFFFF] campaignbtn bg-gradient-primary shadow-primary"
+              <button className="grantBtn md:mt-10 w-full p-3 rounded-xl font-bold text-xl text-[#FFFFFF]  bg-gradient-primary shadow-primary"
                 onClick={() => {
                   history(`/requests/${id}`);
                 }}
@@ -561,10 +568,13 @@ export default function Contribute() {
                       <span className="gT">{summary[11] || ""}</span>
                     </span>
                     <div className="mx-6 my-4">
-                      <div className="flex items-center justify-between text-[#9FA1A3]">
-                        <h3>OP Reward </h3>
-                        <h3>0.03 OP</h3>
-                      </div>
+                      {
+                        ((chainId === OPTIMISTIC_CHAIN_ID || chainId === OPTIMISTIC_NETWORK_ID) || (chainId === GOERLI_CHAIN_ID || chainId === GOERLI_NETWORK_ID)) && 
+                        <div className="flex items-center justify-between text-[#9FA1A3]">
+                          <h3>OP Reward </h3>
+                          <h3>0.03 OP</h3>
+                        </div>
+                      }
 
                       <div className="flex items-center justify-between text-[#000000]">
                         <h3>GivePOINTS </h3>
@@ -586,10 +596,10 @@ export default function Contribute() {
                     >
                       Cancel
                     </button>
-                    <button className="py-1 rounded-md bg-[#000000] flex-1 campaignbtn bg-gradient-primary shadow-primary"
+                    <button className="py-1 rounded-md bg-[#000000] flex-1  bg-gradient-primary shadow-primary"
                      onClick={() => {onClickContribute()}}
                     >
-                      <span className="gT">Contribute</span>
+                      <span className="text-[#ffffff]">Contribute</span>
                     </button>
                   </div>
                 </div>
