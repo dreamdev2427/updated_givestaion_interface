@@ -569,15 +569,15 @@ export default function Contribute() {
                     </span>
                     <div className="mx-6 my-4">
                       {
-                        ((chainId === OPTIMISTIC_CHAIN_ID || chainId === OPTIMISTIC_NETWORK_ID) || (chainId === GOERLI_CHAIN_ID || chainId === GOERLI_NETWORK_ID)) && 
-                        <div className="flex items-center justify-between text-[#9FA1A3]">
+                        ((chainId.toString() === OPTIMISTIC_CHAIN_ID || chainId.toString() === OPTIMISTIC_NETWORK_ID) || (chainId.toString() === GOERLI_CHAIN_ID || chainId.toString() === GOERLI_NETWORK_ID)) && 
+                        <div className="flex items-center justify-between text-[#000000]">
                           <h3>OP Reward </h3>
                           <h3>0.03 OP</h3>
                         </div>
                       }
                       {
-                        ((chainId === GNOSIS_CHAIN_ID || chainId === GNOSIS_NETWORK_ID)) && 
-                        <div className="flex items-center justify-between text-[#9FA1A3]">
+                        (chainId.toString() === GNOSIS_CHAIN_ID || chainId.toString() === GNOSIS_NETWORK_ID) && 
+                        <div className="flex items-center justify-between text-[#000000]">
                           <h3>XDAI Reward </h3>
                           <h3>0.03 XDAI</h3>
                         </div>
