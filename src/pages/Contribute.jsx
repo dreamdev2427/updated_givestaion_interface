@@ -9,7 +9,7 @@ import Header from "../components/HeaderHome";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Confetti from "react-confetti";
 import { useMediaQuery } from "react-responsive";
-import { chains, OPTIMISTIC_CHAIN_ID, OPTIMISTIC_NETWORK_ID, GOERLI_CHAIN_ID, GOERLI_NETWORK_ID } from "../smart-contract/chains_constants";
+import { chains, OPTIMISTIC_CHAIN_ID, OPTIMISTIC_NETWORK_ID, GOERLI_CHAIN_ID, GOERLI_NETWORK_ID, GNOSIS_CHAIN_ID, GNOSIS_NETWORK_ID } from "../smart-contract/chains_constants";
 import parse from "html-react-parser";
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
@@ -573,6 +573,13 @@ export default function Contribute() {
                         <div className="flex items-center justify-between text-[#9FA1A3]">
                           <h3>OP Reward </h3>
                           <h3>0.03 OP</h3>
+                        </div>
+                      }
+                      {
+                        ((chainId === GNOSIS_CHAIN_ID || chainId === GNOSIS_NETWORK_ID)) && 
+                        <div className="flex items-center justify-between text-[#9FA1A3]">
+                          <h3>XDAI Reward </h3>
+                          <h3>0.03 XDAI</h3>
                         </div>
                       }
 
