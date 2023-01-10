@@ -302,12 +302,14 @@ export default function Home() {
   };
 
   useEffect(() => {
+    console.log("network changed b ====>", chainId? Number(chainId.toString(10)).toString() : "null")
+
     getNativePrice();
     dispatch(updateCampaigns([]));
     setTimeout(() => {
       getTotalCounts();
     }, 1000);
-  }, [chainId]);
+  }, [chainId, account]);
 
   useEffect(() => {    
     getAllFromDB();
@@ -391,7 +393,7 @@ export default function Home() {
         {
           skip: offset,
           limit: PAGE_LIMIT,
-          chainId: chainId
+          chainId: Number(chainId.toString(10)).toString()
         },
       })
         .then((res) => {
@@ -412,9 +414,6 @@ export default function Home() {
   
   window.onscroll = () => {
     if(!isScreenMounted.current) return; 
-    console.log("window.innerHeight = ", window.innerHeight)
-    console.log("document.documentElement.scrollTop = ", document.documentElement.scrollTop)
-    console.log("document.documentElement.offsetHeight = ", document.documentElement.offsetHeight)
 
     if (document.documentElement.scrollTop + 200 > document.documentElement.offsetHeight) {
       console.log("do load next")

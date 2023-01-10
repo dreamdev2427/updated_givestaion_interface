@@ -80,19 +80,20 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
 
       const web3 = new Web3(provider);
       const accounts = await web3.eth.getAccounts();
-      const chainId = await web3.eth.getChainId();
+      const cid = await web3.eth.getChainId();
 
       setProvider(provider);
       dispatch(updateGlobalWeb3(web3));
       if (accounts[0]) {
         dispatch(setConnectedWalletAddress(accounts[0]));
         setConnected(true);
+        dispatch(setConnectedChainId(cid));
+        setActiveNetwork(cid);
       } else {
         dispatch(setConnectedWalletAddress(null));
         setConnected(false);
+        dispatch(setConnectedChainId(null));
       }
-      dispatch(setConnectedChainId(chainId));
-      setActiveNetwork(chainId);
     } catch (error) {
       console.log(error);
       setConnected(false);
@@ -134,17 +135,17 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
         } else {
           dispatch(setConnectedWalletAddress(null));
           setConnected(false);
+          dispatch(setConnectedChainId(null));
         }
       };
 
-      const handleChainChanged = (chainId) => {
-        dispatch(setConnectedChainId(chainId));
-        setActiveNetwork(chainId);
+      const handleChainChanged = (cid) => {
+        dispatch(setConnectedChainId(cid));
+        setActiveNetwork(cid);
       };
 
       const handleDisconnect = () => {
         onClickDisconnect();
-        dispatch(setConnectedChainId(null));
       };
 
       provider.on("accountsChanged", handleAccountsChanged);
