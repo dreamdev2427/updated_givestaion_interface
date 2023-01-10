@@ -303,10 +303,11 @@ export default function Home() {
 
   useEffect(() => {
     getNativePrice();
+    dispatch(updateCampaigns([]));
     setTimeout(() => {
       getTotalCounts();
     }, 1000);
-  }, [account, chainId, globalWeb3]);
+  }, [chainId]);
 
   useEffect(() => {    
     getAllFromDB();

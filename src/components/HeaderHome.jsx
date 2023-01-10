@@ -97,6 +97,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
       console.log(error);
       setConnected(false);
       dispatch(setConnectedWalletAddress(null));
+      dispatch(setConnectedChainId(null));
     }
   };
 
@@ -143,6 +144,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
 
       const handleDisconnect = () => {
         onClickDisconnect();
+        dispatch(setConnectedChainId(null));
       };
 
       provider.on("accountsChanged", handleAccountsChanged);
