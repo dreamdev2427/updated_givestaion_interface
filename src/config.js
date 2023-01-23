@@ -3,8 +3,7 @@ export const INFURA_KEY="1b4c44fdf5a0404b91ee1a85db0aed9a";
 export const backendURL="https://admin.givestation.org";
 
 export const Category = [
-    "See All",
-   'Defi',
+    'Defi',
     'Education',
     'Blockchain',
     'Fintech',
@@ -37,4 +36,6 @@ export const Category = [
     "Event",
     "Space",
     "Other",
+    "Gaming",
+    "Sponsorship"
 ];
