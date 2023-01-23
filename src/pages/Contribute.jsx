@@ -590,7 +590,7 @@ export default function Contribute() {
 
                       <div className="flex items-center justify-between text-[#000000]">
                         <h3>Total Donation </h3>
-                        <h3> {Number(globalWeb3?.utils?.fromWei(summary[1]?.toString() || "0"))  + Number(donationAmount)} {chains[chainId?.toString()]?.nativeCurrency}</h3>
+                        <h3> {Number(Number(globalWeb3?.utils?.fromWei(summary[1]?.toString() || "0"))  + Number(donationAmount)).toFixed(6)} {chains[chainId?.toString()]?.nativeCurrency}</h3>
                       </div>
                     </div>
                   </div>
