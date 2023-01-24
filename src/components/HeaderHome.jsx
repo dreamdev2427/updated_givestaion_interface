@@ -333,6 +333,13 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
           <div className="text-left md:text-center  hover:md:bg-[#09080C] md:bg-[rgb(9,8,12)] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow">
             <span className="text-base gradient-text">Claim GVST</span>
           </div>
+          <a
+            href="https://bridge.givestation.org/"
+            target="_blank" rel="noreferrer" 
+            className="relative bg-[#09080C] w-full lg:w-auto my-2 rounded-md py-2 px-4 shadow"
+          >
+            <span className="text-base gradient-text">Bridge</span>
+          </a>
         </div>
         <div className="flex flex-col px-8 mt-5 space-y-3 md:px-0 md:mt-0 lg:space-y-0 lg:space-x-3 lg:flex-row lg:items-center">
           <div className="relative">

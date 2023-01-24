@@ -37,5 +37,11 @@ export const Category = [
     "Space",
     "Other",
     "Gaming",
-    "Sponsorship"
+    "Sponsorship",
+    "A.I",
+    "Metaverse",
+    "Developer Tools",
+    "Gaming",
+    "Infrastructure",
+    "Education(sponsorship)"
 ];
