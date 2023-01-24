@@ -95,29 +95,29 @@ export const chains = {
     [BSC_TEST_CHAIN_ID]: {
         rpcUrl: "https://data-seed-prebsc-1-s1.binance.org:8545/",
         nativeCurrency: "tBNB",
-        factoryAddress: "0x690f275c8e0a57007305a36d353d50ccf0da12b3",
-        givePointAddress: "0x7e504Ca40c55E15F9Ee76a850caCfA6FD63b6254",
+        factoryAddress: "0x82b6225E9841B5ED53370Edd85DB094476DB371C",
+        givePointAddress: "0xbE7EdbF153b0c302b77B81fcb2A9c34Bc50C72F4",
         blockScanUrl: "https://testnet.bscscan.com/"
     },
     [BSC_TEST_NETWORK_ID]: {
         rpcUrl: "https://data-seed-prebsc-1-s1.binance.org:8545/",
         nativeCurrency: "tBNB",
-        factoryAddress: "0x690f275c8e0a57007305a36d353d50ccf0da12b3",
-        givePointAddress: "0x7e504Ca40c55E15F9Ee76a850caCfA6FD63b6254",
+        factoryAddress: "0x82b6225E9841B5ED53370Edd85DB094476DB371C",
+        givePointAddress: "0xbE7EdbF153b0c302b77B81fcb2A9c34Bc50C72F4",
         blockScanUrl: "https://testnet.bscscan.com/"
     },
     [MUMBAI_CHAIN_ID]: {
         rpcUrl: "https://matic-mumbai.chainstacklabs.com",
         nativeCurrency: "mMATIC",
-        factoryAddress: "0x3D2d157070A4F7254E64f90d9A7ceb0e633BCf12",
-        givePointAddress: "0x74F6D3E611C1D87754eF6c9F7AefE6d92a21B2f7",
+        factoryAddress: "0xf0E5E4cE74bCde0Fc547332f86eD147760282c85",
+        givePointAddress: "0x684CCbAeE81042d46128B929098D86CF67A83cAB",
         blockScanUrl: "https://mumbai.polygonscan.com/"
     },
     [MUMBAI_NETWORK_ID]: {
         rpcUrl: "https://matic-mumbai.chainstacklabs.com",
         nativeCurrency: "mMATIC",
-        factoryAddress: "0x3D2d157070A4F7254E64f90d9A7ceb0e633BCf12",
-        givePointAddress: "0x74F6D3E611C1D87754eF6c9F7AefE6d92a21B2f7",
+        factoryAddress: "0xf0E5E4cE74bCde0Fc547332f86eD147760282c85",
+        givePointAddress: "0x684CCbAeE81042d46128B929098D86CF67A83cAB",
         blockScanUrl: "https://mumbai.polygonscan.com/"
     },
     [GOERLI_CHAIN_ID]: {
