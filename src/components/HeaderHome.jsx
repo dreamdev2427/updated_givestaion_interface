@@ -339,6 +339,13 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
             className="relative bg-[#09080C] w-full lg:w-auto my-2 rounded-md py-2 px-4 shadow"
           >
             <span className="text-base gradient-text">Bridge</span>
+          </a>          
+          <a
+            href="http://leaderboard.givestation.org/"
+            target="_blank" rel="noreferrer" 
+            className="relative bg-[#09080C] w-full lg:w-auto my-2 rounded-md py-2 px-4 shadow"
+          >
+            <span className="text-base gradient-text">Leaderboard</span>
           </a>
         </div>
         <div className="flex flex-col px-8 mt-5 space-y-3 md:px-0 md:mt-0 lg:space-y-0 lg:space-x-3 lg:flex-row lg:items-center">
