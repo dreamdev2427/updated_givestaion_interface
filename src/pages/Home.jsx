@@ -90,6 +90,16 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (chainId && chainId !== "") {
+      let filtered = [];
+      filtered = campaignsFromStore.filter(
+        (item) => item[15].includes(chainId) === true
+      );
+      setSummariesOfCampaigns(filtered);
+    }
+  }, [chainId]);
+
+  useEffect(() => {
     if (searchingName) {
       let filtered = [];
       filtered = campaignsFromStore.filter(
