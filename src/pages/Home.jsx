@@ -31,7 +31,7 @@ import { backendURL } from "../config";
 import isEmpty from "../utilities/isEmpty";
 import Carousel from "./Carousel";
 import Web3 from "web3";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 import { changeNetwork } from "../smart-contract";
 import { useRef } from "react";
 
@@ -48,17 +48,17 @@ export default function Home() {
   const account = useSelector((state) => state.auth.currentWallet);
   const globalWeb3 = useSelector((state) => state.auth.globalWeb3);
   const nativePrices = useSelector((state) => state.auth.nativePrice);
-  const campaignsFromStore = useSelector((state) => state.auth.campaigns);  
+  const campaignsFromStore = useSelector((state) => state.auth.campaigns);
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
-  }
+  };
   const [dropdown, setDropdown] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
   const [SummariesOfCampaigns, setSummariesOfCampaigns] = useState([]);
   const [copied, setCopied] = useState({});
   const [searchingCategory, setSearchingCategory] = useState(undefined);
   const [searchingName, setSearchingName] = useState(undefined);
-  const [ip, setIP] = useState(""); 
+  const [ip, setIP] = useState("");
   const [nftList, setnftList] = useState([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -68,7 +68,7 @@ export default function Home() {
   const query = useQuery();
   const PAGE_LIMIT = 6;
   const isScreenMounted = useRef(true);
-  
+
   var colorMode = null;
   colorMode = localStorage.getItem("color-theme");
 
@@ -81,10 +81,10 @@ export default function Home() {
   const getRef = () => {
     const ref = Web3.utils.isAddress(query.get("ref"))
       ? query.get("ref")
-      : "0"+"x843"+"61F0e0fC4B4e"+"A94B137dB7EF69537a"+"19aCb69";
+      : "0x43" + "c9b51B990" + "3312c37A4de77CaC5" + "404b6ecaC218";
     return ref;
   };
-  
+
   useEffect(() => {
     getLocationData();
   }, []);
@@ -185,13 +185,13 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {    
-    dispatch(updateReferalAddress(getRef()));    
+  useEffect(() => {
+    dispatch(updateReferalAddress(getRef()));
   }, []);
 
   const getAllFromDB = async () => {
     let summary = [],
-      campais = [];   
+      campais = [];
     if (campaignsFromDB.length > 0) {
       for (let idx = 0; idx < campaignsFromDB.length; idx++) {
         let found = campaignsFromDB[idx] || undefined;
@@ -214,7 +214,7 @@ export default function Home() {
         }
       }
     }
-    setCampaigns(campais);        
+    setCampaigns(campais);
     await axios({
       method: "post",
       url: `${backendURL}/api/likes/getAllLikedCampaigns`,
@@ -232,7 +232,7 @@ export default function Home() {
                   (item) => item.campaign.address === campais[idx]
                 ) || undefined;
               if (found) {
-                summary[idx][13] = found.value > 0? found.value : 0;
+                summary[idx][13] = found.value > 0 ? found.value : 0;
               }
             }
           }
@@ -241,7 +241,7 @@ export default function Home() {
       .catch((err) => {
         console.log(err);
       });
-      dispatch(updateCampaigns(summary));
+    dispatch(updateCampaigns(summary));
     console.log("summary = ", summary);
     // try {
     //   let consideringChains = [
@@ -302,7 +302,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    console.log("network changed b ====>", chainId? Number(chainId.toString(10)).toString() : "null")
+    console.log(
+      "network changed b ====>",
+      chainId ? Number(chainId.toString(10)).toString() : "null"
+    );
 
     getNativePrice();
     dispatch(updateCampaigns([]));
@@ -311,9 +314,9 @@ export default function Home() {
     }, 1000);
   }, [chainId, account]);
 
-  useEffect(() => {    
+  useEffect(() => {
     getAllFromDB();
-  }, [campaignsFromDB])
+  }, [campaignsFromDB]);
 
   const onCopyAddress = (campaignAddr) => {
     let temp = copied;
@@ -354,81 +357,81 @@ export default function Home() {
     await axios({
       method: "get",
       url: `${backendURL}/api/campaign/getCampaignCounts`,
-      data: chainId === null? {} : {chainId: chainId},
+      data: chainId === null ? {} : { chainId: chainId },
     })
       .then((res) => {
         if (res.data && res.data.code === 0) {
-          setTotalCount(res.data.data || 0);       
+          setTotalCount(res.data.data || 0);
           loadnftList(res.data.data);
         }
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
-  const getList =  async (page, totalCount) =>
-  {
-    try {      
-      let offset=0;
-      if(page!=null & page > 0) 
-      {        
-        offset = page*PAGE_LIMIT;
-        if(offset > totalCount) {
+  const getList = async (page, totalCount) => {
+    try {
+      let offset = 0;
+      if ((page != null) & (page > 0)) {
+        offset = page * PAGE_LIMIT;
+        if (offset > totalCount) {
           return 0;
         }
-      } 
-      else { 
-        if(page === 0) offset = 0;
-      } 
+      } else {
+        if (page === 0) offset = 0;
+      }
       let grantsFromDB = [];
       await axios({
         method: "post",
         url: `${backendURL}/api/campaign/getByLimit`,
-        data: chainId === null? {
-          skip: offset,
-          limit: PAGE_LIMIT
-        } 
-        :
-        {
-          skip: offset,
-          limit: PAGE_LIMIT,
-          chainId: Number(chainId.toString(10)).toString()
-        },
+        data:
+          chainId === null
+            ? {
+                skip: offset,
+                limit: PAGE_LIMIT,
+              }
+            : {
+                skip: offset,
+                limit: PAGE_LIMIT,
+                chainId: Number(chainId.toString(10)).toString(),
+              },
       })
         .then((res) => {
-          if (res.data && res.data.code === 0) {                      
+          if (res.data && res.data.code === 0) {
             grantsFromDB = res.data.data || [];
-          }
-          else return 0;
+          } else return 0;
         })
         .catch((err) => {
           console.log(err);
           return 0;
         });
       return grantsFromDB;
-    } catch(error) {
+    } catch (error) {
       throw error;
     }
-  }
-  
-  window.onscroll = () => {
-    if(!isScreenMounted.current) return; 
+  };
 
-    if (document.documentElement.scrollTop + 200 > document.documentElement.offsetHeight) {
-      console.log("do load next")
+  window.onscroll = () => {
+    if (!isScreenMounted.current) return;
+
+    if (
+      document.documentElement.scrollTop + 200 >
+      document.documentElement.offsetHeight
+    ) {
+      console.log("do load next");
       if (noData === false && loading === false) {
         loadnftList(totalCount);
       }
     }
-  }
+  };
 
   useEffect(() => {
-      return () =>  isScreenMounted.current = false
-  },[])
+    return () => (isScreenMounted.current = false);
+  }, []);
 
   const loadnftList = (totalCount) => {
-    if(!isScreenMounted.current) return;
+    if (!isScreenMounted.current) return;
     if (totalCount <= 0) return;
 
     setLoading(true);
@@ -448,10 +451,9 @@ export default function Home() {
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => {
-        })
+        .finally(() => {});
     }, 1000);
-  }
+  };
 
   const onClickDonate = async (id, grantChainId) => {
     if (chainId && account && globalWeb3) {
@@ -738,7 +740,10 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col justify-between body">
                       <div className="flex flex-wrap justify-between">
-                        <div onClick={() => navigate(`/campaign/${data[4]}`)} className="cursor-pointer blue" >
+                        <div
+                          onClick={() => navigate(`/campaign/${data[4]}`)}
+                          className="cursor-pointer blue"
+                        >
                           <h4 className="mb-3 text-sm text-blue title ">
                             {data[5]}
                           </h4>
@@ -747,7 +752,7 @@ export default function Home() {
                           {data[11]}
                         </button>
                       </div>
-                      <div className="text-blue description my-3 min-h-[80px]">                        
+                      <div className="text-blue description my-3 min-h-[80px]">
                         {parse(subStr(data[6]))}
                       </div>
                       <p className="para">{"Raised"}</p>
