@@ -225,19 +225,25 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
   const onClickChangeNetwork = async (chainId) => {
     try {
       let result = await changeNetwork(chainId);
-      if (result)
-      {
-          if(result.success === true) {
+      if (result) {
+        if (result.success === true) {
           dispatch(setConnectedChainId(chainId));
           setActiveNetwork(chainId);
           onClickConnectWallet();
-        } else {          
-          NotificationManager.warning(<div><span>{result.message}</span><br></br><span>Please check your wallet. Try adding the chain to Wallet first.</span></div>);
+        } else {
+          NotificationManager.warning(
+            <div>
+              <span>{result.message}</span>
+              <br></br>
+              <span>
+                Please check your wallet. Try adding the chain to Wallet first.
+              </span>
+            </div>
+          );
         }
       }
     } catch (error) {
       console.log(error);
-     
     }
   };
   const [isOptimisimOpen, setIsOptimisimOpen] = useState(false);
@@ -300,8 +306,7 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
           />
         </div>
         <div className="flex flex-col items-center md:space-y-3 lg:space-y-0 lg:space-x-3 lg:flex-row">
-          {
-            isSideBarOpen === false && (
+          {isSideBarOpen === false && (
             <Link to={"/"} className="items-center hidden lg:flex">
               <img
                 className="object-contain w-20 h-20"
@@ -313,15 +318,17 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
               </h2>
             </Link>
           )}
-            <div className="text-left md:text-center  hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow" 
-              onClick={() => navigate("/")}
-            >
-              <span className="text-base gradient-text">Grants</span>
-            </div>
+          <div
+            className="text-left md:text-center  hover:md:bg-[#09080C] md:bg-[#09080C] w-full lg:w-auto md:my-2 md:rounded-md py-2 px-4 shadow"
+            onClick={() => navigate("/")}
+          >
+            <span className="text-base gradient-text">Grants</span>
+          </div>
 
           <a
             href="https://hackathons.givestation.org/"
-            target="_blank" rel="noreferrer" 
+            target="_blank"
+            rel="noreferrer"
             className="relative bg-[#09080C] w-full lg:w-auto my-2 rounded-md py-2 px-4 shadow"
           >
             <span className="text-base gradient-text">Hackathons</span>
@@ -335,14 +342,16 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
           </div>
           <a
             href="https://bridge.givestation.org/"
-            target="_blank" rel="noreferrer" 
+            target="_blank"
+            rel="noreferrer"
             className="relative bg-[#09080C] w-full lg:w-auto my-2 rounded-md py-2 px-4 shadow"
           >
             <span className="text-base gradient-text">Bridge</span>
-          </a>          
+          </a>
           <a
             href="http://leaderboard.givestation.org/"
-            target="_blank" rel="noreferrer" 
+            target="_blank"
+            rel="noreferrer"
             className="relative bg-[#09080C] w-full lg:w-auto my-2 rounded-md py-2 px-4 shadow"
           >
             <span className="text-base gradient-text">Leaderboard</span>
@@ -390,29 +399,29 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
                 />
               </div>
               {chainId &&
-              (chainId.toString() === GOERLI_NETWORK_ID ||
-                chainId.toString() === GOERLI_CHAIN_ID) ? (
+              (chainId.toString() === OPTIMISTIC_NETWORK_ID ||
+                chainId.toString() === OPTIMISTIC_CHAIN_ID) ? (
                 <div className="flex items-center justify-between my-5">
                   <div className="flex items-center">
                     <img
                       src={`${window.location.origin}/assets/images/op.png`}
                       alt="op"
                     />
-                    <span className="ml-3 text-lg">Optimism Goerli </span>
+                    <span className="ml-3 text-lg">Optimism mainnet</span>
                   </div>
                   <div className="w-3 h-3 bg-[#07D942] rounded-full"></div>
                 </div>
               ) : (
                 <div
                   className="flex my-1 items-center hover:bg-[#242A38] cursor-pointer  px-0 py-2 rounded-lg"
-                  onClick={() => onClickChangeNetwork(GOERLI_CHAIN_ID)}
+                  onClick={() => onClickChangeNetwork(OPTIMISTIC_CHAIN_ID)}
                 >
                   <img
                     className="w-8 h-8 mr-3"
                     src={`${window.location.origin}/assets/images/op.png`}
                     alt="optimism"
                   />{" "}
-                  <h2 className="text-sm font-medium">Optimism Goerli </h2>
+                  <h2 className="text-sm font-medium">Optimism mainnet </h2>
                 </div>
               )}
               {chainId &&
@@ -603,7 +612,6 @@ export default function Header({ isSideBarOpen = false, setIsSideBarOpen }) {
           </div>
         </div>
       </div>
-      
     </div>
   );
 }
