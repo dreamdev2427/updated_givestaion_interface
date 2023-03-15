@@ -52,7 +52,7 @@ const GivePoints = () => {
     let opRewards = 0;
     await axios({
       method: "post",
-      url: `${backendURL}/api/donation/getTotalDonatedAmountsOfUser`,
+      url: `${backendURL}/api/opRewards/getOpRewardsOfUser`,
       data: {
         user: account || "",
         chainId: chainId || "",
@@ -61,7 +61,7 @@ const GivePoints = () => {
       .then((res) => {
         console.log("getOPInfo ===> ", res);
         if (res.data && res.data.code === 0) {
-          opRewards = res.data.sumOPs || 0;
+          opRewards = res.data.data !== null ? res.data.data.amount : 0;
         }
       })
       .catch((err) => {
