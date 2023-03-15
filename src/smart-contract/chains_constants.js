@@ -51,14 +51,14 @@ export const chains = {
     blockScanUrl: "https://polygonscan.com/",
   },
   [OPTIMISTIC_CHAIN_ID]: {
-    rpcUrl: "https://mainnet.optimism.io/",
+    rpcUrl: "https://endpoints.omniatech.io/v1/op/mainnet/public",
     nativeCurrency: "oETH",
     factoryAddress: "0xEbc9d1060112f38164991950F6ca175730EfB569",
     givePointAddress: "0x7140594Ae3A9ac7Bbf1f7d7f5F7500B29ABADC68",
     blockScanUrl: "https://optimistic.etherscan.io/",
   },
   [OPTIMISTIC_NETWORK_ID]: {
-    rpcUrl: "https://mainnet.optimism.io/",
+    rpcUrl: "https://endpoints.omniatech.io/v1/op/mainnet/public",
     nativeCurrency: "oETH",
     factoryAddress: "0xEbc9d1060112f38164991950F6ca175730EfB569",
     givePointAddress: "0x7140594Ae3A9ac7Bbf1f7d7f5F7500B29ABADC68",
