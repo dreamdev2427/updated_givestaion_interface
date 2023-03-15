@@ -98,7 +98,7 @@ const GiveFrens = () => {
           <div className="px-5 lg:px-8 mt-8">
             <div className="flex items-center justify-center">
               <div>
-                <PageHeader heading={"Favourites"} />
+                <PageHeader heading={"GiveFrends"} />
 
                 <div className="my-10 px-5">
                   <div className="card-gradient-bg px-10 py-6 sm:px-16 rounded-3xl text-center">
@@ -112,16 +112,19 @@ const GiveFrens = () => {
                       POINTS token for free!{" "}
                     </h3>
                     <div className="flex text-base flex-col space-y-2 md:space-x-2 md:flex-row items-center justify-center ">
-                      <CopyToClipboard text={`${window.location.origin}/?ref=${account}`} onCopy={onCopyText}>
-                      <button className="flex items-center justify-center py-4 px-16 border-dashed rounded-full shadow-xl		border-2 border-[#222222]">
-                        <img
-                          className="mr-2"
-                          src="./assets/icons/copy.svg"
-                          alt="copy"
-                        />
-                        GIVEEQW2
-                      </button>
-                      {/* <button className="text-[#fff] bg-[#000000] py-4 px-16 rounded-full">
+                      <CopyToClipboard
+                        text={`${window.location.origin}/?ref=${account}`}
+                        onCopy={onCopyText}
+                      >
+                        <button className="flex items-center justify-center py-4 px-16 border-dashed rounded-full shadow-xl		border-2 border-[#222222]">
+                          <img
+                            className="mr-2"
+                            src="./assets/icons/copy.svg"
+                            alt="copy"
+                          />
+                          GIVEEQW2
+                        </button>
+                        {/* <button className="text-[#fff] bg-[#000000] py-4 px-16 rounded-full">
                         Invite Friends
                       </button> */}
                       </CopyToClipboard>
@@ -131,7 +134,9 @@ const GiveFrens = () => {
                   <div className="flex items-center flex-col space-y-3 sm:space-y-0 sm:flex-row justify-between mt-10">
                     <div className="flex items-center space-x-3">
                       <div className="dark:bg-[#9797972B] bg-[#0F1B2E] flex flex-col items-center rounded-lg py-2 px-4">
-                        <h2 className="text-[#09C9E3] text-lg font-bold">{refCounts}</h2>
+                        <h2 className="text-[#09C9E3] text-lg font-bold">
+                          {refCounts}
+                        </h2>
                         <p className="text-[#DADADA] font-normal text-sm">
                           Active Referrals
                         </p>
@@ -139,15 +144,18 @@ const GiveFrens = () => {
 
                       <div className="dark:bg-[#9797972B] bg-[#0F1B2E] flex flex-col items-center rounded-lg py-2 px-4">
                         <h2 className="text-[#EDD604] text-lg font-bold">
-                        {gpAmount} POINTS
+                          {gpAmount} POINTS
                         </h2>
                         <p className="text-[#DADADA] font-normal text-sm">
                           Active Referrals
                         </p>
                       </div>
                     </div>
-                    <button className="clain-2-btn rounded-xl text-[#fff] text-lg px-5 py-4"
-                     onClick={() => {onClickClaim()}}
+                    <button
+                      className="clain-2-btn rounded-xl text-[#fff] text-lg px-5 py-4"
+                      onClick={() => {
+                        onClickClaim();
+                      }}
                     >
                       CLAIM
                     </button>
